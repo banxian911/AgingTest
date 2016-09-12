@@ -25,16 +25,17 @@ import android.content.SharedPreferences.Editor;
 
 public class SetTestTimeActivity extends Activity implements OnClickListener {
 
+	private static final String TAG = "SetTestTimeActivity";
 	private final int TESTCOUNT = 7;
 	private Button setOK;
 	private Button setCancel;
-	private EditText reboot;
-	private EditText sleep;
-	private EditText vibrate;
-	private EditText receiver;
-	private EditText takepicture;
-	private EditText playvideo;
-	private EditText batteryEditText;
+	private EditText playVideoEdit;
+	private EditText play3DEdit;
+	private EditText lcd_vibrateEdit;
+	private EditText spkEdit;
+	private EditText mic_receiverEdit;
+	private EditText cameraEdit;
+	private EditText rebootEdit;
     private ArrayList<EditText> edit = new ArrayList<EditText>();
     private SharedPreferences mSharepreferences;
 
@@ -43,23 +44,23 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_settings_view);
 
-        reboot = (EditText) findViewById(R.id.rebootEdit);
-        sleep = (EditText) findViewById(R.id.sleepEdit);
-        vibrate = (EditText) findViewById(R.id.vibrateEdit);
-        receiver = (EditText) findViewById(R.id.receiverEdit);
-        takepicture = (EditText) findViewById(R.id.takingEdit);
-        playvideo = (EditText) findViewById(R.id.videoEdit);
-        batteryEditText = (EditText) findViewById(R.id.batteryEdit);
+		playVideoEdit = (EditText) findViewById(R.id.video_time_Edit);
+		play3DEdit = (EditText) findViewById(R.id.play_3d_time_Edit);
+        lcd_vibrateEdit = (EditText) findViewById(R.id.lcd_vibrate_time_Edit);
+        spkEdit = (EditText) findViewById(R.id.spk_time_Edit);
+        mic_receiverEdit = (EditText) findViewById(R.id.mic_receiver_time_Edit);
+        cameraEdit = (EditText) findViewById(R.id.camera_time_Edit);
+        rebootEdit = (EditText) findViewById(R.id.reboot_time_Edit);
         
         mSharepreferences = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE);
-        String test_time = mSharepreferences.getString("test_time", "20/20/20/20/20/20/20");
-        edit.add(reboot);
-        edit.add(sleep);
-        edit.add(vibrate);
-        edit.add(receiver);
-        edit.add(takepicture);
-        edit.add(playvideo);
-        edit.add(batteryEditText);
+        String test_time = mSharepreferences.getString("test_time", "30/30/30/30/30/30/30");
+        edit.add(playVideoEdit);
+        edit.add(play3DEdit);
+        edit.add(lcd_vibrateEdit);
+        edit.add(spkEdit);
+        edit.add(mic_receiverEdit);
+        edit.add(cameraEdit);
+        edit.add(rebootEdit);
         
 		String[] test_time_eachS = test_time.split("/");
 		for (int i=0; i<test_time_eachS.length; i++) {
@@ -95,7 +96,7 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 					}
 				}
 			}
-			Log.i("yuanluo", "---onClick--set_time---" + set_time.toString());
+			Log.i("AgingTest",TAG + "---onClick--set_time---" + set_time.toString());
 			Editor edit = mSharepreferences.edit();
 			edit.putString("test_time", set_time.toString());
 			edit.commit();

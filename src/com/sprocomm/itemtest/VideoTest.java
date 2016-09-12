@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
@@ -25,11 +26,10 @@ public class VideoTest  extends TestItem{
 	public static final String VIDEO_NAME = "moveTest.mp4";
 	public static final String videoPath = new File(Environment.getExternalStorageDirectory(),VIDEO_NAME).getAbsolutePath();
 	
-	VideoView videoView;
-	SurfaceView surfaceView;
-	View test_view;
-	//View view1;
-	View settingView;
+	private VideoView videoView;
+	private SurfaceView surfaceView;
+	private View test_view;
+	private View settingView;
 	Activity mActivity;
 
 	public VideoTest(Context context,long time,Handler handler) {
@@ -48,7 +48,7 @@ public class VideoTest  extends TestItem{
 		isTestEnd = false;
 		
 		mActivity =  (Activity)mContext;
-		
+		//mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		videoView = (VideoView) mActivity.findViewById(R.id.videoView);
 		surfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);
 		surfaceView.setVisibility(View.GONE);

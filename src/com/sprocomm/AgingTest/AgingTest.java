@@ -113,7 +113,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case MSG_WAT_START:
-				Log.i(TAG, "-----MSG_WAT_START-1---");
+				Log.i("AgingTest",TAG + "-----MSG_WAT_START-1---");
 				for (int i = 0; i < testlist.size(); i++) {
 					TestItem item = testlist.get(i);
 					if(item.isNeedTest && !item.isTestEnd){
@@ -125,7 +125,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 					}
 				}
 				
-				Log.i(TAG, "-----MSG_WAT_START-2---");
+				Log.i("AgingTest",TAG + "-----MSG_WAT_START-2---");
 				for (int j = 0; j < testlist.size(); j++) {
 					testlist.get(j).isNeedTest = testCheckbox.get(j).isChecked();
 					testlist.get(j).isTestEnd = false;
@@ -140,7 +140,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 						}
 					}
 				}else{
-					Log.i(TAG, "-----MSG_WAT_START-3---");
+					Log.i("AgingTest",TAG + "-----MSG_WAT_START-3---");
 
 //					for (int j2 = 0; j2 < testlist.size(); j2++) {
 //						if(!testlist.get(j2).isTestPass)return;
@@ -148,7 +148,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 //						Log.i("yuanluo", "-----MSG_WAT_START-4---");
 
 //					}
-					Log.i(TAG, "-----MSG_WAT_START-5---");
+					Log.i("AgingTest",TAG + "-----MSG_WAT_START-5---");
 		            Intent intent = new Intent(AgingTest.this, TestReportActivity.class);
 		            startActivity(intent);
 //
