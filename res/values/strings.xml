@@ -26,5 +26,10 @@
 	<string name="button_ok">OK</string>
 	<string name="button_cancel">Cancel</string>
 	<string name="default_time">20mins</string>
-    
+	
+	<string name="play3D">3DPlay</string>
+	<string name="lcd_vibrate">LCD-Vibrate</string>
+	<string name="spk">SPK</string>
+	<string name="mic_receiver">MIC-Receiver</string>
+    <string name="camera">Camera</string>
 </resources>

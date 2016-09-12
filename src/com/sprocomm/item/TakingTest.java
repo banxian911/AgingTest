@@ -32,7 +32,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.sprocomm.R;
-import com.sprocomm.TestItem;
+import com.sprocomm.utils.TestItem;
 
 public class TakingTest  extends TestItem implements Callback{
 
@@ -73,7 +73,7 @@ public class TakingTest  extends TestItem implements Callback{
 		
 		mActivity =  (Activity)mContext;
 		surfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);
-		setting_view = mActivity.findViewById(R.id.view2);
+		setting_view = mActivity.findViewById(R.id.setting_view);
 		videoView = (VideoView) mActivity.findViewById(R.id.videoView);
 		test_view = mActivity.findViewById(R.id.test_view);
 		mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);

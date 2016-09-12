@@ -1,13 +1,13 @@
 package com.sprocomm.item;
 
+import com.sprocomm.utils.TestItem;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Handler;
-
-import com.sprocomm.TestItem;
 
 public class BatteryTest extends TestItem{
 	private int batteryLevel;

@@ -1,4 +1,4 @@
-package com.sprocomm;
+/*package com.sprocomm;
 
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
@@ -55,3 +55,4 @@ public class PhoneBootReceiver extends BroadcastReceiver{
 		
 	}
 }
+*/

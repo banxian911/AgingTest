@@ -5,8 +5,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.PowerManager;
 
-import com.sprocomm.AgingTest;
-import com.sprocomm.TestItem;
+import com.sprocomm.AgingTest.AgingTest;
+import com.sprocomm.utils.TestItem;
 
 public class RebootTest extends TestItem{
 	

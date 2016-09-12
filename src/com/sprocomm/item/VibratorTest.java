@@ -1,10 +1,10 @@
 package com.sprocomm.item;
 
+import com.sprocomm.utils.TestItem;
+
 import android.content.Context;
 import android.os.Handler;
 import android.os.Vibrator;
-
-import com.sprocomm.TestItem;
 
 public class VibratorTest  extends TestItem{
 

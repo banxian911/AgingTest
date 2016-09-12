@@ -6,9 +6,11 @@
     <!-- <include layout="@layout/test_state" android:id="@+id/view1"/> -->
 
     <include
-        android:id="@+id/view2"
+        android:id="@+id/setting_view"
         layout="@layout/settings_view" />
 
-    <include layout="@layout/test_view" />
+    <include 
+        android:id="@+id/test_view"
+        layout="@layout/test_view" />
 
 </FrameLayout>

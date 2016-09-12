@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:gravity="left">
 
-        <CheckBox
+   <!--      <CheckBox
             android:id="@+id/reboot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,7 +57,61 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="@string/is_circulation" />
-
+ -->
+ 
+ 		 <CheckBox
+	        android:id="@+id/video"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/play_video_test" />
+ 		 
+ 		 <CheckBox 
+ 		     android:id="@+id/play_3d"
+ 		     android:layout_width="wrap_content"
+ 		     android:layout_height="wrap_content"
+ 		     android:text="@string/play3D"		    
+ 		     />
+ 		 
+ 		 <CheckBox 
+ 		     android:id="@+id/lcd_vibrate"
+ 		     android:layout_width="wrap_content"
+ 		     android:layout_height="wrap_content"
+ 		     android:text="@string/lcd_vibrate"
+ 		     />
+ 		 
+ 		  <CheckBox 
+ 		     android:id="@+id/spk"
+ 		     android:layout_width="wrap_content"
+ 		     android:layout_height="wrap_content"
+ 		     android:text="@string/spk"
+ 		     />
+ 		  
+ 		  <CheckBox 
+ 		     android:id="@+id/mic_receiver"
+ 		     android:layout_width="wrap_content"
+ 		     android:layout_height="wrap_content"
+ 		     android:text="@string/mic_receiver"
+ 		     />
+   
+ 		    <CheckBox 
+ 		     android:id="@+id/camera"
+ 		     android:layout_width="wrap_content"
+ 		     android:layout_height="wrap_content"
+ 		     android:text="@string/camera"
+ 		     />
+ 		    
+ 		    <CheckBox
+            android:id="@+id/reboot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reboot_test" 
+            />
+ 		    
+ 		    <CheckBox
+	        android:id="@+id/iscirculation"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/is_circulation" />
     </LinearLayout>
     
         <LinearLayout android:layout_width="fill_parent"

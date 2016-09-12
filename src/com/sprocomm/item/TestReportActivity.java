@@ -6,7 +6,7 @@ import android.widget.TextView;
 import android.os.Bundle;
 import java.util.ArrayList;
 
-import com.sprocomm.AgingTest;
+import com.sprocomm.AgingTest.AgingTest;
 import com.sprocomm.R;
 import android.graphics.Color;
 

@@ -7,7 +7,7 @@ import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Handler;
 
 import com.sprocomm.R;
-import com.sprocomm.TestItem;
+import com.sprocomm.utils.TestItem;
 
 public class ReceiverTest extends TestItem {
 

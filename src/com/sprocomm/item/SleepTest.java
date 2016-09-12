@@ -1,12 +1,12 @@
-package com.sprocomm.item;
+/*package com.sprocomm.item;
+
+import com.sprocomm.utils.TestItem;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
-
-import com.sprocomm.TestItem;
 
 public class SleepTest extends TestItem{
 
@@ -67,3 +67,4 @@ public class SleepTest extends TestItem{
 
 
 }
+*/
