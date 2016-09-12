@@ -1,52 +1,11 @@
 package com.sprocomm.AgingTest;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
-import junit.framework.TestListener;
-import android.R.color;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.KeyguardManager;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Color;
-import android.os.BatteryManager;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.Toast;
-
 import com.sprocomm.R;
-import com.sprocomm.R.id;
-import com.sprocomm.R.layout;
-import com.sprocomm.R.menu;
-import com.sprocomm.R.string;
 import com.sprocomm.item.BatteryTest;
 import com.sprocomm.item.RebootTest;
-//import com.sprocomm.item.RebootTest;
-import com.sprocomm.item.ReceiverTest;
-import com.sprocomm.item.SetTestTimeActivity;
-import com.sprocomm.item.TestReportActivity;
-//import com.sprocomm.item.SleepTest;
-import com.sprocomm.item.TakingTest;
-import com.sprocomm.item.VibratorTest;
 import com.sprocomm.itemtest.CameraTest;
 import com.sprocomm.itemtest.LcdAndVibrateTest;
 import com.sprocomm.itemtest.MicAndReceiverTest;
@@ -56,7 +15,26 @@ import com.sprocomm.itemtest.SpkTest;
 import com.sprocomm.itemtest.VideoTest;
 import com.sprocomm.utils.TestItem;
 
+import android.app.Activity;
+import android.app.KeyguardManager;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Toast;
 
 public class AgingTest extends Activity implements OnCheckedChangeListener,OnClickListener{
 	

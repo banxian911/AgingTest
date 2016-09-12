@@ -1,4 +1,4 @@
-package com.sprocomm.item;
+package com.sprocomm.AgingTest;
 
 import android.app.Activity;
 import android.widget.Button;
@@ -6,7 +6,6 @@ import android.widget.TextView;
 import android.os.Bundle;
 import java.util.ArrayList;
 
-import com.sprocomm.AgingTest.AgingTest;
 import com.sprocomm.R;
 import android.graphics.Color;
 

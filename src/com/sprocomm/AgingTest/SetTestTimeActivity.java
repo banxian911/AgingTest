@@ -1,4 +1,4 @@
-package com.sprocomm.item;
+package com.sprocomm.AgingTest;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.content.Intent;
 import java.util.ArrayList;
 
-import com.sprocomm.AgingTest.AgingTest;
 import com.sprocomm.R;
 
 import android.view.View;

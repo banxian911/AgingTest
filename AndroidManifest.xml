@@ -26,9 +26,9 @@
         android:allowBackup="true"
         android:label="@string/app_name" >
         <activity
-            android:name="com.sprocomm.item.SetTestTimeActivity"
+            android:name="com.sprocomm.AgingTest.SetTestTimeActivity"
             android:label="@string/time_set" />
-        <activity android:name="com.sprocomm.item.TestReportActivity" />
+        <activity android:name="com.sprocomm.AgingTest.TestReportActivity" />
         <activity
             android:name="com.sprocomm.AgingTest.AgingTest"
             android:label="@string/app_name"

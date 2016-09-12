@@ -30,7 +30,7 @@ public class VideoTest  extends TestItem{
 	private SurfaceView surfaceView;
 	private View test_view;
 	private View settingView;
-	Activity mActivity;
+	private Activity mActivity;
 
 	public VideoTest(Context context,long time,Handler handler) {
 		mContext = context;
@@ -49,16 +49,15 @@ public class VideoTest  extends TestItem{
 		
 		mActivity =  (Activity)mContext;
 		//mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		videoView = (VideoView) mActivity.findViewById(R.id.videoView);
-		surfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);
-		surfaceView.setVisibility(View.GONE);
-		
 		settingView = mActivity.findViewById(R.id.setting_view);
-		settingView.setVisibility(View.GONE);
-		
 		test_view = mActivity.findViewById(R.id.test_view);
+		surfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);	
+		videoView = (VideoView) mActivity.findViewById(R.id.videoView);
+		
+		settingView.setVisibility(View.GONE);
 		test_view.setVisibility(View.VISIBLE);
-
+		surfaceView.setVisibility(View.GONE);
+		videoView.setVisibility(View.VISIBLE);
 		
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
         		RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
