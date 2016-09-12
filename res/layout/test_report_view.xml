@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/setting_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/reboot"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/reboot_test"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/rebootEdit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/default_time"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp" >
+
+            <TextView
+                android:id="@+id/sleep"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/sleep_test"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/sleepEdit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/default_time"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp" >
+
+            <TextView
+                android:id="@+id/vibrate"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/vibrate_test"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/vibrateEdit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/default_time"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp" >
+
+            <TextView
+                android:id="@+id/receiver"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/receiver_test"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/receiverEdit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/default_time"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp" >
+
+            <TextView
+                android:id="@+id/taking"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/taking_picture_test"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/takingEdit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/default_time"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp" >
+
+            <TextView
+                android:id="@+id/video"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/play_video_test"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/videoEdit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/default_time"
+                android:textSize="14sp" />
+        </LinearLayout>
+        
+                <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp" >
+
+            <TextView
+                android:id="@+id/battery"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/battery_test"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/batteryEdit"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="@string/default_time"
+                android:textSize="14sp" />
+        </LinearLayout>
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="20dp" >
+
+        <Button
+            android:id="@+id/ok"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_ok" />
+
+        <Button
+            android:id="@+id/cancel"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_cancel" />
+    </LinearLayout>
+
+</LinearLayout>

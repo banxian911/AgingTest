@@ -1,0 +1,30 @@
+<resources>
+
+    <string name="app_name">AgingTest</string>
+    <string name="button_start">Start</string>
+    <string name="button_stop">Stop</string>
+    <string name="camare_not_found">Camare not fond</string>
+    <string name="back_toast">Press the back key again quit the test</string>
+    
+    <string name="sleep_test">Sleep</string>
+    <string name="reboot_test">Reboot</string>
+    <string name="vibrate_test">Vibrate</string>
+    <string name="receiver_test">Receiver</string>
+    <string name="taking_picture_test">Taking picture</string>
+    <string name="play_video_test">Play video</string>
+    <string name="battery_test">Battery</string>
+    <string name="is_circulation">Circulation</string>
+    <string name="dialog_title">Aging test end</string>
+    <string name="dialog_message">Test pass !</string>
+    <string name="test_state_pass">Test pass !</string>
+    <string name="test_state_ng">Test not pass !</string>
+    
+    <string name="test_time">Test time</string>
+    <string name="time_set">Set Time</string>
+    <string name="test_report">Test report</string>
+    
+	<string name="button_ok">OK</string>
+	<string name="button_cancel">Cancel</string>
+	<string name="default_time">20mins</string>
+    
+</resources>
