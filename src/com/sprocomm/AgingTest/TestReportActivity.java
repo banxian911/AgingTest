@@ -18,13 +18,13 @@ public class TestReportActivity extends Activity implements OnClickListener {
 	private final int TESTCOUNT = 7;
 	private Button setOK;
 	private Button setCancel;
-	private TextView reboot;
-	private TextView sleep;
-	private TextView vibrate;
-	private TextView receiver;
-	private TextView takepicture;
-	private TextView playvideo;
-	private TextView batteryTextView;
+	private TextView playVideoText;
+	private TextView play3DText;
+	private TextView lcd_vibrateText;
+	private TextView spkText;
+	private TextView mic_receiverText;
+	private TextView cameraText;
+	private TextView rebootText;
 	private ArrayList<TextView> edit = new ArrayList<TextView>();
 
 	@Override
@@ -33,21 +33,21 @@ public class TestReportActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_report_view);
 
-		reboot = (TextView) findViewById(R.id.rebootEdit);
-		sleep = (TextView) findViewById(R.id.sleepEdit);
-		vibrate = (TextView) findViewById(R.id.vibrateEdit);
-		receiver = (TextView) findViewById(R.id.receiverEdit);
-		takepicture = (TextView) findViewById(R.id.takingEdit);
-		playvideo = (TextView) findViewById(R.id.videoEdit);
-		batteryTextView = (TextView) findViewById(R.id.batteryEdit);
+		playVideoText = (TextView) findViewById(R.id.video_report_text);
+		play3DText = (TextView) findViewById(R.id.play_3d_report_text);
+		lcd_vibrateText = (TextView) findViewById(R.id.lcd_vibrate_report_text);
+		spkText = (TextView) findViewById(R.id.spk_report_text);
+		mic_receiverText = (TextView) findViewById(R.id.mic_receiver_report_text);
+		cameraText = (TextView) findViewById(R.id.camera_report_text);
+		rebootText = (TextView) findViewById(R.id.reboot_report_text);
 
-		edit.add(reboot);
-		edit.add(sleep);
-		edit.add(vibrate);
-		edit.add(receiver);
-		edit.add(takepicture);
-		edit.add(playvideo);
-		edit.add(batteryTextView);
+		edit.add(playVideoText);
+		edit.add(play3DText);
+		edit.add(lcd_vibrateText);
+		edit.add(spkText);
+		edit.add(mic_receiverText);
+		edit.add(cameraText);
+		edit.add(rebootText);
 
 		setOK = (Button) findViewById(R.id.ok);
 		setCancel = (Button) findViewById(R.id.cancel);
