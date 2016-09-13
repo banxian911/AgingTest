@@ -1,4 +1,4 @@
-package com.sprocomm;
+package com.sprocomm.utils;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;

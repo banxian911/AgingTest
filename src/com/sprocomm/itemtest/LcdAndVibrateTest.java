@@ -100,7 +100,7 @@ public class LcdAndVibrateTest extends TestItem implements Callback,Runnable{
 	
 	private void startVibrator(){
 		vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-		vibrator.vibrate(new long[]{1000,1000,1000,1000}, 0);
+		vibrator.vibrate(new long[]{100,10,100,1000}, 0);
 	}
 	private void stopVibrator(){
 		if(vibrator != null)vibrator.cancel();

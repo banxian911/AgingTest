@@ -1,4 +1,4 @@
-package com.sprocomm;
+package com.sprocomm.utils;
 
 public class Tuple<A, B> {
 

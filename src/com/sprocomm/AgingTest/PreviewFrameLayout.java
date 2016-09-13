@@ -1,4 +1,7 @@
-package com.sprocomm;
+package com.sprocomm.AgingTest;
+
+import com.sprocomm.utils.Tuple;
+import com.sprocomm.utils.Util;
 
 import android.content.Context;
 import android.content.res.Configuration;
