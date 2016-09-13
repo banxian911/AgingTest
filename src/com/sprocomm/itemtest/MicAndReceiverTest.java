@@ -56,8 +56,8 @@ public class MicAndReceiverTest extends TestItem {
                 case status_stop:
                 	StartPlayRever();
                     break;
-
                 case pass_cycle:
+                	
                     break;
                 default:
                     break;
@@ -175,6 +175,7 @@ public class MicAndReceiverTest extends TestItem {
 		// TODO Auto-generated method stub
     	Toast.makeText(mContext, "开始播放", Toast.LENGTH_LONG).show();
     	mPlayReverUtil.start();
+    	Log.d("AgingTest", TAG + "---play start---> ");
     	if (timer != null){
   	      if (myPlaytest != null){
   	    	  myPlaytest.cancel();  //将原任务从队列中移除

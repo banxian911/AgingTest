@@ -12,11 +12,12 @@ public class PlayReverUtil implements IVoiceManager{
     private MediaPlayer mPlayer;  
     public PlayReverUtil(String path){  
         this.path = path;  
-        mPlayer = new MediaPlayer();  
+       // mPlayer = new MediaPlayer();  
     }  
       
     @Override  
     public boolean start() {  
+    		mPlayer = new MediaPlayer(); 
         try { 
         	if (mPlayer.isPlaying()) {
 				mPlayer.reset();
@@ -31,7 +32,7 @@ public class PlayReverUtil implements IVoiceManager{
              //播放  
              mPlayer.start();         
          }catch(Exception e){  
-             Log.e(TAG, "prepare() failed");    
+             Log.d("AgingTest", TAG + "---prepare() failed ---> ");
          }  
   
         return false;  
