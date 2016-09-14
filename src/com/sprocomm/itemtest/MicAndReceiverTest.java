@@ -125,6 +125,7 @@ public class MicAndReceiverTest extends TestItem {
 		isInTest = false;
 		isTestPass = isPass;
 		isTestEnd = isPass;
+		timer.cancel();
 		stopMicReceiver();
 		videoView.setVisibility(View.VISIBLE);
 		settingView.setVisibility(View.VISIBLE);
@@ -134,6 +135,12 @@ public class MicAndReceiverTest extends TestItem {
 	
 	private void stopMicReceiver() {
 		// TODO Auto-generated method stub
+		if (mReceiverUtil !=null || mPlayReverUtil !=null) {
+			mReceiverUtil.stop();
+			mPlayReverUtil.stop();
+			mReceiverUtil = null;
+			mPlayReverUtil = null;
+		}
 		isReceiver =false;
 	}
 

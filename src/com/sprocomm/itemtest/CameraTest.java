@@ -48,15 +48,14 @@ public class CameraTest extends TestItem implements Callback {
 	private int camer_id = 0;
 	private static final int FRONT_CAMERA = 1;
 	private static final int BACK_CAMERA = 0;
-	private int mDisplayRotation;
-	private int mDisplayOrientation;
 
-	private Boolean isReceiver = false;
+	private Boolean isCameraPreview = false;
+	private Boolean isCameraRun = false;
 
 	private Timer timer;
 	private BackCameraTask myBackCameraTask;
 	private FrontCameraTest myFrontCameraTest;
-	private int time = 30 * 1000;// 前摄和后摄打开时间均为5分钟
+	private int time = 10 * 1000;// 前摄和后摄打开时间均为5分钟
 
 	private final int status_start = 0;
 	private final int status_stop = 1;
@@ -69,7 +68,8 @@ public class CameraTest extends TestItem implements Callback {
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case status_start:
-				closeCamera();
+				//closeCamera();
+				stopPreview();
 				Toast.makeText(mContext,R.string.startBackCamera, Toast.LENGTH_LONG).show();
 				break;
 			case status_stop:
@@ -99,7 +99,6 @@ public class CameraTest extends TestItem implements Callback {
 		isTestEnd = false;
 
 		mActivity = (Activity) mContext;
-		// mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		settingView = mActivity.findViewById(R.id.setting_view);
 		test_view = mActivity.findViewById(R.id.test_view);
 		mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);
@@ -117,7 +116,7 @@ public class CameraTest extends TestItem implements Callback {
 
 		timer = new Timer();
 		myHandler = new MyHandler();
-		isReceiver = true;
+		isCameraRun = true;
 		startCameraPreView();
 
 	}
@@ -129,18 +128,35 @@ public class CameraTest extends TestItem implements Callback {
 		isInTest = false;
 		isTestPass = isPass;
 		isTestEnd = isPass;
-		stopcamerTest();
-		closeCamera();
+		isCameraRun = false;
+		timer.cancel();
+		stopPreview();
 		settingView.setVisibility(View.VISIBLE);
 		test_view.setVisibility(View.GONE);
 		mSurfaceView.setVisibility(View.GONE);
 		videoView.setVisibility(View.GONE);
 	}
+	
+	private void stopPreview() {
+		Log.d("AgingTest", TAG + "---stopPreview Camera---isCameraPreview---> " + isCameraPreview);
+        if (mCamera != null && isCameraPreview) {
+            mCamera.stopPreview();
+            mCamera.release();
+            mCamera = null;
+            isCameraPreview = false;
+        }
+        
+    }
 
-	private void stopcamerTest() {
-		isReceiver = false;
-	}
-
+/*	private void closeCamera() {
+		Log.d("AgingTest", TAG + "---close Camera---");
+		if (mCamera != null) {
+			mCamera.release();
+			mCamera = null;
+			isCameraPreview = false;
+		}
+	}*/
+	
 	private void startCameraPreView() {
 		// TODO Auto-generated method stub
 		Log.d("AgingTest", TAG + "---CameraTest statView---");
@@ -152,8 +168,8 @@ public class CameraTest extends TestItem implements Callback {
 	class RecordThread extends Thread {
 		@Override
 		public void run() {
-			Log.d("AgingTest", TAG + "---isReceiver---=>" + isReceiver);
-			if (isReceiver) {
+			Log.d("AgingTest", TAG + "---isCameraRun---=>" + isCameraRun);
+			if (isCameraRun) {
 				test();
 			}
 
@@ -161,7 +177,7 @@ public class CameraTest extends TestItem implements Callback {
 		private void test() {
 			Log.d("AgingTest", TAG + "---start backCamera--camera_id=>" + camer_id);
 			myHandler.sendEmptyMessage(status_start);
-			camer_id = 0;
+			camer_id = BACK_CAMERA;
 			startPreview();
 			if (timer != null) {
 				if (myBackCameraTask != null) {
@@ -179,15 +195,15 @@ public class CameraTest extends TestItem implements Callback {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			closeCamera();
+			//closeCamera();
+			stopPreview();
 			myHandler.sendEmptyMessage(status_stop);
-			// mHandler.sendEmptyMessage(pass_cycle);
 		}
 	}
 
 	private void startFrontCamer() {
 		Log.d("AgingTest", TAG + "---start FrontCamera--camera_id=>" + camer_id);
-		camer_id = 1;
+		camer_id = FRONT_CAMERA;
 		startPreview();
 		if (timer != null) {
 			if (myFrontCameraTest != null) {
@@ -203,8 +219,9 @@ public class CameraTest extends TestItem implements Callback {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			if (isReceiver) {
-				closeCamera();
+			if (isCameraPreview) {
+				//closeCamera();
+				stopPreview();
 				startCameraPreView();
 			}
 		}
@@ -224,14 +241,19 @@ public class CameraTest extends TestItem implements Callback {
 			e.printStackTrace();
 			mCamera = null;
 		}
-		if (mCamera != null) {
+		if (isCameraPreview) {
+			stopPreview();
+		}
+		if (mCamera != null && !isCameraPreview) {
 			setCameraParameters();
 			setPreviewDisplay(mSurfaceHolder);
 			try {
 				mCamera.startPreview();
 			} catch (Throwable ex) {
-				closeCamera();
+				//closeCamera();
+				stopPreview();
 			}
+			isCameraPreview = true;
 		}
 	}
 
@@ -243,7 +265,8 @@ public class CameraTest extends TestItem implements Callback {
 			// mCamera.setDisplayOrientation(mDisplayOrientation);
 
 		} catch (IOException e) {
-			closeCamera();
+			//closeCamera();
+			stopPreview();
 			e.printStackTrace();
 		}
 	}
@@ -261,14 +284,6 @@ public class CameraTest extends TestItem implements Callback {
 			return 270;
 		}
 		return 0;
-	}
-
-	private void closeCamera() {
-		Log.d("AgingTest", TAG + "---close Camera---");
-		if (mCamera != null) {
-			mCamera.release();
-			mCamera = null;
-		}
 	}
 
 	private void setCameraParameters() {
@@ -367,7 +382,7 @@ public class CameraTest extends TestItem implements Callback {
 		mSurfaceHolder = holder;
 		if (mCamera == null)
 			return;
-		if (holder.isCreating()) {
+		if (isCameraPreview && holder.isCreating()) {
 			setPreviewDisplay(holder);
 		} else {
 			startCameraPreView();
