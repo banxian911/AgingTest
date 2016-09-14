@@ -35,4 +35,7 @@
     
     <string name="startReveiver">In the recording</string>
     <string name="startPlayRe">In the play</string>
+    <string name="startBackCamera">Open a back-facing camera</string>
+    <string name="startFrontCamera">Open a front-facing camera</string>
+    
 </resources>
