@@ -1,5 +1,4 @@
 package com.sprocomm.AgingTest;
-/*package com.sprocomm;
 
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
@@ -25,7 +24,7 @@ public class PhoneBootReceiver extends BroadcastReceiver{
 		if(isRebootTest){
 			//WakeLock wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
 			//wakeLock.acquire();
-			pm.wakeUp(SystemClock.uptimeMillis());
+			//pm.wakeUp(SystemClock.uptimeMillis());
 			KeyguardManager kManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
 			KeyguardManager.KeyguardLock lock = kManager.newKeyguardLock("keyguardlock");
 			lock.disableKeyguard();	
@@ -56,4 +55,3 @@ public class PhoneBootReceiver extends BroadcastReceiver{
 		
 	}
 }
-*/

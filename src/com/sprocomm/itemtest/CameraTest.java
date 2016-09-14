@@ -238,6 +238,10 @@ public class CameraTest extends TestItem implements Callback {
 			mCamera = Camera.open(camer_id);
 		} catch (RuntimeException e) {
 			Log.e("AgingTest", TAG + "---fail to open camera---");
+			Toast.makeText(mContext,R.string.camare_not_found, Toast.LENGTH_LONG).show();
+			mTextView.setVisibility(View.VISIBLE);
+			mTextView.setTextSize(30);
+			mTextView.setText(R.string.camare_not_found);
 			e.printStackTrace();
 			mCamera = null;
 		}
