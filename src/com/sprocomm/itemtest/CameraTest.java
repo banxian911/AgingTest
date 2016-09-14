@@ -55,7 +55,7 @@ public class CameraTest extends TestItem implements Callback {
 	private Timer timer;
 	private BackCameraTask myBackCameraTask;
 	private FrontCameraTest myFrontCameraTest;
-	private int time = 10 * 1000;// 前摄和后摄打开时间均为5分钟
+	private int time = 60 * 1000;// 前摄和后摄打开时间均为1分钟
 
 	private final int status_start = 0;
 	private final int status_stop = 1;
