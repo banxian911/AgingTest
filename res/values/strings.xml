@@ -32,4 +32,7 @@
 	<string name="spk">SPK</string>
 	<string name="mic_receiver">MIC-Receiver</string>
     <string name="camera">Camera</string>
+    
+    <string name="startReveiver">In the recording</string>
+    <string name="startPlayRe">In the play</string>
 </resources>

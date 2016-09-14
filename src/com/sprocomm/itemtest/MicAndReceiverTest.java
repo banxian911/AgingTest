@@ -16,6 +16,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -24,6 +25,7 @@ public class MicAndReceiverTest extends TestItem {
 	private static final String TAG = "MicAndReceiverTest";
 	private SurfaceView mSurfaceView;
 	private VideoView videoView;
+	private TextView mTextView;
 	private View test_view;
 	private View settingView;
 	private Activity mActivity;
@@ -51,6 +53,7 @@ public class MicAndReceiverTest extends TestItem {
                 case status_recoding:
                //     tv_status.setText(R.string.record_status_recording);
                 	Toast.makeText(mContext, "开始录音", Toast.LENGTH_LONG).show();
+                	mTextView.setText(R.string.startReveiver);
                 	mPlayReverUtil.stop();
                     break;
                 case status_stop:
@@ -88,11 +91,16 @@ public class MicAndReceiverTest extends TestItem {
 		test_view = mActivity.findViewById(R.id.test_view);
 		mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);	
 		videoView = (VideoView) mActivity.findViewById(R.id.videoView);
+		mTextView = (TextView) mActivity.findViewById(R.id.textView);
 		
 		settingView.setVisibility(View.GONE);
 		test_view.setVisibility(View.VISIBLE);
-		mSurfaceView.setVisibility(View.VISIBLE);
+		mSurfaceView.setVisibility(View.GONE);
 		videoView.setVisibility(View.GONE);
+		mTextView.setVisibility(View.VISIBLE);
+		
+		mTextView.setTextSize(30);
+		
 		
 		timer = new Timer();
 		
@@ -174,6 +182,7 @@ public class MicAndReceiverTest extends TestItem {
     public void StartPlayRever() {
 		// TODO Auto-generated method stub
     	Toast.makeText(mContext, "开始播放", Toast.LENGTH_LONG).show();
+    	mTextView.setText(R.string.startPlayRe);
     	mPlayReverUtil.start();
     	Log.d("AgingTest", TAG + "---play start---> ");
     	if (timer != null){

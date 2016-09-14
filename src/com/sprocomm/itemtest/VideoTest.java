@@ -18,6 +18,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 public class VideoTest  extends TestItem{
@@ -27,7 +28,8 @@ public class VideoTest  extends TestItem{
 	public static final String videoPath = new File(Environment.getExternalStorageDirectory(),VIDEO_NAME).getAbsolutePath();
 	
 	private VideoView videoView;
-	private SurfaceView surfaceView;
+	private SurfaceView mSurfaceView;
+	private TextView mTextView;
 	private View test_view;
 	private View settingView;
 	private Activity mActivity;
@@ -51,13 +53,15 @@ public class VideoTest  extends TestItem{
 		//mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		settingView = mActivity.findViewById(R.id.setting_view);
 		test_view = mActivity.findViewById(R.id.test_view);
-		surfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);	
+		mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);	
 		videoView = (VideoView) mActivity.findViewById(R.id.videoView);
+		mTextView = (TextView) mActivity.findViewById(R.id.textView);
 		
 		settingView.setVisibility(View.GONE);
 		test_view.setVisibility(View.VISIBLE);
-		surfaceView.setVisibility(View.GONE);
+		mSurfaceView.setVisibility(View.GONE);
 		videoView.setVisibility(View.VISIBLE);
+		mTextView.setVisibility(View.GONE);
 		
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
         		RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);

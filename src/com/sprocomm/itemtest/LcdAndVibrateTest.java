@@ -15,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 public class LcdAndVibrateTest extends TestItem implements Callback,Runnable{
@@ -23,7 +24,7 @@ public class LcdAndVibrateTest extends TestItem implements Callback,Runnable{
 	
 	private SurfaceView mSurfaceView;
     private SurfaceHolder mSurfaceHolder;
-	
+    private TextView mTextView;
 	private VideoView videoView;
 	private View test_view;
 	private View settingView;
@@ -69,11 +70,13 @@ public class LcdAndVibrateTest extends TestItem implements Callback,Runnable{
 		test_view = mActivity.findViewById(R.id.test_view);
 		mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);	
 		videoView = (VideoView) mActivity.findViewById(R.id.videoView);
+		mTextView = (TextView) mActivity.findViewById(R.id.textView);
 		
 		settingView.setVisibility(View.GONE);
 		test_view.setVisibility(View.VISIBLE);
 		mSurfaceView.setVisibility(View.VISIBLE);
 		videoView.setVisibility(View.GONE);
+		mTextView.setVisibility(View.GONE);
 		
 		mSurfaceHolder = mSurfaceView.getHolder();
 		mSurfaceHolder.addCallback(this);
