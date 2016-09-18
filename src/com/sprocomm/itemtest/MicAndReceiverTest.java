@@ -6,7 +6,7 @@ import java.util.TimerTask;
 import com.sprocomm.R;
 import com.sprocomm.utils.ReceiverUtil;
 import com.sprocomm.utils.TestItem;
-import com.sprocomm.utils.PlayReverUtil;
+import com.sprocomm.utils.PlayMediaUtil;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,7 +32,7 @@ public class MicAndReceiverTest extends TestItem {
 	
 	private String path = null;
 	private ReceiverUtil mReceiverUtil;
-	private PlayReverUtil mPlayReverUtil;
+	private PlayMediaUtil mPlayReverUtil;
 	
 	private Boolean isReceiver = false; 
 	
@@ -54,7 +54,7 @@ public class MicAndReceiverTest extends TestItem {
                //     tv_status.setText(R.string.record_status_recording);
                 	Toast.makeText(mContext, "开始录音", Toast.LENGTH_LONG).show();
                 	mTextView.setText(R.string.startReveiver);
-                	mPlayReverUtil.stop();
+                //	mPlayReverUtil.stop();
                     break;
                 case status_stop:
                 	StartPlayRever();
@@ -108,7 +108,7 @@ public class MicAndReceiverTest extends TestItem {
         path += "/Agingtest.amr";    
         myHandler = new MyHandler();
         mReceiverUtil = new ReceiverUtil(path);  
-        mPlayReverUtil = new PlayReverUtil(path);  
+       // mPlayReverUtil = new PlayReverUtil(path);  
         isReceiver = true;
 		startMicReceiver();
         
@@ -190,6 +190,9 @@ public class MicAndReceiverTest extends TestItem {
 		// TODO Auto-generated method stub
     	Toast.makeText(mContext, "开始播放", Toast.LENGTH_LONG).show();
     	mTextView.setText(R.string.startPlayRe);
+    	
+    	 
+        mPlayReverUtil = new PlayMediaUtil(path);  
     	mPlayReverUtil.start();
     	Log.d("AgingTest", TAG + "---play start---> ");
     	if (timer != null){
