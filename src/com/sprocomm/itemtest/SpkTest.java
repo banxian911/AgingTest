@@ -53,7 +53,7 @@ public class SpkTest extends TestItem {
 			super.handleMessage(msg);
 			switch (msg.what) {
 			case status_start:
-				mTextView.setText("is play");
+				mTextView.setText("SPK test is runing");
 				mTextView.setTextSize(30);
 				break;
 			case status_stop:
@@ -115,7 +115,6 @@ public class SpkTest extends TestItem {
 		isInTest = false;
 		isTestPass = isPass;
 		isTestEnd = isPass;
-		
 		stopSpkPlay();
 		timer.cancel();
 		videoView.setVisibility(View.VISIBLE);
@@ -182,10 +181,9 @@ public class SpkTest extends TestItem {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			//closeCamera();
 			myHandler.sendEmptyMessage(status_next);
-			Log.d("AgingTest", TAG + "---ipath--->" + ipath);
-			if (ipath < path.length) {
+			Log.d("AgingTest", TAG + "---ipath--->" + ipath +"---path.length--->"+path.length );
+			if (ipath < path.length -1) {
 				ipath = ipath +1;
 				PlayMusic();
 			}else {
