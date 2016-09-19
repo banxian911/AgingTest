@@ -34,8 +34,6 @@ public class MicAndReceiverTest extends TestItem {
 	private ReceiverUtil mReceiverUtil;
 	private PlayMediaUtil mPlayReverUtil;
 	
-	private Boolean isReceiver = false; 
-	
 	private Timer timer;
 	private Receivetask myReceivetask;
 	private Playtest myPlaytest;
@@ -108,8 +106,6 @@ public class MicAndReceiverTest extends TestItem {
         path += "/Agingtest.amr";    
         myHandler = new MyHandler();
         mReceiverUtil = new ReceiverUtil(path);  
-       // mPlayReverUtil = new PlayReverUtil(path);  
-        isReceiver = true;
 		startMicReceiver();
         
 	}
@@ -141,7 +137,6 @@ public class MicAndReceiverTest extends TestItem {
 			mReceiverUtil = null;
 			mPlayReverUtil = null;
 		}
-		isReceiver =false;
 	}
 
 	private void startMicReceiver() {
@@ -154,7 +149,7 @@ public class MicAndReceiverTest extends TestItem {
 	class RecordThread extends Thread {
         @Override
         public void run() {
-        	if (isReceiver) {
+        	if (isInTest) {
         		test();
 			}
             
@@ -209,7 +204,7 @@ public class MicAndReceiverTest extends TestItem {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			if (isReceiver) {
+			if (isInTest) {
 				mPlayReverUtil.stop();
 				startMicReceiver();
 			}

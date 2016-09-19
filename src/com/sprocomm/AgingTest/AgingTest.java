@@ -55,15 +55,6 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 	private static boolean isCirculation = false;
 	private static boolean isInTest;
 	
-//	CheckBox box_reboot;
-//	CheckBox box_sleep;
-//	CheckBox box_vibrate;
-//	CheckBox box_receiver;
-//	CheckBox box_taking;
-////	CheckBox box_Video;
-//	CheckBox box_battery;
-//	CheckBox box_isCirculation;
-	
 	CheckBox box_Video;
 	CheckBox box_3dplay;
 	CheckBox box_lcd_vibrate;
@@ -233,19 +224,6 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 			test_time_eachI[i] = Integer.parseInt(test_time_eachS[i]);
 		}
 
-
-//		testlist.add(new ThreeDPlayTest(this, test_time_eachI[1] * MINUTE,mHandler));
-//		testlist.add(new RebootTest(this,test_time_eachI[0] * MINUTE,mHandler));
-//		//testlist.add(new SleepTest(this,test_time_eachI[1] * MINUTE,mHandler));
-//		
-//		testlist.add(new VibratorTest(this,test_time_eachI[2] * MINUTE,mHandler));
-//		testlist.add(new ReceiverTest(this,test_time_eachI[3] * MINUTE,mHandler));
-//		testlist.add(new TakingTest(this,test_time_eachI[4] * MINUTE,mHandler));
-//		testlist.add(new VideoTest(this,test_time_eachI[5] * MINUTE,mHandler));
-//		bt = new BatteryTest(this,test_time_eachI[6] * MINUTE,mHandler);
-//		testlist.add(bt);
-		
-		
 		testlist.add(new VideoTest(this,test_time_eachI[0] * MINUTE,mHandler));
 		testlist.add(new Play3DTest(this, test_time_eachI[1] * MINUTE,mHandler));
 		testlist.add(new LcdAndVibrateTest(this, test_time_eachI[2] * MINUTE, mHandler));
