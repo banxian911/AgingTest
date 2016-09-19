@@ -40,7 +40,7 @@ public class SpkTest extends TestItem {
 	private PlayMediaUtil mPlayMediaUtil = null;
 	private Timer timer;
 	private PlaySPKTask mPlaySPKTask;
-	private int time;
+	private int duration;
 	
 	private final int status_start = 0;
 	private final int status_stop = 1;
@@ -156,8 +156,7 @@ public class SpkTest extends TestItem {
 	private void PlayMusic(){
 		Log.d("AgingTest", TAG + "---playMusic---ipath--->" + ipath);
 		
-	//	uri ="android.resource://" + mContext.getPackageName() + "/" + path[ipath];
-		uri ="android.resource://" + mContext.getPackageName() + "/" + R.raw.test_music_1;
+		uri ="android.resource://" + mContext.getPackageName() + "/" + path[ipath];
 		Log.d("AgingTest", TAG + "---playMusic uri--->" + uri);
 		if (isInTest) {	
 			myHandler.sendEmptyMessage(status_start);
@@ -166,16 +165,15 @@ public class SpkTest extends TestItem {
 			}
 			mPlayMediaUtil = new PlayMediaUtil(mContext,Uri.parse(uri));
 			mPlayMediaUtil.start();
-			time = mPlayMediaUtil.MusicTime();
-			
-			Log.d("AgingTest", TAG + "---playMusic time--->" + time);
+			duration = mPlayMediaUtil.MusicTime();
+			Log.d("AgingTest", TAG + "---playMusic time--->" + duration);
 			if (timer != null) {
 				if (mPlaySPKTask != null) {
 					mPlaySPKTask.cancel(); // 将原任务从队列中移除
 				}
 			}
 			mPlaySPKTask = new PlaySPKTask();
-			timer.schedule(mPlaySPKTask,time);
+			timer.schedule(mPlaySPKTask,duration);
 		}
 	}
 	

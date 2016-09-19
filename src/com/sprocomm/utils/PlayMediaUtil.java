@@ -47,17 +47,20 @@ public class PlayMediaUtil implements IVoiceManager{
     @Override  
     public boolean start() {  
     	Log.d("AgingTest", TAG + "---mPlayer ---> "+mPlayer);
-    	if (mPlayer !=null) {
-    		
+    	if (mPlayer !=null) {	
     		if (mPlayer.isPlaying()) {
 				mPlayer.reset();
-			} 
+			}
              mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
              mPlayer.setVolume(1, 1);
-             
-             //mPlayer.prepare();  //同步装载资源
-             
-             //通过异步方式装载媒体资源
+			try {
+				mPlayer.prepare(); // 同步装载资源
+			} catch (Exception e) {
+				// TODO: handle exception
+				Log.d("AgingTest", TAG + "---prepare() failed --1-> ");
+			}
+             mPlayer.start();  
+            /* //通过异步方式装载媒体资源
              mPlayer.prepareAsync();
              mPlayer.setOnPreparedListener(new OnPreparedListener() {
 				
@@ -68,7 +71,7 @@ public class PlayMediaUtil implements IVoiceManager{
 		             //播放  
 		             mPlayer.start();   
 				}
-			});
+			});*/
 		}else {
 			Log.d("AgingTest", TAG + "---mPlayer is ---> " + mPlayer);
 		}	
