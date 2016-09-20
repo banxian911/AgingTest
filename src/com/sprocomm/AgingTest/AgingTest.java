@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import com.sprocomm.R;
 import com.sprocomm.item.BatteryTest;
-import com.sprocomm.item.RebootTest;
 import com.sprocomm.itemtest.CameraTest;
 import com.sprocomm.itemtest.LcdAndVibrateTest;
 import com.sprocomm.itemtest.MicAndReceiverTest;
 import com.sprocomm.itemtest.Play3DTest;
+import com.sprocomm.itemtest.RebootTest;
 import com.sprocomm.itemtest.SpkTest;
 //import com.sprocomm.itemtest.ThreeDPlayTest;
 import com.sprocomm.itemtest.VideoTest;

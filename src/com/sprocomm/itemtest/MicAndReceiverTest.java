@@ -50,7 +50,7 @@ public class MicAndReceiverTest extends TestItem {
             switch (msg.what) {
                 case status_recoding:
                //     tv_status.setText(R.string.record_status_recording);
-                	Toast.makeText(mContext, "开始录音", Toast.LENGTH_LONG).show();
+                	Toast.makeText(mContext, "开始录音", Toast.LENGTH_SHORT).show();
                 	mTextView.setText(R.string.startReveiver);
                 //	mPlayReverUtil.stop();
                     break;
@@ -131,10 +131,12 @@ public class MicAndReceiverTest extends TestItem {
 	
 	private void stopMicReceiver() {
 		// TODO Auto-generated method stub
-		if (mReceiverUtil !=null || mPlayReverUtil !=null) {
-			mReceiverUtil.stop();
-			mPlayReverUtil.stop();
+		if (mReceiverUtil !=null) {
+			mReceiverUtil.stop();	
 			mReceiverUtil = null;
+		}
+		if (mPlayReverUtil != null) {
+			mPlayReverUtil.stop();
 			mPlayReverUtil = null;
 		}
 	}
@@ -183,7 +185,7 @@ public class MicAndReceiverTest extends TestItem {
     
     public void StartPlayRever() {
 		// TODO Auto-generated method stub
-    	Toast.makeText(mContext, "开始播放", Toast.LENGTH_LONG).show();
+    	Toast.makeText(mContext, "开始播放", Toast.LENGTH_SHORT).show();
     	mTextView.setText(R.string.startPlayRe);
     	
     	 

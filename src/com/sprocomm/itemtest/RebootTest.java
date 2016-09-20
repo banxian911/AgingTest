@@ -1,4 +1,4 @@
-package com.sprocomm.item;
+package com.sprocomm.itemtest;
 
 import android.app.Activity;
 import android.content.Context;
