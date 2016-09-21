@@ -236,11 +236,11 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 		isInTest = isRebootTest;
 		boolean isFromReceiver = getIntent().getBooleanExtra("fromReceiver", false);
 		if(isRebootTest){
-			TestItem rebootTest = testlist.get(0);
+			TestItem rebootTest = testlist.get(6);
 			rebootTest.isInTest = isFromReceiver ? false : true;
 			rebootTest.isTestPass = isFromReceiver ? true : false;
 			rebootTest.isTestEnd  = isFromReceiver ? true : false;
-			testCheckbox.get(0).setBackgroundColor(isFromReceiver ? Color.TRANSPARENT : Color.GRAY);
+			testCheckbox.get(6).setBackgroundColor(isFromReceiver ? Color.TRANSPARENT : Color.GRAY);
 			if(isFromReceiver){
 				rebootTest.stopTest(true);
 				mHandler.sendEmptyMessage(MSG_WAT_START);

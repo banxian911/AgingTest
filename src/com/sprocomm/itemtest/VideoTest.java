@@ -43,14 +43,12 @@ public class VideoTest  extends TestItem{
 	@Override
 	public void startTest() {
 		super.startTest();
-		//System.out.println("XIONG ----"+this.getClass().getName()+"-----start----");
 		Log.d("AgingTest", TAG + "---videoTest start---");
 		isInTest = true;
 		isTestPass = false;
 		isTestEnd = false;
 		
 		mActivity =  (Activity)mContext;
-		//mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		settingView = mActivity.findViewById(R.id.setting_view);
 		test_view = mActivity.findViewById(R.id.test_view);
 		mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);	
@@ -71,7 +69,37 @@ public class VideoTest  extends TestItem{
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         videoView.setLayoutParams(layoutParams);
 
-		//videoView.setVideoPath(videoPath);
+        StartPlayVideo();
+	}
+	
+
+	
+	@Override
+	public void stopTest(boolean isPass) {
+		super.stopTest(isPass);
+		Log.d("AgingTest", TAG + "---videoPlay stop---");
+		isInTest = false;
+		isTestPass = isPass;
+		isTestEnd = isPass;
+		
+		StopPlayVideo();
+		settingView.setVisibility(View.VISIBLE);
+		test_view.setVisibility(View.GONE);
+	}
+	
+
+	
+	private void StopPlayVideo() {
+		// TODO Auto-generated method stub
+		if(videoView != null){
+			videoView.pause();
+			videoView.stopPlayback();
+			videoView.invalidate();
+		}
+	}
+
+	private void StartPlayVideo() {
+		// TODO Auto-generated method stub
 		String uri = "android.resource://" + mContext.getPackageName() + "/" + R.raw.move_test;
 		Log.d("AgingTest", TAG + "---uri---" + uri);
 		videoView.setVideoURI(Uri.parse(uri));
@@ -91,25 +119,7 @@ public class VideoTest  extends TestItem{
 		videoView.requestFocus();
 		videoView.start();
 	}
-	
 
-	@Override
-	public void stopTest(boolean isPass) {
-		super.stopTest(isPass);
-		Log.d("AgingTest", TAG + "---videoPlay stop---");
-		isInTest = false;
-		isTestPass = isPass;
-		isTestEnd = isPass;
-		
-//		view1.setVisibility(View.VISIBLE);
-		settingView.setVisibility(View.VISIBLE);
-		
-		if(videoView != null){
-			videoView.pause();
-			videoView.stopPlayback();
-			videoView.invalidate();
-		}
-		test_view.setVisibility(View.GONE);
-	}
+	
 
 }

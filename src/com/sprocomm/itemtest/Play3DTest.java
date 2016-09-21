@@ -106,6 +106,7 @@ public class Play3DTest extends TestItem {
 			ApkRunInstallUtil.RunApp(mContext, APP_PACKAGE_NAME);
 		} else {
 			Toast.makeText(mContext, "请安装Play3D", Toast.LENGTH_LONG).show();
+			//stopTest(false);
 		}
 
 	}
