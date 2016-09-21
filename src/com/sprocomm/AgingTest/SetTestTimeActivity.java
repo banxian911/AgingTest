@@ -8,7 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import java.util.ArrayList;
 
-import com.sprocomm.R;
+import com.sprocomm.AgingTest.R;
 
 import android.view.View;
 import android.view.View.OnClickListener;

@@ -1,6 +1,6 @@
 package com.sprocomm.itemtest;
 
-import com.sprocomm.R;
+import com.sprocomm.AgingTest.R;
 import com.sprocomm.itemtest.CameraTest.MyHandler;
 import com.sprocomm.itemtest.CameraTest.RecordThread;
 import com.sprocomm.utils.TestItem;

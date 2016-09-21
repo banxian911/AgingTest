@@ -3,8 +3,8 @@ package com.sprocomm.itemtest;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.sprocomm.R;
-import com.sprocomm.R.raw;
+import com.sprocomm.AgingTest.R;
+import com.sprocomm.AgingTest.R.raw;
 import com.sprocomm.itemtest.CameraTest.BackCameraTask;
 import com.sprocomm.itemtest.CameraTest.MyHandler;
 import com.sprocomm.itemtest.CameraTest.RecordThread;

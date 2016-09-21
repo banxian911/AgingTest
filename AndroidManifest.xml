@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sprocomm"
+    package="com.sprocomm.AgingTest"
     
     android:versionCode="1"
     android:versionName="2.1" >
