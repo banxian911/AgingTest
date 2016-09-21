@@ -309,8 +309,13 @@ public class CameraTest extends TestItem implements Callback {
 		Log.v("AgingTest", TAG + "---Preview size is " + optimalSize.width + "x" + optimalSize.height);
 		// mPreviewWidth = optimalSize.width;
 		// mPreviewHeight = optimalSize.height;
-
 		parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+	
+		/**
+		 * 在部分机型中出现java.lang.RuntimeException: setParameters failed
+		 * 该错误有可能是主要在于代码控制分辨率的显示和真机测试分辨率不一样
+		 * 解决办法：可以注释掉这一行代码，但是由此我们设置的一些参数就不能使用了。
+		 */
 		mCamera.setParameters(parameters);
 	}
 
