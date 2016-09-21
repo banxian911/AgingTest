@@ -105,7 +105,6 @@ public class MicAndReceiverTest extends TestItem {
 		path = Environment.getExternalStorageDirectory().getAbsolutePath();    
         path += "/Agingtest.amr";    
         myHandler = new MyHandler();
-        mReceiverUtil = new ReceiverUtil(path);  
 		startMicReceiver();
         
 	}
@@ -159,6 +158,7 @@ public class MicAndReceiverTest extends TestItem {
         private void test() {
         	
         	myHandler.sendEmptyMessage(status_recoding);
+        	mReceiverUtil = new ReceiverUtil(path);  
         	mReceiverUtil.start();
         	if (timer != null){
         	      if (myReceivetask != null){

@@ -87,7 +87,7 @@ public class Play3DTest extends TestItem {
 		// TODO Auto-generated method stub
 		Log.d("AgingTest", TAG + "---Play3DTest stop--1-");
 		Log.d("AgingTest", TAG + "---ApkRunInstallUtil.isRunning---" + ApkRunInstallUtil.isRunning(mContext, APP_PACKAGE_NAME));
-		//if (ApkRunInstallUtil.isRunning(mContext, APP_PACKAGE_NAME)) {
+	//	if (ApkRunInstallUtil.isRunning(mContext, APP_PACKAGE_NAME)) {
 			try {
 				Log.d("AgingTest", TAG + "---Play3DTest stop--2-");
 				ApkRunInstallUtil.forceStopPackage(mContext, APP_PACKAGE_NAME);

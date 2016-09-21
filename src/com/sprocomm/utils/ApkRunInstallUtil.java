@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -19,8 +20,8 @@ public class ApkRunInstallUtil {
 	private static final String TAG = "InstallPlay3DApp";
 	private static final String MTAG = "AgingTest";
 	
-	public ApkRunInstallUtil(Context context){
-		
+	public ApkRunInstallUtil() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -94,6 +95,7 @@ public class ApkRunInstallUtil {
 		Log.d(MTAG, TAG + "--- isRunning---");
 		ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 		List<RunningAppProcessInfo> list = am.getRunningAppProcesses();
+		Log.d(MTAG, TAG + "---  list--->");
 		for (RunningAppProcessInfo appProcess : list) {
 			String processName = appProcess.processName;
 			if (processName != null && processName.equals(packageName)) {
@@ -101,6 +103,15 @@ public class ApkRunInstallUtil {
 			}
 		}
 		return false;
+		
+		/*ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		List<RunningTaskInfo> list = am.getRunningTasks(100);
+		for (RunningTaskInfo info : list){
+			if (info.topActivity.getPackageName().equals(packageName) || info.baseActivity.getPackageName().equals(packageName)){
+				return true;
+			} 
+		}
+		return false;*/
 	}
 	
 	 /** 

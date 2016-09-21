@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import com.sprocomm.R;
-import com.sprocomm.itemtest.BatteryTest;
+//import com.sprocomm.itemtest.BatteryTest;
 import com.sprocomm.itemtest.CameraTest;
 import com.sprocomm.itemtest.LcdAndVibrateTest;
 import com.sprocomm.itemtest.MicAndReceiverTest;
@@ -39,6 +39,7 @@ import android.widget.Toast;
 public class AgingTest extends Activity implements OnCheckedChangeListener,OnClickListener{
 	
 	private static final String TAG = "AgingTest";
+	private static final String TAGM = "AgingTest";
 	
 	public static final String SAVE_DATA = "testState";
 	public static final String TEST_TIME = "testtime";
@@ -50,6 +51,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 	private static final long MINUTE = 60 * 1000l;
 	public static final int MSG_WAT_START = 0x01;
 	public static final int MSG_WAT_STOP = 0x02;
+	public static final int MSG_REBOOT_STOP = 0x03;
+	
 	
 	
 	private static boolean isCirculation = false;
@@ -74,7 +77,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 	PowerManager pm = null;
 	WakeLock wakeLock = null;
 	private int mBatteryLevel;
-	BatteryTest bt;
+//	BatteryTest bt;
 	private KeyguardManager kManager;
 	private KeyguardManager.KeyguardLock lock;
 	
@@ -82,9 +85,10 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case MSG_WAT_START:
-				Log.i("AgingTest",TAG + "-----MSG_WAT_START-1---");
+				Log.i(TAGM,TAG + "-----MSG_WAT_START-1---testlist.size()--->"+ testlist.size());
 				for (int i = 0; i < testlist.size(); i++) {
 					TestItem item = testlist.get(i);
+					Log.i(TAGM,TAG + "---i--->"+i +"---item.isNeedTest--->"+item.isNeedTest + "---item.isTestEnd--->"+item.isTestEnd);
 					if(item.isNeedTest && !item.isTestEnd){
 						item.startTest();
 						testCheckbox.get(i).setBackgroundColor(Color.GRAY);
@@ -94,13 +98,14 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 					}
 				}
 				
-				Log.i("AgingTest",TAG + "-----MSG_WAT_START-2---");
+				Log.i(TAGM,TAG + "-----MSG_WAT_START-2---testlist.size()--->"+ testlist.size());
 				for (int j = 0; j < testlist.size(); j++) {
 					testlist.get(j).isNeedTest = testCheckbox.get(j).isChecked();
 					testlist.get(j).isTestEnd = false;
 				}
 				mHandler.sendEmptyMessage(MSG_WAT_STOP);
 				if(box_isCirculation.isChecked()){
+					Log.i(TAGM,TAG + "-----MSG_WAT_START-3---testlist.size()--->"+ testlist.size());
 					for (int j2 = 0; j2 < testlist.size(); j2++) {
 						if(testlist.get(j2).isNeedTest){
 							isInTest = true;
@@ -109,7 +114,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 						}
 					}
 				}else{
-					Log.i("AgingTest",TAG + "-----MSG_WAT_START-3---");
+					Log.i(TAGM,TAG + "-----MSG_WAT_START-4---");
 
 //					for (int j2 = 0; j2 < testlist.size(); j2++) {
 //						if(!testlist.get(j2).isTestPass)return;
@@ -117,7 +122,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 //						Log.i("yuanluo", "-----MSG_WAT_START-4---");
 
 //					}
-					Log.i("AgingTest",TAG + "-----MSG_WAT_START-5---");
+					Log.i(TAGM,TAG + "-----MSG_WAT_START-5---");
 		            Intent intent = new Intent(AgingTest.this, TestReportActivity.class);
 		            startActivity(intent);
 //
@@ -149,6 +154,16 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 				}
 				break;
 				
+			
+			 case MSG_REBOOT_STOP:
+				 Log.i(TAGM,TAG + "---MSG_REBOOT_STOP-1---testlist.size()--->"+ testlist.size());
+					for (int j = 0; j < testlist.size(); j++) {
+						testlist.get(j).isNeedTest = testCheckbox.get(j).isChecked();
+						testlist.get(j).isTestEnd = true;
+					}
+					//mHandler.sendEmptyMessage(MSG_WAT_START);	
+					mHandler.sendEmptyMessageDelayed(MSG_WAT_START, 2000);
+				 break;
 			}
 		}
 	};
@@ -217,7 +232,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 		long testTime = 30 * MINUTE;
 		
 		test_time = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time", "30/30/30/30/30/30/30");
-		Log.i("AgingTest",TAG + "------test_time-----" + test_time);
+		Log.i(TAGM,TAG + "------test_time-----" + test_time);
 		String[] test_time_eachS = test_time.split("/");
 		int[] test_time_eachI = new int[test_time_eachS.length];
 		for (int i=0; i<test_time_eachS.length; i++) {
@@ -234,7 +249,9 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 		
 		boolean isRebootTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).getBoolean("reboot", false);
 		isInTest = isRebootTest;
+		Log.i(TAGM,TAG + "------isInTest-----" + isInTest);
 		boolean isFromReceiver = getIntent().getBooleanExtra("fromReceiver", false);
+		Log.i(TAGM,TAG + "------isFromReceiver-----" + isFromReceiver);
 		if(isRebootTest){
 			TestItem rebootTest = testlist.get(6);
 			rebootTest.isInTest = isFromReceiver ? false : true;
@@ -243,7 +260,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 			testCheckbox.get(6).setBackgroundColor(isFromReceiver ? Color.TRANSPARENT : Color.GRAY);
 			if(isFromReceiver){
 				rebootTest.stopTest(true);
-				mHandler.sendEmptyMessage(MSG_WAT_START);
+				mHandler.sendEmptyMessage(MSG_REBOOT_STOP);
 			}
 			
 		}
@@ -288,7 +305,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 	}
 	
 	public void init(){
-		Log.i("AgingTest",TAG + "------testlist.size()------" + testlist.size());
+		Log.i(TAGM,TAG + "------testlist.size()------" + testlist.size());
 		for (int i = 0; i < testlist.size(); i++) {
 			Log.i("AgingTest",TAG + "------i---A----" + i);
 			TestItem item = testlist.get(i);
@@ -306,8 +323,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 	}
 	
 	public void updateUI(){
-		System.out.println("XIONG ------updateUI-----1---isInTest="+isInTest);
-		Log.i("AgingTest",TAG + "----testCheckbox.size()---->" + testCheckbox.size());
+		Log.i(TAGM,TAG + "----testCheckbox.size()---->" + testCheckbox.size());
 		for (int i = 0; i < testCheckbox.size(); i++) {
 			CheckBox checkbox = testCheckbox.get(i);
 			checkbox.setTextColor(testlist.get(i).isTestPass ? Color.GREEN : Color.RED);
@@ -363,7 +379,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 		if(index != -1){
 			testlist.get(index).isNeedTest = isChecked;
 			String key = testlist.get(index).getClass().getName()+"isCheck";
-			Log.i("AgingTest",TAG + "----key---->" + key);
+			Log.i(TAGM,TAG + "----key---->" + key);
 			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit().putBoolean(key, isChecked).commit();
 		}
 		updateUI();
@@ -399,7 +415,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 				File tmpFile = 	new File(videoPath);
 				if(tmpFile.exists()){
 					tmpFile.delete();
-					System.out.println("XIONG ----delect the Video file end");
+					Log.i(TAGM,TAG + "----delect the Video file end---->" );
 				}
 			}
 		}).start();
@@ -410,6 +426,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 	public void onBackPressed() {
 		
 		long currentTime = System.currentTimeMillis();
+		Log.i(TAGM,TAG + "----currentTime---->" +currentTime + "---lastTime--->"+lastTime);
 		if(currentTime-lastTime > 2000){
 			lastTime = currentTime;
 			Toast.makeText(this,R.string.back_toast, Toast.LENGTH_SHORT).show();

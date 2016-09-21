@@ -11,16 +11,27 @@ import android.util.Log;
 import android.net.Uri;
 
 public class PhoneBootReceiver extends BroadcastReceiver{
+	
+	private static final String TAG = "PhoneBootReceiver";
+	private static final String TAGM = "AgingTest";
+	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Log.i("eric","onReceive");
+		Log.i(TAGM,TAG + "---onReceive start---->" );
 		long startTime = context.getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).getLong("startTime", System.currentTimeMillis());
 		boolean isRebootTest = context.getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).getBoolean("reboot", false);
-		String setTime = context.getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time", "20/20/20/20/20/20");
+		String setTime = context.getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time", "30/30/30/30/30/30/30");
 		String[] test_time_eachS = setTime.split("/");
-		int rebootTime = Integer.parseInt(test_time_eachS[0]);
+		int rebootTime = Integer.parseInt(test_time_eachS[6]);
+		
+		Log.i(TAGM,TAG + "---startTime--->" + startTime );
+		Log.i(TAGM,TAG + "---isRebootTest--->" + isRebootTest );
+		Log.i(TAGM,TAG + "---setTime--->" + setTime );
+		Log.i(TAGM,TAG + "---test_time_eachS--->" + test_time_eachS );
+		Log.i(TAGM,TAG + "---rebootTime--->" + rebootTime );
+		
 		PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
-		Log.d("ian.qu","ian.qu Aging phonebootreceiver has been received; isRebootTest= " +isRebootTest);
+		Log.i(TAGM,TAG + "ian.qu Aging phonebootreceiver has been received; isRebootTest= " +isRebootTest );
 		if(isRebootTest){
 			//WakeLock wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
 			//wakeLock.acquire();
