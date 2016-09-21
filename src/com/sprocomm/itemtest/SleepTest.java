@@ -1,3 +1,4 @@
+package com.sprocomm.itemtest;
 /*package com.sprocomm.item;
 
 import com.sprocomm.utils.TestItem;

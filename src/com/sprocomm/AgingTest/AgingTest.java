@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import com.sprocomm.R;
-import com.sprocomm.item.BatteryTest;
+import com.sprocomm.itemtest.BatteryTest;
 import com.sprocomm.itemtest.CameraTest;
 import com.sprocomm.itemtest.LcdAndVibrateTest;
 import com.sprocomm.itemtest.MicAndReceiverTest;
