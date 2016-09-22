@@ -38,4 +38,7 @@
     <string name="startBackCamera">Open a back-facing camera</string>
     <string name="startFrontCamera">Open a front-facing camera</string>
     
+    <string name="TestPass">PASS</string>
+    <string name="noTest">NO_TEST</string>
+    
 </resources>

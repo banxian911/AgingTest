@@ -15,6 +15,8 @@ import android.util.Log;
 
 public class TestReportActivity extends Activity implements OnClickListener {
 
+	private static final String TAG = "TestReportActivity";
+	private static final String TAGM = "AgingTest";
 	private final int TESTCOUNT = 7;
 	private Button setOK;
 	private Button setCancel;
@@ -57,8 +59,8 @@ public class TestReportActivity extends Activity implements OnClickListener {
 		if (TESTCOUNT == AgingTest.getList().size()) {
 			for (int i = 0; i < TESTCOUNT; i++) {
 				boolean testResult = AgingTest.getList().get(i).isTestPass;
-				Log.i("yuanluo", "----i----" + testResult);
-				edit.get(i).setText(testResult ? "PASS" : "FAIL");
+				Log.i(TAGM,TAG + "----testResult--->" + testResult );
+				edit.get(i).setText(testResult ? R.string.TestPass: R.string.noTest);
 				edit.get(i).setTextColor(testResult ? Color.GREEN : Color.RED);
 
 			}
