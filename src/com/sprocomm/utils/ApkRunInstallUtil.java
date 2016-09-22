@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningTaskInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -28,10 +29,18 @@ public class ApkRunInstallUtil {
      * 启动App
      * @param context
      */
-    public static void RunApp(Context context,String packageName) {
+    public static void RunApp(Context context,String packageName,String packageActivity) {
     	
     	Log.d(MTAG, TAG + "---RunApp start---");
-       context.startActivity(context.getPackageManager().getLaunchIntentForPackage(packageName));
+    	
+    	//无法启动去掉"android.intent.category.LAUNCHER"的apk
+      // context.startActivity(context.getPackageManager().getLaunchIntentForPackage(packageName));
+    	Intent intent = new Intent();  
+        ComponentName comp = new ComponentName(packageName,packageActivity);  
+        intent.setComponent(comp);  
+        intent.setAction("android.intent.action.MAIN");  
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+        context.startActivity(intent);
     }
 
     /**

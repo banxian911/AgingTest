@@ -30,6 +30,7 @@ public class Play3DTest extends TestItem {
 	private Activity mActivity;
 	 
 	public static final String APP_PACKAGE_NAME = "com.example.android.opengl";//包名
+	public static final String APP_PACKAGE_ACTIVITY = "com.sv3458.spacerace.OpenGLES20Activity";//类名
 	
 	public Play3DTest(Context context,long time,Handler handler){
 		mContext = context;
@@ -103,7 +104,7 @@ public class Play3DTest extends TestItem {
 		// TODO Auto-generated method stub
 		Log.d("AgingTest", TAG + "---Play3DTest start--1-");
 		if (ApkRunInstallUtil.isAppInstalled(mContext, APP_PACKAGE_NAME)) {
-			ApkRunInstallUtil.RunApp(mContext, APP_PACKAGE_NAME);
+			ApkRunInstallUtil.RunApp(mContext, APP_PACKAGE_NAME,APP_PACKAGE_ACTIVITY);
 		} else {
 			Toast.makeText(mContext, "请安装Play3D", Toast.LENGTH_LONG).show();
 			//stopTest(false);
