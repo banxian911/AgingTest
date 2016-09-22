@@ -110,7 +110,6 @@ public class SpkTest extends TestItem {
 	public void stopTest(boolean isPass) {
 		// TODO Auto-generated method stub
 		super.stopTest(isPass);
-		
 		Log.d("AgingTest", TAG + "---SpkTest stop---");
 		isInTest = false;
 		isTestPass = isPass;
@@ -128,6 +127,7 @@ public class SpkTest extends TestItem {
 		Log.d("AgingTest", TAG + "---SpkTest stop play---");
 		if (mPlayMediaUtil != null) {
 			mPlayMediaUtil.stop();
+			mPlayMediaUtil = null;
 		}	
 	}
 

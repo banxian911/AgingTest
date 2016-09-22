@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".PhoneBootReceiver" >
+        <receiver android:name="com.sprocomm.AgingTest.PhoneBootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

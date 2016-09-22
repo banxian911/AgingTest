@@ -97,7 +97,6 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 						return;
 					}
 				}
-				
 				Log.i(TAGM,TAG + "-----MSG_WAT_START-2---testlist.size()--->"+ testlist.size());
 				for (int j = 0; j < testlist.size(); j++) {
 					testlist.get(j).isNeedTest = testCheckbox.get(j).isChecked();
@@ -106,23 +105,17 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 				mHandler.sendEmptyMessage(MSG_WAT_STOP);
 				if(box_isCirculation.isChecked()){
 					Log.i(TAGM,TAG + "-----MSG_WAT_START-3---testlist.size()--->"+ testlist.size());
-					for (int j2 = 0; j2 < testlist.size(); j2++) {
+					/*for (int j2 = 0; j2 < testlist.size(); j2++) {
 						if(testlist.get(j2).isNeedTest){
 							isInTest = true;
 //							mHandler.sendEmptyMessage(MSG_WAT_START);
-							mHandler.sendEmptyMessageDelayed(MSG_WAT_START, 200);
+							mHandler.sendEmptyMessageDelayed(MSG_WAT_START, 2000);
 						}
-					}
+					}*/
+					mHandler.sendEmptyMessageDelayed(MSG_WAT_START, 2000);
 				}else{
 					Log.i(TAGM,TAG + "-----MSG_WAT_START-4---");
 
-//					for (int j2 = 0; j2 < testlist.size(); j2++) {
-//						if(!testlist.get(j2).isTestPass)return;
-//						if(!testlist.get(j2).isNeedTest)return;
-//						Log.i("yuanluo", "-----MSG_WAT_START-4---");
-
-//					}
-					Log.i(TAGM,TAG + "-----MSG_WAT_START-5---");
 		            Intent intent = new Intent(AgingTest.this, TestReportActivity.class);
 		            startActivity(intent);
 //
@@ -134,7 +127,9 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 				
 				break;
 			case MSG_WAT_STOP:
+				Log.i(TAGM,TAG + "-----MSG_WAT_STOP-1---");
 				boolean test_next = msg.getData().getBoolean("test_next");
+				Log.i(TAGM,TAG + "-----MSG_WAT_STOP-1---test_next--->"+ test_next);
 				for (int i = 0; i < testlist.size(); i++) {
 					if(testlist.get(i).isInTest){
 						testlist.get(i).stopTest(test_next ? true : false);
@@ -143,7 +138,6 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 					}
 				}
 				if(test_next){
-//					mHandler.sendEmptyMessage(MSG_WAT_START);
 					mHandler.sendEmptyMessageDelayed(MSG_WAT_START, 500);
 				}else{
 					isInTest = false;
@@ -152,6 +146,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 					}
 					updateUI();
 				}
+			
 				break;
 				
 			
@@ -161,7 +156,6 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 						testlist.get(j).isNeedTest = testCheckbox.get(j).isChecked();
 						testlist.get(j).isTestEnd = true;
 					}
-					//mHandler.sendEmptyMessage(MSG_WAT_START);	
 					mHandler.sendEmptyMessageDelayed(MSG_WAT_START, 2000);
 				 break;
 			}
@@ -264,42 +258,6 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 			}
 			
 		}
-		
-		/*if(! new File(videoPath).exists()){
-			new Thread(new Runnable() {
-				public void run() {
-					InputStream input = null;
-					FileOutputStream output = null;
-					try {
-						input = getAssets().open(VIDEO_NAME);
-						output = new FileOutputStream(videoPath);
-						byte[] tmp = new byte[512];
-						while ((input.read(tmp)) != -1) {
-							output.write(tmp);
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}finally{
-						if(input != null){
-							try {
-								input.close();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						}
-						if(output != null){
-							try {
-								output.flush();
-								output.close();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						}
-					}
-				}
-			}).start();
-
-		}*/
 		
 		init();
 	}

@@ -83,9 +83,9 @@ public class PlayMediaUtil implements IVoiceManager{
     	Log.d("AgingTest", TAG + "---ReverPlay is stop --- ");
     	if (mPlayer != null ) {
     		mPlayer.stop();  
-            mPlayer.release();     
+            mPlayer.release();
+            mPlayer = null;
 		}
-    	mPlayer = null;
         return false;  
     }  
     
