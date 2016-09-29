@@ -41,4 +41,8 @@
     <string name="TestPass">PASS</string>
     <string name="noTest">NO_TEST</string>
     
+    <string name="dialog_again">重新获取</string>
+    <string name="error_permissions">获取权限失败</string>
+    <string name="dialog_dismiss">"关闭"</string>
+    
 </resources>

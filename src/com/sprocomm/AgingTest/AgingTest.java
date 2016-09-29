@@ -13,6 +13,7 @@ import com.sprocomm.itemtest.RebootTest;
 import com.sprocomm.itemtest.SpkTest;
 //import com.sprocomm.itemtest.ThreeDPlayTest;
 import com.sprocomm.itemtest.VideoTest;
+import com.sprocomm.utils.PermissionUtil;
 import com.sprocomm.utils.TestItem;
 
 import android.app.Activity;
@@ -179,6 +180,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 		setContentView(R.layout.main_activity);
 	/*	registerReceiver(mBatteryInfoReceiver,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));*/
+		AccessPermissions();
 		mContext = this;
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
@@ -454,4 +456,12 @@ public class AgingTest extends Activity implements OnCheckedChangeListener,OnCli
 	public int getBatteryPer(){
 		return mBatteryLevel;
 	}*/
+    
+    private void AccessPermissions(){
+    	int intPermission = getSharedPreferences("PermissionUtil", Context.MODE_PRIVATE).getInt("result", 1);
+    	if (intPermission != 0) {
+    		Intent intent = new Intent(this,PermissionUtil.class);
+        	startActivity(intent);
+		}
+    }
 }
