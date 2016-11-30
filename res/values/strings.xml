@@ -1,7 +1,9 @@
 <resources>
 
     <string name="app_name">AgingTest</string>
-    <string name="button_start">Start</string>
+    <string name="button_select_all">SELECT ALL</string>
+    <string name="button_clear_all">CLEAR ALL</string>
+    <string name="button_start">START</string>
     <string name="button_stop">Stop</string>
     <string name="camare_not_found">Camare not fond</string>
     <string name="back_toast">Press the back key again quit the test</string>
@@ -44,5 +46,16 @@
     <string name="dialog_again">重新获取</string>
     <string name="error_permissions">获取权限失败</string>
     <string name="dialog_dismiss">"关闭"</string>
+    
+    <string name="main_view_text">"AgingTest:select what you want test,then press Start. V0.1"</string>
+    <string name="cpu_test">CPU</string>
+    <string name="audio_test">Audio</string>
+    <string name="test_2d">2D</string>
+    <string name="s3_test">S3</string>
+    <string name="emmc_test">EMMC</string>
+    <string name="test_3d">3D</string>
+    <string name="memory_test">Memory</string>
+    <string name="lcd_test">LCD</string>
+    <string name="button_setting">SETTING</string>
     
 </resources>

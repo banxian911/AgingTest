@@ -6,8 +6,8 @@
     <!-- <include layout="@layout/test_state" android:id="@+id/view1"/> -->
 
     <include
-        android:id="@+id/setting_view"
-        layout="@layout/settings_view" />
+        android:id="@+id/main_view"
+        layout="@layout/main_view" />
 
     <include 
         android:id="@+id/test_view"

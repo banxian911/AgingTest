@@ -88,7 +88,7 @@ public class SpkTest extends TestItem {
 		isTestEnd = false;
 
 		mActivity = (Activity) mContext;
-		settingView = mActivity.findViewById(R.id.setting_view);
+		settingView = mActivity.findViewById(R.id.main_view);
 		test_view = mActivity.findViewById(R.id.test_view);
 		mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);
 		videoView = (VideoView) mActivity.findViewById(R.id.videoView);
