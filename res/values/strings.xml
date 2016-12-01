@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">AgingTest</string>
@@ -7,46 +8,38 @@
     <string name="button_stop">Stop</string>
     <string name="camare_not_found">Camare not fond</string>
     <string name="back_toast">Press the back key again quit the test</string>
-    
     <string name="sleep_test">Sleep</string>
     <string name="reboot_test">Reboot</string>
     <string name="vibrate_test">Vibrate</string>
     <string name="receiver_test">Receiver</string>
     <string name="taking_picture_test">Taking picture</string>
-    <string name="play_video_test">Play video</string>
+    <string name="play_video_test">Video</string>
     <string name="battery_test">Battery</string>
     <string name="is_circulation">Circulation</string>
     <string name="dialog_title">Aging test end</string>
     <string name="dialog_message">Test pass !</string>
     <string name="test_state_pass">Test pass !</string>
     <string name="test_state_ng">Test not pass !</string>
-    
     <string name="test_time">Test time</string>
     <string name="time_set">Set Time</string>
     <string name="test_report">Test report</string>
-    
-	<string name="button_ok">OK</string>
-	<string name="button_cancel">Cancel</string>
-	<string name="default_time">30mins</string>
-	
-	<string name="play3D">3DPlay</string>
-	<string name="lcd_vibrate">LCD-Vibrate</string>
-	<string name="spk">SPK</string>
-	<string name="mic_receiver">MIC-Receiver</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="default_time">30mins</string>
+    <string name="play3D">3DPlay</string>
+    <string name="lcd_vibrate">LCD-Vibrate</string>
+    <string name="spk">SPK</string>
+    <string name="mic_receiver">MIC-Receiver</string>
     <string name="camera">Camera</string>
-    
     <string name="startReveiver">In the recording</string>
     <string name="startPlayRe">In the play</string>
     <string name="startBackCamera">Open a back-facing camera</string>
     <string name="startFrontCamera">Open a front-facing camera</string>
-    
     <string name="TestPass">PASS</string>
     <string name="noTest">NO_TEST</string>
-    
     <string name="dialog_again">重新获取</string>
     <string name="error_permissions">获取权限失败</string>
     <string name="dialog_dismiss">"关闭"</string>
-    
     <string name="main_view_text">"AgingTest:select what you want test,then press Start. V0.1"</string>
     <string name="cpu_test">CPU</string>
     <string name="audio_test">Audio</string>
@@ -57,5 +50,10 @@
     <string name="memory_test">Memory</string>
     <string name="lcd_test">LCD</string>
     <string name="button_setting">SETTING</string>
-    
+    <string name="title_activity_math_charm">MathCharmActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+     <string name="settings_test">Edit the test time as what you want(minutes)</string>
+    <string name="cpu_test_info">CPU test in progress</string>
+
 </resources>
