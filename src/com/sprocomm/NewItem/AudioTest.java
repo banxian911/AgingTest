@@ -29,7 +29,7 @@ public class AudioTest extends TestItem {
 		isTestEnd = false;
 		
 		Intent mIntent = new Intent(mContext,MathCharmActivity.class);
-		mIntent.putExtra("mathcharm", 0);
+		mIntent.putExtra("mathcharm", 1);
 		mContext.startActivity(mIntent);
 	}
 	
