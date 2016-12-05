@@ -6,10 +6,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.sprocomm.AgingTest.R;
-import com.sprocomm.itemtest.MicAndReceiverTest.MyHandler;
-import com.sprocomm.itemtest.MicAndReceiverTest.Playtest;
-import com.sprocomm.itemtest.MicAndReceiverTest.Receivetask;
-import com.sprocomm.itemtest.MicAndReceiverTest.RecordThread;
 import com.sprocomm.utils.TestItem;
 
 import android.app.Activity;
@@ -17,7 +13,6 @@ import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.hardware.Camera;
-import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 import android.os.Handler;

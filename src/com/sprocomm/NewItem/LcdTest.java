@@ -8,26 +8,27 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
-public class MemoryTest extends TestItem {
-	private static final String TAG = "MemoryTest";
+public class LcdTest extends TestItem {
+	private static String TAG = "LcdTest";
 
-	public MemoryTest(Context context,long time,Handler handler) {
+	public LcdTest(Context context,long time,Handler handler) {
 		// TODO Auto-generated constructor stub
 		mContext = context;
 		testTime = time;
 		mHandler = handler;
 	}
+	
 	@Override
 	public void startTest() {
 		// TODO Auto-generated method stub
 		super.startTest();
-		Log.d("AgingTest", TAG + "---MemoryTest start---");
+		Log.d("AgingTest", TAG + "---LcdTest start---");
 		isInTest = true;
 		isTestPass = false;
 		isTestEnd = false;
 		
 		Intent mIntent = new Intent(mContext,MathCharmActivity.class);
-		mIntent.putExtra("mathcharm", 5);
+		mIntent.putExtra("mathcharm", 6);
 		mContext.startActivity(mIntent);
 	}
 	
@@ -35,7 +36,7 @@ public class MemoryTest extends TestItem {
 	public void stopTest(boolean isPass) {
 		// TODO Auto-generated method stub
 		super.stopTest(isPass);
-		Log.d("AgingTest", TAG + "---MemoryTest stop---");
+		Log.d("AgingTest", TAG + "---LcdTest stop---");
 		isInTest = false;
 		isTestPass = isPass;
 		isTestEnd = isPass;

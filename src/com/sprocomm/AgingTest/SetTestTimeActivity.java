@@ -2,23 +2,16 @@ package com.sprocomm.AgingTest;
 
 import java.util.ArrayList;
 
-import android.os.BatteryManager;
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
-import java.util.ArrayList;
-
-import com.sprocomm.AgingTest.R;
-
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.util.Log;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 
 
 

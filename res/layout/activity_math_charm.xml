@@ -21,6 +21,11 @@
         android:textColor="@color/blue"
         android:textSize="20sp" />
     
+    <ImageView android:id="@+id/lcdView"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:visibility="gone"/>
+    
     <Chronometer 
         android:id="@+id/run_time"
         android:layout_width="match_parent"

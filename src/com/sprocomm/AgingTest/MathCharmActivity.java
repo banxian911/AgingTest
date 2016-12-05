@@ -15,10 +15,13 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.Window;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MathCharmActivity extends Activity{
+public class MathCharmActivity extends Activity {
 
 	private static String TAG = "MathCharmActivity";
 	private WJMagicCurveView wjMagicCurveView;
@@ -28,44 +31,52 @@ public class MathCharmActivity extends Activity{
 	private int duration = 10 * 1000;
 	private static int flag;
 
+	private ImageView lcdView;
+	private int[] lcdBgColor = { Color.BLUE, Color.GREEN, Color.RED, Color.WHITE, Color.BLACK, Color.YELLOW };
+	private int lcdBg = 0;
+	private LcdTask mLcdTask;
+	private int lcdTime = 1 * 1000;
+
 	private Chronometer runTime;
-	
+
 	private String uri = null;
 	private PlayMediaUtil mPlayMediaUtil = null;
 
 	public static MathCharmActivity instance = null;
 
 	private static String stopTestBR = "com.sprocomm.AgingTest.StopTestBR";
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.d("AgingTest", TAG + "---MathCharmActivity start---");
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_math_charm);
 
 		instance = this;
 
 		wjMagicCurveView = (WJMagicCurveView) findViewById(R.id.art);
 		testType = (TextView) findViewById(R.id.test_type);
-		runTime = (Chronometer)findViewById(R.id.run_time);
-		
+		lcdView = (ImageView) findViewById(R.id.lcdView);
+		runTime = (Chronometer) findViewById(R.id.run_time);
+
 		timer = new Timer();
 		Intent mIntent = getIntent();
 		flag = mIntent.getIntExtra("mathcharm", 0);
 		Log.d("AgingTest", TAG + "---flag---" + flag);
-		
+
 		startTest(flag);
 		startTransform(flag);
-		
+
 		runTime.start();
 		runTime.setFormat("测试时间：%S");
 	}
-	
-	private void startTest(int flag){
+
+	private void startTest(int flag) {
 		Log.d("AgingTest", TAG + "---startTest---flag--->" + flag);
 		switch (flag) {
 		case 0:
-			testType.setText(cpuinfo()+"\n\n"+ "Test the CPU......");
+			testType.setText(cpuinfo() + "\n\n" + "Test the CPU......");
 			break;
 		case 1:
 			testType.setText("AudioTest is Running");
@@ -77,11 +88,22 @@ public class MathCharmActivity extends Activity{
 		case 3:
 			testType.setText("S3Test is Running");
 			break;
+		case 4:
+			testType.setText("EMMC is Running");
+			break;
+		case 5:
+			testType.setText("MemoryTest is Running");
+			break;
+		case 6:
+			testType.setText("LCDTest is Running");
+			lcdView.setVisibility(View.VISIBLE);
+			LcdTest();
+			break;
 		default:
 			break;
 		}
 	}
-		
+
 	private void startTransform(int flag) {
 		Log.d("AgingTest", TAG + "---startTransform---flag--->" + flag);
 		wjMagicCurveView.stopDraw();
@@ -98,6 +120,15 @@ public class MathCharmActivity extends Activity{
 		case 3:
 			line3();
 			break;
+		case 4:
+
+			break;
+		case 5:
+
+			break;
+		case 6:
+
+			break;
 		default:
 			break;
 		}
@@ -108,21 +139,30 @@ public class MathCharmActivity extends Activity{
 		}
 	}
 
-	
-	private String cpuinfo(){
-		
+	private void LcdTest() {
+
+		if (lcdBg >= lcdBgColor.length) {
+			lcdBg = 0;
+		}
+		lcdView.setBackgroundColor(lcdBgColor[lcdBg]);
+		lcdBg++;
+		if (timer != null) {
+			mLcdTask = new LcdTask();
+			timer.schedule(mLcdTask, lcdTime);
+		}
+
+	}
+
+	private String cpuinfo() {
+
 		String infoStr = CpuInfo.getCpuName();
 		int cpunum = CpuInfo.getNumCores();
 		String cpuFre = CpuInfo.getMaxCpuFreq();
-		//int freInt =Integer.parseInt(cpuFre);
-		float freflo = Float.parseFloat(cpuFre)/ 1000000;
-		Log.d("AgingTest", TAG + "---infoStr--->" + infoStr 
-				+ "--cpuNum-->"+cpunum
-				+ "--cpufre-->"+cpuFre);
-		String cpuInfo = "CPU info：\n"
-				+"CPU Processor:"+infoStr + "\n"
-				+ "CPU core："+cpunum + "\n" 
-				+ "CPU Maxfrequency："+freflo+"GHz";
+		// int freInt =Integer.parseInt(cpuFre);
+		float freflo = Float.parseFloat(cpuFre) / 1000000;
+		Log.d("AgingTest", TAG + "---infoStr--->" + infoStr + "--cpuNum-->" + cpunum + "--cpufre-->" + cpuFre);
+		String cpuInfo = "CPU info：\n" + "CPU Processor:" + infoStr + "\n" + "CPU core：" + cpunum + "\n"
+				+ "CPU Maxfrequency：" + freflo + "GHz";
 		return cpuInfo;
 	}
 
@@ -157,39 +197,26 @@ public class MathCharmActivity extends Activity{
 
 	public void line0() {
 		wjMagicCurveView.setPaintColor(Color.BLUE);
-		wjMagicCurveView.setRadius(-1, -1, -1, -1)
-		.setDurationSec(-1)
-		.setLoopTotalCount(-1)
-		.setSpeed(-1, -1)
-		.startDraw();
+		wjMagicCurveView.setRadius(-1, -1, -1, -1).setDurationSec(-1).setLoopTotalCount(-1).setSpeed(-1, -1)
+				.startDraw();
 	}
-	
+
 	public void line1() {
-		wjMagicCurveView.setRadius(300, 1, 300, 150)
-		.setDurationSec(100)
-		.setLoopTotalCount(-1)
-		.setSpeed(60, 28)
-		.startDraw();
+		wjMagicCurveView.setRadius(300, 1, 300, 150).setDurationSec(100).setLoopTotalCount(-1).setSpeed(60, 28)
+				.startDraw();
 	}
-	
+
 	public void line2() {
 		wjMagicCurveView.setPaintColor(Color.GREEN);
-		wjMagicCurveView.setRadius(300, 20, 150, 150)
-		.setDurationSec(50)
-		.setLoopTotalCount(-1)
-		.setSpeed(-1, -1)
-		.startDraw();
+		wjMagicCurveView.setRadius(300, 20, 150, 150).setDurationSec(50).setLoopTotalCount(-1).setSpeed(-1, -1)
+				.startDraw();
 	}
-	
+
 	public void line3() {
 		wjMagicCurveView.setPaintColor(Color.LTGRAY);
-		wjMagicCurveView.setRadius(320, 320, 280, 280)
-		.setDurationSec(-1)
-		.setLoopTotalCount(-1)
-		.setSpeed(-1, -1)
-		.startDraw();
+		wjMagicCurveView.setRadius(320, 320, 280, 280).setDurationSec(-1).setLoopTotalCount(-1).setSpeed(-1, -1)
+				.startDraw();
 	}
-	
 
 	class MathCharmTask extends TimerTask {
 		@Override
@@ -198,29 +225,44 @@ public class MathCharmActivity extends Activity{
 			Log.d("AgingTest", TAG + "---MathCharmTask---flag--->" + flag);
 
 			runOnUiThread(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 					startTransform(flag);
-					
+
 				}
 			});
-			
+
 		}
 	}
+
+	class LcdTask extends TimerTask {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			Log.d("AgingTest", TAG + "---LcdTask--->");
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					LcdTest();
+				}
+			});
+
+		}
+
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			Intent mIntent = new Intent(stopTestBR);
-			this.sendBroadcast(mIntent);}
-			return super.onKeyDown(keyCode, event);
-	/*		return false;
-		} else {
-			return super.onKeyDown(keyCode, event);*/
-			
-	} 
-	
+			this.sendBroadcast(mIntent);
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
 }

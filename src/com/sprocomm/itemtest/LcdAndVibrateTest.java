@@ -1,15 +1,12 @@
 package com.sprocomm.itemtest;
 
 import com.sprocomm.AgingTest.R;
-import com.sprocomm.itemtest.CameraTest.MyHandler;
-import com.sprocomm.itemtest.CameraTest.RecordThread;
 import com.sprocomm.utils.TestItem;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
@@ -19,7 +16,6 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 public class LcdAndVibrateTest extends TestItem implements Callback {

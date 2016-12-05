@@ -6,15 +6,10 @@ import com.sprocomm.utils.TestItem;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.opengl.GLSurfaceView;
 import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;

@@ -4,11 +4,9 @@ import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.PowerManager;
-import android.os.SystemClock;
-import android.os.PowerManager.WakeLock;
-import android.util.Log;
 import android.net.Uri;
+import android.os.PowerManager;
+import android.util.Log;
 
 public class PhoneBootReceiver extends BroadcastReceiver{
 	

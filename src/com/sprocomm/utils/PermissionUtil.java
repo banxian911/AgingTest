@@ -1,6 +1,5 @@
  package com.sprocomm.utils;
 
-import com.sprocomm.AgingTest.AgingTest;
 import com.sprocomm.AgingTest.R;
 
 import android.Manifest;
@@ -16,9 +15,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 

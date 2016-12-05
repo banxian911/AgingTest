@@ -1,17 +1,17 @@
 package com.sprocomm.AgingTest;
 
-import android.app.Activity;
-import android.widget.Button;
-import android.widget.TextView;
-import android.os.Bundle;
 import java.util.ArrayList;
 
-import com.sprocomm.AgingTest.R;
+import android.app.Activity;
 import android.graphics.Color;
-
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class TestReportActivity extends Activity implements OnClickListener {
 
@@ -20,13 +20,21 @@ public class TestReportActivity extends Activity implements OnClickListener {
 	private final int TESTCOUNT = 7;
 	private Button setOK;
 	private Button setCancel;
-	private TextView playVideoText;
-	private TextView play3DText;
-	private TextView lcd_vibrateText;
-	private TextView spkText;
-	private TextView mic_receiverText;
-	private TextView cameraText;
-	private TextView rebootText;
+
+	private ListView mListView;
+	private ArrayList<String> mArrayList = new ArrayList<String>();
+	private TextView reboot;
+	private TextView cpu;
+	private TextView audio;
+	private TextView text2d;
+	private TextView s3;
+	private TextView emmc;
+	private TextView video;
+	private TextView test3d;
+	private TextView battery;
+	private TextView memory;
+	private TextView lcd;
+	private TextView camera;
 	private ArrayList<TextView> edit = new ArrayList<TextView>();
 
 	@Override
@@ -35,37 +43,17 @@ public class TestReportActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_report_view);
 
-		playVideoText = (TextView) findViewById(R.id.video_report_text);
-		play3DText = (TextView) findViewById(R.id.play_3d_report_text);
-		lcd_vibrateText = (TextView) findViewById(R.id.lcd_vibrate_report_text);
-		spkText = (TextView) findViewById(R.id.spk_report_text);
-		mic_receiverText = (TextView) findViewById(R.id.mic_receiver_report_text);
-		cameraText = (TextView) findViewById(R.id.camera_report_text);
-		rebootText = (TextView) findViewById(R.id.reboot_report_text);
+		initUI();
 
-		edit.add(playVideoText);
-		edit.add(play3DText);
-		edit.add(lcd_vibrateText);
-		edit.add(spkText);
-		edit.add(mic_receiverText);
-		edit.add(cameraText);
-		edit.add(rebootText);
-
-		setOK = (Button) findViewById(R.id.ok);
-		setCancel = (Button) findViewById(R.id.cancel);
-		setOK.setOnClickListener(this);
-		setCancel.setOnClickListener(this);
-		
 		if (TESTCOUNT == AgingTest.getList().size()) {
 			for (int i = 0; i < TESTCOUNT; i++) {
 				boolean testResult = AgingTest.getList().get(i).isTestPass;
-				Log.i(TAGM,TAG + "----testResult--->" + testResult );
-				edit.get(i).setText(testResult ? R.string.TestPass: R.string.noTest);
+				Log.i(TAGM, TAG + "----testResult--->" + testResult);
+				edit.get(i).setText(testResult ? R.string.TestPass : R.string.noTest);
 				edit.get(i).setTextColor(testResult ? Color.GREEN : Color.RED);
 
 			}
 		}
-
 
 	}
 
@@ -80,6 +68,41 @@ public class TestReportActivity extends Activity implements OnClickListener {
 			finish();
 		}
 
+	}
+	
+	private void initUI(){
+		reboot = (TextView) findViewById(R.id.reboot_report_text);
+		cpu = (TextView) findViewById(R.id.cpu_report_text);
+		audio = (TextView) findViewById(R.id.audio_report_text);
+		text2d = (TextView) findViewById(R.id.test_2d_report_text);
+		s3 = (TextView) findViewById(R.id.s3_report_text);
+		emmc = (TextView) findViewById(R.id.emmc_report_text);
+		video = (TextView) findViewById(R.id.video_report_text);
+		test3d = (TextView) findViewById(R.id.test_3d_report_text);
+		battery = (TextView) findViewById(R.id.battery_report_text);
+		memory = (TextView) findViewById(R.id.memory_report_text);
+		lcd = (TextView) findViewById(R.id.lcd_report_text);
+		camera = (TextView) findViewById(R.id.camera_report_text);
+
+		edit.add(reboot);
+		edit.add(cpu);
+		edit.add(audio);
+		edit.add(text2d);
+		edit.add(s3);
+		edit.add(emmc);
+		edit.add(video);
+
+		edit.add(test3d);
+		edit.add(battery);
+		edit.add(memory);
+		edit.add(lcd);
+		edit.add(camera);
+
+
+		setOK = (Button) findViewById(R.id.ok);
+		setCancel = (Button) findViewById(R.id.cancel);
+		setOK.setOnClickListener(this);
+		setCancel.setOnClickListener(this);
 	}
 
 }

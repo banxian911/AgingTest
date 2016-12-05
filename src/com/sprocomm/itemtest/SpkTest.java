@@ -4,10 +4,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.sprocomm.AgingTest.R;
-import com.sprocomm.AgingTest.R.raw;
-import com.sprocomm.itemtest.CameraTest.BackCameraTask;
-import com.sprocomm.itemtest.CameraTest.MyHandler;
-import com.sprocomm.itemtest.CameraTest.RecordThread;
 import com.sprocomm.utils.PlayMediaUtil;
 import com.sprocomm.utils.TestItem;
 
@@ -20,7 +16,6 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 public class SpkTest extends TestItem {

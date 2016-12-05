@@ -1,13 +1,13 @@
 package com.sprocomm.itemtest;
 
+import com.sprocomm.AgingTest.AgingTest;
+import com.sprocomm.utils.TestItem;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.util.Log;
-
-import com.sprocomm.AgingTest.AgingTest;
-import com.sprocomm.utils.TestItem;
 
 public class RebootTest extends TestItem{
 	

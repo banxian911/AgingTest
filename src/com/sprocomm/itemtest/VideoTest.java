@@ -16,7 +16,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;

@@ -1,12 +1,9 @@
 package com.sprocomm.utils;
 
-import java.io.IOException;
-
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.util.Log;
 
