@@ -66,11 +66,13 @@
                     android:scheme="android_secret_code" />
             </intent-filter>
         </receiver>
-
+    
         <activity
             android:name=".MathCharmActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_math_charm" >
         </activity>
+       
     </application>
 
 </manifest>

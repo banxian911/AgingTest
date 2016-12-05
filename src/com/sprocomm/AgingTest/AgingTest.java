@@ -25,8 +25,10 @@ import com.sprocomm.utils.TestItem;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -65,6 +67,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private static boolean isCirculation = false;
 	private static boolean isInTest;
 
+	private static String stopTestBR = "com.sprocomm.AgingTest.StopTestBR";
+	
 	// CheckBox box_Video;
 	// CheckBox box_3dplay;
 	// CheckBox box_lcd_vibrate;
@@ -90,9 +94,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	Context mContext;
 
 	private Button button_start;
-	private Button stop;
-	private Button stop_testview;
-
+	
 	private Button button_select_all;
 	private Button button_clear_all;
 	private Button button_setting;
@@ -209,6 +211,9 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		 * IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 		 */
 		AccessPermissions();
+		
+		registerReceiver(StopTestBR, new IntentFilter(stopTestBR));
+		
 		mContext = this;
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
@@ -235,9 +240,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		box_isCirculation = (CheckBox) findViewById(R.id.iscirculation);
 
 		button_start = (Button) findViewById(R.id.start);
-		stop = (Button) findViewById(R.id.stop);
-		stop_testview = (Button) findViewById(R.id.stop_testview);
-		
+	
 		button_select_all = (Button) findViewById(R.id.select_all);
 		button_clear_all = (Button) findViewById(R.id.clear_all);
 		button_setting = (Button) findViewById(R.id.setting);
@@ -275,8 +278,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		box_isCirculation.setOnCheckedChangeListener(this);
 
 		button_start.setOnClickListener(this);
-		stop.setOnClickListener(this);
-		stop_testview.setOnClickListener(this);
+	
 		
 		button_select_all.setOnClickListener(this);
 		button_clear_all.setOnClickListener(this);
@@ -350,7 +352,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 		test_view.setVisibility(View.GONE);
 		button_start.setEnabled(true);
-		stop.setEnabled(false);
+	
 		updateUI();
 	}
 
@@ -363,13 +365,13 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		}
 		box_isCirculation.setEnabled(false);
 		button_start.setEnabled(false);
-		stop.setEnabled(false);
+	
 		button_clear_all.setEnabled(false);
 		button_select_all.setEnabled(false);
 		button_setting.setEnabled(false);
 
 		if (isInTest) {
-			stop.setEnabled(true);
+		//	stop.setEnabled(true);
 		} else {
 
 			for (int i = 0; i < testCheckbox.size(); i++) {
@@ -380,7 +382,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			button_select_all.setEnabled(true);
 			button_clear_all.setEnabled(true);
 			button_setting.setEnabled(true);
-			stop.setEnabled(false);
+			//stop.setEnabled(false);
 		}
 	}
 
@@ -448,11 +450,11 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			isInTest = true;
 			mHandler.sendEmptyMessage(MSG_WAT_START);
 			break;
-		case R.id.stop:
+	/*	case R.id.stop:
 		case R.id.stop_testview:
 			isInTest = false;
 			mHandler.sendEmptyMessage(MSG_WAT_STOP);
-			break;
+			break;*/
 		case R.id.select_all:
 			selectAll();
 			break;
@@ -587,4 +589,20 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			testCheckbox.get(i).setChecked(false);
 		}
 	}
+	
+	private BroadcastReceiver StopTestBR = new BroadcastReceiver(){
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			Log.i(TAGM, TAG + "----StopTestBR---->");
+			String action = intent.getAction();
+			if (action.equals(stopTestBR)) {
+				isInTest = false;
+				mHandler.sendEmptyMessage(MSG_WAT_STOP);
+				updateUI();
+			}
+		}
+		
+	};
 }

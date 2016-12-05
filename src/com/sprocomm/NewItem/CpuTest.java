@@ -23,8 +23,6 @@ public class CpuTest extends TestItem {
 	private View test_view;
 	private View mainView;
 	private Activity mActivity;
-
-	public static CpuTest instance = null;
 	
 	public CpuTest(Context context,long time,Handler handler){
 		mContext = context;
@@ -40,13 +38,12 @@ public class CpuTest extends TestItem {
 		isInTest = true;
 		isTestPass = false;
 		isTestEnd = false;
-		
-		instance =this;
 
 		//initUI();
 		Intent mIntent = new Intent(mContext,MathCharmActivity.class);
 		mIntent.putExtra("mathcharm", 0);
 		mContext.startActivity(mIntent);
+		
 	}
 
 	
