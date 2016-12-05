@@ -357,6 +357,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit()
 						.putBoolean(key, false).commit();
 
+				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+				.edit().putBoolean("isCleanReport", false).commit();
 			}
 
 			item.isTestPass = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
@@ -372,7 +374,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 		test_view.setVisibility(View.GONE);
 		button_start.setEnabled(true);
-
+		
 		updateUI();
 	}
 
@@ -468,8 +470,6 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		switch (v.getId()) {
 		case R.id.start:
 			isInTest = true;
-			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
-			.edit().putBoolean("isCleanReport", false).commit();
 			mHandler.sendEmptyMessage(MSG_WAT_START);
 			break;
 		// case R.id.stop:
