@@ -3,6 +3,7 @@ package com.sprocomm.AgingTest;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,12 +18,10 @@ public class TestReportActivity extends Activity implements OnClickListener {
 
 	private static final String TAG = "TestReportActivity";
 	private static final String TAGM = "AgingTest";
-	private final int TESTCOUNT = 7;
+	private final int TESTCOUNT = 12;
 	private Button setOK;
 	private Button setCancel;
 
-	private ListView mListView;
-	private ArrayList<String> mArrayList = new ArrayList<String>();
 	private TextView reboot;
 	private TextView cpu;
 	private TextView audio;
@@ -41,6 +40,7 @@ public class TestReportActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		Log.i(TAGM, TAG + "----start--->");
 		setContentView(R.layout.test_report_view);
 
 		initUI();
@@ -48,7 +48,7 @@ public class TestReportActivity extends Activity implements OnClickListener {
 		if (TESTCOUNT == AgingTest.getList().size()) {
 			for (int i = 0; i < TESTCOUNT; i++) {
 				boolean testResult = AgingTest.getList().get(i).isTestPass;
-				Log.i(TAGM, TAG + "----testResult--->" + testResult);
+				//Log.i(TAGM, TAG + "----testResult--->" + testResult);
 				edit.get(i).setText(testResult ? R.string.TestPass : R.string.noTest);
 				edit.get(i).setTextColor(testResult ? Color.GREEN : Color.RED);
 
@@ -64,7 +64,11 @@ public class TestReportActivity extends Activity implements OnClickListener {
 		if (view.getId() == R.id.ok) {
 			finish();
 		}
-		if (view.getId() == R.id.cancel) {
+		if (view.getId() == R.id.clean_report) {
+			
+			//finish();
+			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+			.edit().putBoolean("isCleanReport", true).commit();
 			finish();
 		}
 
@@ -100,7 +104,7 @@ public class TestReportActivity extends Activity implements OnClickListener {
 
 
 		setOK = (Button) findViewById(R.id.ok);
-		setCancel = (Button) findViewById(R.id.cancel);
+		setCancel = (Button) findViewById(R.id.clean_report);
 		setOK.setOnClickListener(this);
 		setCancel.setOnClickListener(this);
 	}

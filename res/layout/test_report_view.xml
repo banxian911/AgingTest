@@ -297,12 +297,12 @@
             android:text="@string/button_ok" />
 
         <Button
-            android:id="@+id/cancel"
+            android:id="@+id/clean_report"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/button_cancel" />
+            android:text="@string/button_clean_report" />
     </LinearLayout>
 
 </LinearLayout>

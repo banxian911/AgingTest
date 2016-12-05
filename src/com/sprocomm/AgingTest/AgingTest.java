@@ -48,6 +48,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 	public static final String SAVE_DATA = "testState";
 	public static final String TEST_TIME = "testtime";
+
 	public static boolean DEBUG = true;
 
 	public static final String VIDEO_NAME = "moveTest.mp4";
@@ -63,7 +64,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private static boolean isInTest;
 
 	private static String stopTestBR = "com.sprocomm.AgingTest.StopTestBR";
-	
+
 	// CheckBox box_Video;
 	// CheckBox box_3dplay;
 	// CheckBox box_lcd_vibrate;
@@ -207,15 +208,22 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		 * IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 		 */
 		AccessPermissions();
-		
+
 		registerReceiver(StopTestBR, new IntentFilter(stopTestBR));
-		
+
 		mContext = this;
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
 		wakeLock.acquire();
 
 		initUI();
+		init();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
 		init();
 	}
 
@@ -241,7 +249,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		button_clear_all = (Button) findViewById(R.id.clear_all);
 		button_setting = (Button) findViewById(R.id.setting);
 		button_report = (Button) findViewById(R.id.report);
-		
+
 		test_view = findViewById(R.id.test_view);
 
 		testCheckbox.clear();
@@ -276,16 +284,16 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 		button_start.setOnClickListener(this);
 		stop_testview.setOnClickListener(this);
-		
+
 		button_select_all.setOnClickListener(this);
 		button_clear_all.setOnClickListener(this);
 		button_setting.setOnClickListener(this);
 		button_report.setOnClickListener(this);
 		initTimeSet();
-		
+
 	}
-	
-	private void initTimeSet(){
+
+	private void initTimeSet() {
 		long testTime = 30 * MINUTE;
 
 		test_time = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time",
@@ -334,9 +342,23 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 	public void init() {
 		Log.i(TAGM, TAG + "------testlist.size()------" + testlist.size());
+		boolean isCleanReport = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+				.getBoolean("isCleanReport", false);
+		Log.i(TAGM, TAG + "------isCleanReport------" + isCleanReport);
 		for (int i = 0; i < testlist.size(); i++) {
-			//Log.i("AgingTest", TAG + "------i---A----" + i);
+			// Log.i("AgingTest", TAG + "------i---A----" + i);
 			TestItem item = testlist.get(i);
+			if (isCleanReport) {
+
+				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit()
+						.putBoolean(item.getClass().getName(), false).commit();
+
+				String key = testlist.get(i).getClass().getName() + "isCheck";
+				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit()
+						.putBoolean(key, false).commit();
+
+			}
+
 			item.isTestPass = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
 					.getBoolean(item.getClass().getName(), false);
 			String key = testlist.get(i).getClass().getName() + "isCheck";
@@ -345,11 +367,12 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			testCheckbox.get(i).setChecked(item.isNeedTest);
 			box_isCirculation.setChecked(getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
 					.getBoolean("isCirculation", false));
+
 		}
 
 		test_view.setVisibility(View.GONE);
 		button_start.setEnabled(true);
-	
+
 		updateUI();
 	}
 
@@ -362,13 +385,13 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		}
 		box_isCirculation.setEnabled(false);
 		button_start.setEnabled(false);
-	
+
 		button_clear_all.setEnabled(false);
 		button_select_all.setEnabled(false);
 		button_setting.setEnabled(false);
 
 		if (isInTest) {
-		//	stop.setEnabled(true);
+			// stop.setEnabled(true);
 		} else {
 
 			for (int i = 0; i < testCheckbox.size(); i++) {
@@ -379,7 +402,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			button_select_all.setEnabled(true);
 			button_clear_all.setEnabled(true);
 			button_setting.setEnabled(true);
-			//stop.setEnabled(false);
+			// stop.setEnabled(false);
 		}
 	}
 
@@ -445,9 +468,11 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		switch (v.getId()) {
 		case R.id.start:
 			isInTest = true;
+			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+			.edit().putBoolean("isCleanReport", false).commit();
 			mHandler.sendEmptyMessage(MSG_WAT_START);
 			break;
-		//case R.id.stop:
+		// case R.id.stop:
 		case R.id.stop_testview:
 			isInTest = false;
 			mHandler.sendEmptyMessage(MSG_WAT_STOP);
@@ -455,11 +480,11 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		case R.id.select_all:
 			selectAll();
 			break;
-			
+
 		case R.id.clear_all:
 			clearAll();
 			break;
-			
+
 		case R.id.setting:
 			Intent intent = new Intent(AgingTest.this, SetTestTimeActivity.class);
 			startActivity(intent);
@@ -476,7 +501,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	protected void onDestroy() {
 		Toast.makeText(mContext, "Del the video file", Toast.LENGTH_LONG).show();
 		super.onDestroy();
-		// unregisterReceiver(mBatteryInfoReceiver);
+		unregisterReceiver(StopTestBR);
 		lock.reenableKeyguard();
 		if (wakeLock.isHeld())
 			wakeLock.release();
@@ -510,13 +535,13 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		super.onBackPressed();
 	}
 
-	/*@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-
-	}*/
+	/*
+	 * @Override public boolean onCreateOptionsMenu(Menu menu) { // Inflate the
+	 * menu; this adds items to the action bar if it is present.
+	 * getMenuInflater().inflate(R.menu.main, menu); return true;
+	 * 
+	 * }
+	 */
 
 	// @Override
 	// protected void onActivityResult(int requestCode, int resultCode, Intent
@@ -536,24 +561,17 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		return testlist;
 	}
 
-/*	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.test_time) {
-			Intent intent = new Intent(AgingTest.this, SetTestTimeActivity.class);
-			startActivity(intent);
-			return true;
-		} else if (id == R.id.test_report) {
-			Intent intent = new Intent(AgingTest.this, TestReportActivity.class);
-			startActivity(intent);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-*/
+	/*
+	 * @Override public boolean onOptionsItemSelected(MenuItem item) { // Handle
+	 * action bar item clicks here. The action bar will // automatically handle
+	 * clicks on the Home/Up button, so long // as you specify a parent activity
+	 * in AndroidManifest.xml. int id = item.getItemId(); if (id ==
+	 * R.id.test_time) { Intent intent = new Intent(AgingTest.this,
+	 * SetTestTimeActivity.class); startActivity(intent); return true; } else if
+	 * (id == R.id.test_report) { Intent intent = new Intent(AgingTest.this,
+	 * TestReportActivity.class); startActivity(intent); return true; } return
+	 * super.onOptionsItemSelected(item); }
+	 */
 	/*
 	 * private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver()
 	 * {
@@ -575,22 +593,22 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			startActivity(intent);
 		}
 	}
-	
-	private void selectAll(){
+
+	private void selectAll() {
 		Log.i(TAGM, TAG + "----selectAll()---->");
 		for (int i = 0; i < testCheckbox.size(); i++) {
 			testCheckbox.get(i).setChecked(true);
 		}
 	}
-	
-	private void clearAll(){
+
+	private void clearAll() {
 		Log.i(TAGM, TAG + "----clearAll---->");
 		for (int i = 0; i < testCheckbox.size(); i++) {
 			testCheckbox.get(i).setChecked(false);
 		}
 	}
-	
-	private BroadcastReceiver StopTestBR = new BroadcastReceiver(){
+
+	private BroadcastReceiver StopTestBR = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -603,6 +621,6 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 				updateUI();
 			}
 		}
-		
+
 	};
 }

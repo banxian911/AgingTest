@@ -21,12 +21,6 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 	private final int TESTCOUNT = 12;
 	private Button setOK;
 	private Button setCancel;
-//	private EditText playVideoEdit;
-//	private EditText play3DEdit;
-//	private EditText lcd_vibrateEdit;
-//	private EditText spkEdit;
-//	private EditText mic_receiverEdit;
-	
 	
 	private EditText cpuEdit;
 	private EditText memoryEdit;
@@ -49,12 +43,6 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_settings_view);
 
-		//playVideoEdit = (EditText) findViewById(R.id.video_time_Edit);
-		//play3DEdit = (EditText) findViewById(R.id.play_3d_time_Edit);
-//        lcd_vibrateEdit = (EditText) findViewById(R.id.lcd_vibrate_time_Edit);
-//        spkEdit = (EditText) findViewById(R.id.spk_time_Edit);
-//        mic_receiverEdit = (EditText) findViewById(R.id.mic_receiver_time_Edit);
-        
 		initUI();
         
         mSharepreferences = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE);
