@@ -10,6 +10,7 @@ import com.sprocomm.NewItem.LcdTest;
 import com.sprocomm.NewItem.MemoryTest;
 import com.sprocomm.NewItem.S3Test;
 import com.sprocomm.NewItem.Test2D;
+import com.sprocomm.NewItem.VRecroderTest;
 import com.sprocomm.itemtest.BatteryTest;
 //import com.sprocomm.itemtest.BatteryTest;
 import com.sprocomm.itemtest.CameraTest;
@@ -317,7 +318,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		testlist.add(new BatteryTest(this, test_time_eachI[8] * MINUTE, mHandler));
 		testlist.add(new MemoryTest(this, test_time_eachI[9] * MINUTE, mHandler));
 		testlist.add(new LcdTest(this, test_time_eachI[10] * MINUTE, mHandler));
-		testlist.add(new CameraTest(this, test_time_eachI[11] * MINUTE, mHandler));
+		testlist.add(new VRecroderTest(this, test_time_eachI[11] * MINUTE, mHandler));
 
 		boolean isRebootTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
 				.getBoolean("reboot", false);

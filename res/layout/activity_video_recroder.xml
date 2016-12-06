@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sprocomm.AgingTest.VideoRecroder" >
+
+   
+    <SurfaceView
+        android:id="@+id/video_recorder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="3.0dip" />
+    
+    <Chronometer 
+        android:id="@+id/run_time_vr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:layout_alignParentBottom="true"
+        android:textSize="10sp"
+        android:textColor="@color/green"/>
+
+</RelativeLayout>
