@@ -49,13 +49,16 @@ public class VideoRecorderUtil {
 		}
 	}
 
-	public void startRecording(SurfaceView paramSurfaceView) {
+	public void startRecording(SurfaceView paramSurfaceView,int cameraId) {
 		mediarecorder = new MediaRecorder();
-		/*
-		 * mCamera = Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK); if
-		 * (mCamera != null) { mCamera.setDisplayOrientation(90);
-		 * mCamera.unlock(); mediarecorder.setCamera(mCamera); }
-		 */
+		
+		mCamera = Camera.open(cameraId);
+		if (mCamera != null) {
+			//mCamera.setDisplayOrientation(90);
+			mCamera.unlock();
+			mediarecorder.setCamera(mCamera);
+		}
+
 		mediarecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
 		mediarecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 		mediarecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
@@ -75,17 +78,24 @@ public class VideoRecorderUtil {
 			isRecording = true;
 			 //runtimetest();
 		} catch (Exception exception) {
-			exception.printStackTrace();
+			//exception.printStackTrace();
 		}
 	}
 
 	public void stopRecording() {
-		if (this.mediarecorder != null) {
+		Log.i("AgingTest", TAG + "---stoptRecording-a--");
+		if (mediarecorder != null) {
 			Log.i("AgingTest", TAG + "---stoptRecording---");
 			this.mediarecorder.stop();
 			this.mediarecorder.release();
 			this.mediarecorder = null;
-			this.timer.cancel();
+			if (timer !=null) {
+				this.timer.cancel();
+			}
+			if (mCamera != null) {
+				mCamera.release();
+				mCamera = null;
+            }
 			if ((this.lastFileName != null) && (!"".equals(this.lastFileName))) {
 				File localFile = new File(this.lastFileName);
 				localFile.delete();

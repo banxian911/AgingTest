@@ -64,6 +64,7 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 		for (int i=0; i<test_time_eachS.length; i++) {
 			if (i == 11) {
 				int time = Integer.parseInt(test_time_eachS[i]);
+				Log.i("AgingTest",TAG + "---time---" + time +"--edit.get(i)--" + edit.get(i));
 				edit.get(i).setText(""+time/60);
 			}else {
 				edit.get(i).setText(test_time_eachS[i]);
@@ -110,7 +111,7 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 					}
 					if (edit.get(i).equals(cameraEdit)) {
 						time = time * 60;
-						Log.i("AgingTest",TAG + "---time---" + time +"--edit.get(i)--" +edit.get(i));
+						//Log.i("AgingTest",TAG + "---time---" + time +"--edit.get(i)--" +edit.get(i));
 					}
 					AgingTest.getList().get(i).setTestTime(time);
 					set_time.append(time);

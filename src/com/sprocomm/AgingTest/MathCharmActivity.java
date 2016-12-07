@@ -132,7 +132,7 @@ public class MathCharmActivity extends Activity {
 		default:
 			break;
 		}
-
+		Log.d("AgingTest", TAG + "---timer--->" + timer);
 		if (timer != null) {
 			mCharmTask = new MathCharmTask();
 			timer.schedule(mCharmTask, duration);
@@ -230,7 +230,7 @@ public class MathCharmActivity extends Activity {
 				public void run() {
 					// TODO Auto-generated method stub
 					startTransform(flag);
-
+					//mCharmTask.cancel();
 				}
 			});
 
