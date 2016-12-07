@@ -134,6 +134,9 @@ public class MathCharmActivity extends Activity {
 		}
 		Log.d("AgingTest", TAG + "---timer--->" + timer);
 		if (timer != null) {
+			if (mCharmTask != null) {
+				mCharmTask.cancel();
+			}
 			mCharmTask = new MathCharmTask();
 			timer.schedule(mCharmTask, duration);
 		}
@@ -147,6 +150,9 @@ public class MathCharmActivity extends Activity {
 		lcdView.setBackgroundColor(lcdBgColor[lcdBg]);
 		lcdBg++;
 		if (timer != null) {
+			if (mLcdTask != null) {
+				mLcdTask.cancel();
+			}
 			mLcdTask = new LcdTask();
 			timer.schedule(mLcdTask, lcdTime);
 		}
