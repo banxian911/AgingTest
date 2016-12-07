@@ -298,7 +298,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		long testTime = 30 * MINUTE;
 
 		test_time = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time",
-				"30/30/30/30/30/30/30/30/30/30/30/30");
+				"30/30/30/30/30/30/30/30/30/30/30/1");
 		Log.i(TAGM, TAG + "------test_time-----" + test_time);
 		String[] test_time_eachS = test_time.split("/");
 		int[] test_time_eachI = new int[test_time_eachS.length];

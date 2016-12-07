@@ -73,7 +73,7 @@ public class VideoRecorderUtil {
 			Log.i("AgingTest", TAG + "---startRecording---");
 			mediarecorder.start();
 			isRecording = true;
-			 runtimetest();
+			 //runtimetest();
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}

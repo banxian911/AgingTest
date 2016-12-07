@@ -46,7 +46,7 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 		initUI();
         
         mSharepreferences = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE);
-        String test_time = mSharepreferences.getString("test_time", "30/30/30/30/30/30/30/30/30/30/30/30");
+        String test_time = mSharepreferences.getString("test_time", "30/30/30/30/30/30/30/30/30/30/30/1");
         edit.add(rebootEdit);
         edit.add(cpuEdit);
         edit.add(audioEdit);
@@ -62,7 +62,13 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
               
 		String[] test_time_eachS = test_time.split("/");
 		for (int i=0; i<test_time_eachS.length; i++) {
-			edit.get(i).setText(test_time_eachS[i]);
+			if (i == 11) {
+				int time = Integer.parseInt(test_time_eachS[i]);
+				edit.get(i).setText(""+time/60);
+			}else {
+				edit.get(i).setText(test_time_eachS[i]);
+			}
+			
 		}
 		
         setOK = (Button) findViewById(R.id.ok);
@@ -101,6 +107,10 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 						time = Integer.parseInt(edit.get(i).getText().toString());
 					} else {
 						time = 20;
+					}
+					if (edit.get(i).equals(cameraEdit)) {
+						time = time * 60;
+						Log.i("AgingTest",TAG + "---time---" + time +"--edit.get(i)--" +edit.get(i));
 					}
 					AgingTest.getList().get(i).setTestTime(time);
 					set_time.append(time);
