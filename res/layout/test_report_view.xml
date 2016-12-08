@@ -45,12 +45,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:text="@string/cpu_test"
+                android:visibility="invisible"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/cpu_report_text"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:text="@string/noTest"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -110,6 +112,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:visibility="invisible"
                 android:text="@string/s3_test"
                 android:textSize="12sp" />
 
@@ -117,6 +120,7 @@
                 android:id="@+id/s3_report_text"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:text="@string/noTest"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -132,6 +136,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:visibility="invisible"
                 android:text="@string/emmc_test"
                 android:textSize="12sp" />
 
@@ -140,6 +145,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/noTest"
+                android:visibility="invisible"
                 android:textSize="12sp" />
         </LinearLayout>
         
@@ -200,6 +206,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:text="@string/battery_test"
+                android:visibility="invisible"
                 android:textSize="12sp" />
 
             <TextView
@@ -207,6 +214,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/noTest"
+                android:visibility="invisible"
                 android:textSize="12sp" />
         </LinearLayout>
            
@@ -222,6 +230,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:text="@string/memory_test"
+                android:visibility="invisible"
                 android:textSize="12sp" />
 
             <TextView
@@ -229,6 +238,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="@string/noTest"
+                android:visibility="invisible"
                 android:textSize="12sp" />
         </LinearLayout>
            
