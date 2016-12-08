@@ -32,8 +32,8 @@
             android:id="@+id/cpu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="@string/cpu_test" />
+            android:text="@string/cpu_test"
+            android:visibility="invisible" />
 
         <CheckBox
             android:id="@+id/audio"
@@ -61,15 +61,15 @@
             android:id="@+id/s3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="@string/s3_test" />
+            android:text="@string/s3_test"
+            android:visibility="invisible" />
 
         <CheckBox
             android:id="@+id/emmc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="@string/emmc_test" />
+            android:text="@string/emmc_test"
+            android:visibility="invisible" />
 
         <CheckBox
             android:id="@+id/video"
@@ -97,15 +97,15 @@
             android:id="@+id/battery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="@string/battery_test" />
+            android:text="@string/battery_test"
+            android:visibility="invisible" />
 
         <CheckBox
             android:id="@+id/memory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="@string/memory_test" />
+            android:text="@string/memory_test"
+            android:visibility="invisible" />
 
         <CheckBox
             android:id="@+id/lcd"

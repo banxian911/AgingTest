@@ -28,7 +28,7 @@ public class MathCharmActivity extends Activity {
 	private TextView testType;
 	private Timer timer;
 	private MathCharmTask mCharmTask;
-	private int duration = 10 * 1000;
+	private int duration = 30 * 1000;
 	private static int flag;
 
 	private ImageView lcdView;
@@ -176,7 +176,7 @@ public class MathCharmActivity extends Activity {
 		if (mPlayMediaUtil != null) {
 			AudioTestStop();
 		}
-		uri = "android.resource://" + getPackageName() + "/" + R.raw.test_music_2;
+		uri = "android.resource://" + getPackageName() + "/" + R.raw.test_music;
 		Log.d("AgingTest", TAG + "---playMusic uri--->" + uri);
 		mPlayMediaUtil = new PlayMediaUtil(this, Uri.parse(uri));
 		mPlayMediaUtil.start();

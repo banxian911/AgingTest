@@ -24,6 +24,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="@string/cpu_test"
+            android:visibility="invisible"
             android:textSize="13sp" />
 
         <EditText
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/default_time"
             android:inputType="number"
+            android:visibility="invisible"
             android:textSize="13sp" />
 
         <TextView
@@ -39,6 +41,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="@string/memory_test"
+            android:visibility="invisible"
             android:textSize="13sp" />
 
         <EditText
@@ -46,6 +49,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:hint="@string/default_time"
+            android:visibility="invisible"
             android:inputType="number"
             android:textSize="13sp" />
     </LinearLayout>
@@ -150,6 +154,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="@string/emmc_test"
+            android:visibility="invisible"
             android:textSize="13sp" />
 
         <EditText
@@ -158,6 +163,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/default_time"
             android:inputType="number"
+            android:visibility="invisible"
             android:textSize="13sp" />
     </LinearLayout>
 
@@ -172,6 +178,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="@string/s3_test"
+            android:visibility="invisible"
             android:textSize="13sp" />
 
         <EditText
@@ -180,6 +187,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/default_time"
             android:inputType="number"
+            android:visibility="invisible"
             android:textSize="13sp" />
 
         <TextView
@@ -187,6 +195,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="@string/battery_test"
+            android:visibility="invisible"
             android:textSize="13sp" />
 
         <EditText
@@ -194,6 +203,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:hint="@string/default_time"
+            android:visibility="invisible"
             android:inputType="number"
             android:textSize="13sp" />
     </LinearLayout>

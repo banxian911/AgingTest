@@ -154,7 +154,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 				break;
 			case MSG_WAT_STOP:
-				Log.i(TAGM, TAG + "-----MSG_WAT_STOP-1---");
+				//Log.i(TAGM, TAG + "-----MSG_WAT_STOP-1---");
 				boolean test_next = msg.getData().getBoolean("test_next");
 				Log.i(TAGM, TAG + "-----MSG_WAT_STOP-1---test_next--->" + test_next);
 				for (int i = 0; i < testlist.size(); i++) {
@@ -607,9 +607,9 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 				public void run() {
 					// TODO Auto-generated method stub
 					isCirculation = false;
-					isInTest = false;
-					mHandler.sendEmptyMessage(MSG_WAT_STOP);
-					updateUI();
+				//	isInTest = false;
+				//	mHandler.sendEmptyMessage(MSG_WAT_STOP);
+				//	updateUI();
 				}
 			});
 		}

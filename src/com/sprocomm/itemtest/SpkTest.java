@@ -1,4 +1,4 @@
-package com.sprocomm.itemtest;
+/*package com.sprocomm.itemtest;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -189,3 +189,4 @@ public class SpkTest extends TestItem {
 		}
 	}
 }
+*/
