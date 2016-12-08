@@ -3,7 +3,6 @@ package com.sprocomm.utils;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 

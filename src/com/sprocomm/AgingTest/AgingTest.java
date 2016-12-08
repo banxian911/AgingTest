@@ -10,6 +10,7 @@ import com.sprocomm.NewItem.LcdTest;
 import com.sprocomm.NewItem.MemoryTest;
 import com.sprocomm.NewItem.S3Test;
 import com.sprocomm.NewItem.Test2D;
+import com.sprocomm.NewItem.Test3D;
 import com.sprocomm.NewItem.VRecroderTest;
 import com.sprocomm.itemtest.BatteryTest;
 //import com.sprocomm.itemtest.BatteryTest;
@@ -314,7 +315,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		testlist.add(new S3Test(this, test_time_eachI[4] * MINUTE, mHandler));
 		testlist.add(new EmmcTest(this, test_time_eachI[5] * MINUTE, mHandler));
 		testlist.add(new VideoTest(this, test_time_eachI[6] * MINUTE, mHandler));
-		testlist.add(new Play3DTest(this, test_time_eachI[7] * MINUTE, mHandler));
+		testlist.add(new Test3D(this, test_time_eachI[7] * MINUTE, mHandler));
 		testlist.add(new BatteryTest(this, test_time_eachI[8] * MINUTE, mHandler));
 		testlist.add(new MemoryTest(this, test_time_eachI[9] * MINUTE, mHandler));
 		testlist.add(new LcdTest(this, test_time_eachI[10] * MINUTE, mHandler));
