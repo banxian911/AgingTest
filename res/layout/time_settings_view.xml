@@ -8,9 +8,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings_test"
         android:layout_gravity="center"
         android:layout_margin="10dp"
+        android:text="@string/settings_test"
         android:textSize="12sp" />
 
     <LinearLayout
@@ -218,22 +218,22 @@
             android:hint="@string/default_time"
             android:inputType="number"
             android:textSize="13sp" />
- 
     </LinearLayout>
 
-      <TextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/settings_test_num"
         android:layout_gravity="center"
         android:layout_margin="10dp"
+        android:text="@string/settings_test_num"
         android:textSize="12sp" />
-     <LinearLayout
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:orientation="horizontal" >
- 
+
         <TextView
             android:id="@+id/camera_time"
             android:layout_width="50dp"
@@ -250,6 +250,22 @@
             android:textSize="13sp" />
     </LinearLayout>
     
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:text="@string/settings_cycle"
+        android:textSize="12sp" />
+     
+    <Spinner android:id="@+id/cycle_spin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:entries="@array/cycle_str"
+        />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

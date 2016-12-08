@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 
 
-public class SetTestTimeActivity extends Activity implements OnClickListener {
+public class SetTestTimeActivity extends Activity implements OnClickListener,OnItemSelectedListener{
 
 	private static final String TAG = "SetTestTimeActivity";
 	private final int TESTCOUNT = 12;
@@ -35,6 +38,8 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 	private EditText cameraEdit;
 	private EditText rebootEdit;
 	
+	private Spinner mCycleSp;
+	
     private ArrayList<EditText> edit = new ArrayList<EditText>();
     private SharedPreferences mSharepreferences;
 
@@ -44,39 +49,41 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.time_settings_view);
 
 		initUI();
-        
-        mSharepreferences = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE);
-        String test_time = mSharepreferences.getString("test_time", "30/30/30/30/30/30/30/30/30/30/30/1");
-        edit.add(rebootEdit);
-        edit.add(cpuEdit);
-        edit.add(audioEdit);
-        edit.add(test2DEdit);
-        edit.add(s3Edit);
-        edit.add(emmcEdit);
-        edit.add(playVideoEdit);
-        edit.add(play3DEdit);
-        edit.add(batteryEdit);
-        edit.add(memoryEdit);
-        edit.add(lcdEdit);
-        edit.add(cameraEdit);
-              
-		String[] test_time_eachS = test_time.split("/");
-		for (int i=0; i<test_time_eachS.length; i++) {
-			if (i == 11) {
-				int time = Integer.parseInt(test_time_eachS[i]);
-				Log.i("AgingTest",TAG + "---time---" + time +"--edit.get(i)--" + edit.get(i));
-				edit.get(i).setText(""+time/60);
-			}else {
-				edit.get(i).setText(test_time_eachS[i]);
-			}
-			
-		}
-		
-        setOK = (Button) findViewById(R.id.ok);
-		setCancel = (Button) findViewById(R.id.cancel);
+		initData();
+      
+		mCycleSp.setOnItemSelectedListener(this);
 		setOK.setOnClickListener(this);
 		setCancel.setOnClickListener(this);
 		
+	}
+	
+	private void initData(){
+		  mSharepreferences = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE);
+	        String test_time = mSharepreferences.getString("test_time", "30/30/30/30/30/30/30/30/30/30/30/1");
+	        edit.add(rebootEdit);
+	        edit.add(cpuEdit);
+	        edit.add(audioEdit);
+	        edit.add(test2DEdit);
+	        edit.add(s3Edit);
+	        edit.add(emmcEdit);
+	        edit.add(playVideoEdit);
+	        edit.add(play3DEdit);
+	        edit.add(batteryEdit);
+	        edit.add(memoryEdit);
+	        edit.add(lcdEdit);
+	        edit.add(cameraEdit);
+	              
+			String[] test_time_eachS = test_time.split("/");
+			for (int i=0; i<test_time_eachS.length; i++) {
+				if (i == 11) {
+					int time = Integer.parseInt(test_time_eachS[i]);
+					//Log.i("AgingTest",TAG + "---time---" + time +"--edit.get(i)--" + edit.get(i));
+					edit.get(i).setText(""+time/60);
+				}else {
+					edit.get(i).setText(test_time_eachS[i]);
+				}
+				
+			}
 	}
 
 	private void initUI(){
@@ -89,11 +96,14 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 		 lcdEdit = (EditText) findViewById(R.id.lcd_time_Edit);
 		 emmcEdit = (EditText) findViewById(R.id.emmc_time_Edit);
 		 s3Edit = (EditText) findViewById(R.id.s3_time_Edit);
-		 batteryEdit = (EditText) findViewById(R.id.battery_time_Edit);
-		
-        rebootEdit = (EditText) findViewById(R.id.reboot_time_Edit);
-        
-        cameraEdit = (EditText) findViewById(R.id.camera_time_Edit);
+		 batteryEdit = (EditText) findViewById(R.id.battery_time_Edit);	
+		 rebootEdit = (EditText) findViewById(R.id.reboot_time_Edit); 
+		 cameraEdit = (EditText) findViewById(R.id.camera_time_Edit);
+		 
+		 mCycleSp = (Spinner) findViewById(R.id.cycle_spin);
+		 
+		 setOK = (Button) findViewById(R.id.ok);
+		setCancel = (Button) findViewById(R.id.cancel);
 	}
 	@Override
 	public void onClick(View view) {
@@ -130,5 +140,37 @@ public class SetTestTimeActivity extends Activity implements OnClickListener {
 			finish();
 		}
 
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		int cycleint = 0;
+		switch (position) {
+		case 0:	
+			cycleint = 2;
+			break;
+		case 1:
+			cycleint = 4;
+			break;
+		case 2:
+			cycleint = 8;
+			break;
+		case 3:
+			cycleint = 16;
+			break;
+		case 4:
+			cycleint = 24;
+			break;
+		default:
+			break;
+		}
+		getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit().putInt("cycleNum", cycleint).commit();
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> parent) {
+		// TODO Auto-generated method stub
+		
 	}
 }

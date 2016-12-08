@@ -5,9 +5,11 @@ import com.sprocomm.Earth3D.OpenglSurfaceView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -20,6 +22,7 @@ public class Test3DActivity extends Activity {
 	private OpenglSurfaceView gl_view;
 	
 	public static Test3DActivity instance = null;
+	private static String stopTestBR = "com.sprocomm.AgingTest.StopTestBR";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +45,28 @@ public class Test3DActivity extends Activity {
 	}
 	
 	@Override
-	protected void onDestroy() {
+	protected void onPause() {
 		// TODO Auto-generated method stub
-		super.onDestroy();
-		//gl_view.stop
+		super.onPause();
+		gl_view.onPause();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		gl_view.onResume();
+	}
+	
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Intent mIntent = new Intent(stopTestBR);
+			this.sendBroadcast(mIntent);
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 }

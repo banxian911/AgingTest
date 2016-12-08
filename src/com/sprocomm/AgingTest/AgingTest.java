@@ -2,6 +2,8 @@ package com.sprocomm.AgingTest;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.sprocomm.NewItem.AudioTest;
 import com.sprocomm.NewItem.CpuTest;
@@ -63,18 +65,14 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	public static final int MSG_REBOOT_STOP = 0x03;
 
 	private static boolean isCirculation = false;
+	private Timer timer;
+	private cycleTimeTask mTimeTask;
+	
 	private static boolean isInTest;
 
 	private static String stopTestBR = "com.sprocomm.AgingTest.StopTestBR";
 
-	// CheckBox box_Video;
-	// CheckBox box_3dplay;
-	// CheckBox box_lcd_vibrate;
-	// CheckBox box_spk;
-	// CheckBox box_mic_receiver;
-	// CheckBox box_camera;
-	// CheckBox box_reboot;
-	CheckBox box_isCirculation;
+//	CheckBox box_isCirculation;
 
 	private CheckBox box_reboot;
 	private CheckBox box_cpu;
@@ -130,7 +128,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 					testlist.get(j).isTestEnd = false;
 				}
 				mHandler.sendEmptyMessage(MSG_WAT_STOP);
-				if (box_isCirculation.isChecked()) {
+				if (isCirculation) {
 					Log.i(TAGM, TAG + "-----MSG_WAT_START-3---testlist.size()--->" + testlist.size());
 					/*
 					 * for (int j2 = 0; j2 < testlist.size(); j2++) {
@@ -218,6 +216,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
 		wakeLock.acquire();
 
+		timer = new Timer();
+		
 		initUI();
 		init();
 	}
@@ -243,7 +243,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		box_lcd = (CheckBox) findViewById(R.id.lcd);
 		box_camera = (CheckBox) findViewById(R.id.camera);
 
-		box_isCirculation = (CheckBox) findViewById(R.id.iscirculation);
+	//	box_isCirculation = (CheckBox) findViewById(R.id.iscirculation);
 
 		button_start = (Button) findViewById(R.id.start);
 		stop_testview = (Button) findViewById(R.id.stop_testview);
@@ -282,7 +282,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		box_memory.setOnCheckedChangeListener(this);
 		box_lcd.setOnCheckedChangeListener(this);
 		box_camera.setOnCheckedChangeListener(this);
-		box_isCirculation.setOnCheckedChangeListener(this);
+	//	box_isCirculation.setOnCheckedChangeListener(this);
 
 		button_start.setOnClickListener(this);
 		stop_testview.setOnClickListener(this);
@@ -369,8 +369,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			item.isNeedTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).getBoolean(key,
 					false);
 			testCheckbox.get(i).setChecked(item.isNeedTest);
-			box_isCirculation.setChecked(getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
-					.getBoolean("isCirculation", false));
+		//	box_isCirculation.setChecked(getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+			//		.getBoolean("isCirculation", false));
 
 		}
 
@@ -387,7 +387,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			checkbox.setTextColor(testlist.get(i).isTestPass ? Color.GREEN : Color.RED);
 			checkbox.setEnabled(false);
 		}
-		box_isCirculation.setEnabled(false);
+		//box_isCirculation.setEnabled(false);
 		button_start.setEnabled(false);
 
 		button_clear_all.setEnabled(false);
@@ -401,7 +401,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			for (int i = 0; i < testCheckbox.size(); i++) {
 				testCheckbox.get(i).setEnabled(true);
 			}
-			box_isCirculation.setEnabled(true);
+			//box_isCirculation.setEnabled(true);
 			button_start.setEnabled(true);
 			button_select_all.setEnabled(true);
 			button_clear_all.setEnabled(true);
@@ -451,11 +451,11 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			index = 11;
 			break;
 
-		case R.id.iscirculation:
+	/*	case R.id.iscirculation:
 			isCirculation = isChecked;
 			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit()
 					.putBoolean("isCirculation", isChecked).commit();
-			break;
+			break;*/
 		}
 		if (index != -1) {
 			testlist.get(index).isNeedTest = isChecked;
@@ -473,11 +473,18 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		case R.id.start:
 			isInTest = true;
 			mHandler.sendEmptyMessage(MSG_WAT_START);
+			if (mTimeTask != null) {
+				mTimeTask.cancel();
+			}
+			CycleTask();
 			break;
 		// case R.id.stop:
 		case R.id.stop_testview:
 			isInTest = false;
 			mHandler.sendEmptyMessage(MSG_WAT_STOP);
+			if (mTimeTask != null) {
+				mTimeTask.cancel();
+			}
 			break;
 		case R.id.select_all:
 			selectAll();
@@ -518,6 +525,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 				}
 			}
 		}).start();
+		timer.cancel();
 	}
 
 	long lastTime = 0;
@@ -537,55 +545,9 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		super.onBackPressed();
 	}
 
-	/*
-	 * @Override public boolean onCreateOptionsMenu(Menu menu) { // Inflate the
-	 * menu; this adds items to the action bar if it is present.
-	 * getMenuInflater().inflate(R.menu.main, menu); return true;
-	 * 
-	 * }
-	 */
-
-	// @Override
-	// protected void onActivityResult(int requestCode, int resultCode, Intent
-	// data) {
-	// // TODO Auto-generated method stub
-	// if (requestCode == SET_TEST_TIME_CODE) {
-	// if (resultCode == RESULT_OK) {
-	// Log.i("yuanluo", "------ok---------");
-	// } else if (resultCode == RESULT_CANCELED) {
-	// Log.i("yuanluo", "------cancel---------");
-	// }
-	// }
-	// super.onActivityResult(requestCode, resultCode, data);
-	// }
-
 	public static ArrayList<TestItem> getList() {
 		return testlist;
 	}
-
-	/*
-	 * @Override public boolean onOptionsItemSelected(MenuItem item) { // Handle
-	 * action bar item clicks here. The action bar will // automatically handle
-	 * clicks on the Home/Up button, so long // as you specify a parent activity
-	 * in AndroidManifest.xml. int id = item.getItemId(); if (id ==
-	 * R.id.test_time) { Intent intent = new Intent(AgingTest.this,
-	 * SetTestTimeActivity.class); startActivity(intent); return true; } else if
-	 * (id == R.id.test_report) { Intent intent = new Intent(AgingTest.this,
-	 * TestReportActivity.class); startActivity(intent); return true; } return
-	 * super.onOptionsItemSelected(item); }
-	 */
-	/*
-	 * private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver()
-	 * {
-	 * 
-	 * @Override public void onReceive(Context context, Intent intent) { // TODO
-	 * Auto-generated method stub String action = intent.getAction(); if
-	 * (Intent.ACTION_BATTERY_CHANGED.equals(action)) { mBatteryLevel =
-	 * intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 100);
-	 * bt.setBatteryLevel(mBatteryLevel); } } };
-	 * 
-	 * public int getBatteryPer(){ return mBatteryLevel; }
-	 */
 
 	private void AccessPermissions() {
 		Log.i(TAGM, TAG + "----AccessPermissions() ---->");
@@ -625,4 +587,32 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		}
 
 	};
+	
+	private void CycleTask(){
+		int cycleInt = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).getInt("cycleNum", 0);
+		int cycleTime = cycleInt * 60 * 1000;
+		Log.i(TAGM, TAG + "----CycleTask()--cycleTime-->" + cycleTime);
+		isCirculation = true;
+		mTimeTask = new cycleTimeTask();
+		timer.schedule(mTimeTask, cycleTime);
+	}
+	class cycleTimeTask extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub	
+			runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					isCirculation = false;
+					isInTest = false;
+					mHandler.sendEmptyMessage(MSG_WAT_STOP);
+					updateUI();
+				}
+			});
+		}
+		
+	}
 }

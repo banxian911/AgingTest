@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cycle_str">
+        <item>2 hour</item>
+        <item>4 hour</item>
+        <item>8 hour</item>
+        <item>16 hour</item>
+        <item>24 hour</item>
+    </string-array>
+    
+</resources>
