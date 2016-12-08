@@ -16,11 +16,11 @@ public class PhoneBootReceiver extends BroadcastReceiver{
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Log.i(TAGM,TAG + "---onReceive start---->" );
-		long startTime = context.getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).getLong("startTime", System.currentTimeMillis());
-		boolean isRebootTest = context.getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).getBoolean("reboot", false);
-		String setTime = context.getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time", "30/30/30/30/30/30/30");
+		long startTime = context.getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).getLong("startTime", System.currentTimeMillis());
+		boolean isRebootTest = context.getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).getBoolean("reboot", false);
+		String setTime = context.getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time", "30/30/30/30/30/30/30/30/30/30/30/1");
 		String[] test_time_eachS = setTime.split("/");
-		int rebootTime = Integer.parseInt(test_time_eachS[6]);
+		int rebootTime = Integer.parseInt(test_time_eachS[0]);
 		
 		Log.i(TAGM,TAG + "---startTime--->" + startTime );
 		Log.i(TAGM,TAG + "---isRebootTest--->" + isRebootTest );
@@ -42,7 +42,7 @@ public class PhoneBootReceiver extends BroadcastReceiver{
 	            bootActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	            bootActivityIntent.putExtra("fromReceiver", true);
 	            context.startActivity(bootActivityIntent);  
-//				context.getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit().putBoolean("reboot", false).commit();
+//				context.getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit().putBoolean("reboot", false).commit();
 			}else{
 				//PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 				pm.reboot("");

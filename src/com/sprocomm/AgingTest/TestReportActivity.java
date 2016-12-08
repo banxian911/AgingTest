@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class TestReportActivity extends Activity implements OnClickListener {
 
@@ -67,7 +65,7 @@ public class TestReportActivity extends Activity implements OnClickListener {
 		if (view.getId() == R.id.clean_report) {
 			
 			//finish();
-			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
 			.edit().putBoolean("isCleanReport", true).commit();
 			finish();
 		}

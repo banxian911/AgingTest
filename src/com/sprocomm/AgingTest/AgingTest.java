@@ -2,8 +2,6 @@ package com.sprocomm.AgingTest;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.sprocomm.NewItem.AudioTest;
 import com.sprocomm.NewItem.CpuTest;
@@ -15,9 +13,6 @@ import com.sprocomm.NewItem.Test2D;
 import com.sprocomm.NewItem.Test3D;
 import com.sprocomm.NewItem.VRecroderTest;
 import com.sprocomm.itemtest.BatteryTest;
-//import com.sprocomm.itemtest.BatteryTest;
-import com.sprocomm.itemtest.CameraTest;
-import com.sprocomm.itemtest.Play3DTest;
 import com.sprocomm.itemtest.RebootTest;
 //import com.sprocomm.itemtest.ThreeDPlayTest;
 import com.sprocomm.itemtest.VideoTest;
@@ -64,9 +59,11 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	public static final int MSG_WAT_STOP = 0x02;
 	public static final int MSG_REBOOT_STOP = 0x03;
 
-	private static boolean isCirculation = false;
-	private Timer timer;
-	private cycleTimeTask mTimeTask;
+//	private static boolean isCirculation = false;
+//	private Timer timer;
+	//private cycleTimeTask mTimeTask;
+	private long startTestTime;
+	private long cycleTime;
 	
 	private static boolean isInTest;
 
@@ -96,12 +93,10 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private Button button_setting;
 	private Button button_report;
 
-	private boolean isFull = false;
 	View test_view;
 	PowerManager pm = null;
 	WakeLock wakeLock = null;
-	private int mBatteryLevel;
-	// BatteryTest bt;
+
 	private KeyguardManager kManager;
 	private KeyguardManager.KeyguardLock lock;
 
@@ -128,8 +123,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 					testlist.get(j).isTestEnd = false;
 				}
 				mHandler.sendEmptyMessage(MSG_WAT_STOP);
-				if (isCirculation) {
-					Log.i(TAGM, TAG + "-----MSG_WAT_START-3---testlist.size()--->" + testlist.size());
+				Log.i(TAGM, TAG + "-----isCycle()--->" + isCycle());
+				if (isCycle()) {
 					/*
 					 * for (int j2 = 0; j2 < testlist.size(); j2++) {
 					 * if(testlist.get(j2).isNeedTest){ isInTest = true; //
@@ -216,7 +211,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
 		wakeLock.acquire();
 
-		timer = new Timer();
+	//	timer = new Timer();
 		
 		initUI();
 		init();
@@ -296,7 +291,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	}
 
 	private void initTimeSet() {
-		long testTime = 30 * MINUTE;
+	//	long testTime = 30 * MINUTE;
 
 		test_time = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time",
 				"30/30/30/30/30/30/30/30/30/30/30/1");
@@ -321,18 +316,18 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		testlist.add(new LcdTest(this, test_time_eachI[10] * MINUTE, mHandler));
 		testlist.add(new VRecroderTest(this, test_time_eachI[11] * MINUTE, mHandler));
 
-		boolean isRebootTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+		boolean isRebootTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
 				.getBoolean("reboot", false);
 		isInTest = isRebootTest;
 		Log.i(TAGM, TAG + "------isInTest-----" + isInTest);
 		boolean isFromReceiver = getIntent().getBooleanExtra("fromReceiver", false);
 		Log.i(TAGM, TAG + "------isFromReceiver-----" + isFromReceiver);
 		if (isRebootTest) {
-			TestItem rebootTest = testlist.get(12);
+			TestItem rebootTest = testlist.get(0);
 			rebootTest.isInTest = isFromReceiver ? false : true;
 			rebootTest.isTestPass = isFromReceiver ? true : false;
 			rebootTest.isTestEnd = isFromReceiver ? true : false;
-			testCheckbox.get(12).setBackgroundColor(isFromReceiver ? Color.TRANSPARENT : Color.GRAY);
+			testCheckbox.get(0).setBackgroundColor(isFromReceiver ? Color.TRANSPARENT : Color.GRAY);
 			if (isFromReceiver) {
 				rebootTest.stopTest(true);
 				mHandler.sendEmptyMessage(MSG_REBOOT_STOP);
@@ -344,7 +339,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 	public void init() {
 		Log.i(TAGM, TAG + "------testlist.size()------" + testlist.size());
-		boolean isCleanReport = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+		boolean isCleanReport = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
 				.getBoolean("isCleanReport", false);
 		Log.i(TAGM, TAG + "------isCleanReport------" + isCleanReport);
 		for (int i = 0; i < testlist.size(); i++) {
@@ -352,24 +347,24 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			TestItem item = testlist.get(i);
 			if (isCleanReport) {
 
-				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit()
+				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit()
 						.putBoolean(item.getClass().getName(), false).commit();
 
 				String key = testlist.get(i).getClass().getName() + "isCheck";
-				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit()
+				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit()
 						.putBoolean(key, false).commit();
 
-				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
 				.edit().putBoolean("isCleanReport", false).commit();
 			}
 
-			item.isTestPass = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+			item.isTestPass = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
 					.getBoolean(item.getClass().getName(), false);
 			String key = testlist.get(i).getClass().getName() + "isCheck";
-			item.isNeedTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).getBoolean(key,
+			item.isNeedTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).getBoolean(key,
 					false);
 			testCheckbox.get(i).setChecked(item.isNeedTest);
-		//	box_isCirculation.setChecked(getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE)
+		//	box_isCirculation.setChecked(getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
 			//		.getBoolean("isCirculation", false));
 
 		}
@@ -453,7 +448,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 	/*	case R.id.iscirculation:
 			isCirculation = isChecked;
-			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit()
+			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit()
 					.putBoolean("isCirculation", isChecked).commit();
 			break;*/
 		}
@@ -461,7 +456,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			testlist.get(index).isNeedTest = isChecked;
 			String key = testlist.get(index).getClass().getName() + "isCheck";
 			Log.i(TAGM, TAG + "----key---->" + key);
-			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit().putBoolean(key, isChecked)
+			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit().putBoolean(key, isChecked)
 					.commit();
 		}
 		updateUI();
@@ -473,18 +468,18 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		case R.id.start:
 			isInTest = true;
 			mHandler.sendEmptyMessage(MSG_WAT_START);
-			if (mTimeTask != null) {
-				mTimeTask.cancel();
-			}
+//			if (mTimeTask != null) {
+//				mTimeTask.cancel();
+//			}
 			CycleTask();
 			break;
 		// case R.id.stop:
 		case R.id.stop_testview:
 			isInTest = false;
 			mHandler.sendEmptyMessage(MSG_WAT_STOP);
-			if (mTimeTask != null) {
-				mTimeTask.cancel();
-			}
+//			if (mTimeTask != null) {
+//				mTimeTask.cancel();
+//			}
 			break;
 		case R.id.select_all:
 			selectAll();
@@ -525,7 +520,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 				}
 			}
 		}).start();
-		timer.cancel();
+	//	timer.cancel();
 	}
 
 	long lastTime = 0;
@@ -561,7 +556,12 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private void selectAll() {
 		Log.i(TAGM, TAG + "----selectAll()---->");
 		for (int i = 0; i < testCheckbox.size(); i++) {
-			testCheckbox.get(i).setChecked(true);
+			if (i == 1 || i == 4 || i == 5 || i == 8 || i ==9) {
+				
+			}else {
+				testCheckbox.get(i).setChecked(true);
+			}
+			
 		}
 	}
 
@@ -589,30 +589,25 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	};
 	
 	private void CycleTask(){
-		int cycleInt = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).getInt("cycleNum", 0);
-		int cycleTime = cycleInt * 60 * 1000;
-		Log.i(TAGM, TAG + "----CycleTask()--cycleTime-->" + cycleTime);
-		isCirculation = true;
-		mTimeTask = new cycleTimeTask();
-		timer.schedule(mTimeTask, cycleTime);
-	}
-	class cycleTimeTask extends TimerTask{
-
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub	
-			runOnUiThread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					isCirculation = false;
-				//	isInTest = false;
-				//	mHandler.sendEmptyMessage(MSG_WAT_STOP);
-				//	updateUI();
-				}
-			});
-		}
+		 getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
+				.edit().putLong("taskStartTime", System.currentTimeMillis()).commit();
+		 Log.i(TAGM, TAG + "----CycleTask()---->" + System.currentTimeMillis());
+		int cycleInt = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).getInt("cycleNum", 0);
 		
+		
+		getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
+				.edit().putLong("taskCycleTime", cycleInt * 60 * 1000).commit();
+				
+	}
+	
+	private Boolean isCycle(){
+		startTestTime = getSharedPreferences(AgingTest.SAVE_DATA, MODE_PRIVATE).getLong("taskStartTime",0);
+		cycleTime = getSharedPreferences(AgingTest.SAVE_DATA, MODE_PRIVATE).getLong("taskCycleTime", 0);
+		Log.i(TAGM, TAG + "----startTestTime---->" + startTestTime + "---cycleTime---" + cycleTime + "----->");
+		if ( (System.currentTimeMillis() - startTestTime) >= cycleTime) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 }

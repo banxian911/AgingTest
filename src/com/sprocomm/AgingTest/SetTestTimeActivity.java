@@ -165,7 +165,7 @@ public class SetTestTimeActivity extends Activity implements OnClickListener,OnI
 		default:
 			break;
 		}
-		getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_WORLD_WRITEABLE).edit().putInt("cycleNum", cycleint).commit();
+		getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit().putInt("cycleNum", cycleint).commit();
 	}
 
 	@Override
