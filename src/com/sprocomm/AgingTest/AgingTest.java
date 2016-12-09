@@ -330,7 +330,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			testCheckbox.get(0).setBackgroundColor(isFromReceiver ? Color.TRANSPARENT : Color.GRAY);
 			if (isFromReceiver) {
 				rebootTest.stopTest(true);
-				mHandler.sendEmptyMessage(MSG_REBOOT_STOP);
+				//mHandler.sendEmptyMessage(MSG_REBOOT_STOP);
+				mHandler.sendEmptyMessage(MSG_WAT_START);
 			}
 
 		}
