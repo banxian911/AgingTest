@@ -74,16 +74,13 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".VideoRecorde"
+            android:name=".VideoRecroder"
             android:label="@string/title_activity_video_recorde"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".VideoRecroder"
-            android:label="@string/title_activity_video_recroder" >
-        </activity>
-        <activity
             android:name=".Test3DActivity"
+	    	android:screenOrientation="portrait"
             android:label="@string/title_activity_test3_d" >
         </activity>
     </application>

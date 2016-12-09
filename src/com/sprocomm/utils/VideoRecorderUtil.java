@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.media.MediaRecorder;
 import android.os.Environment;
@@ -22,7 +24,7 @@ public class VideoRecorderUtil {
 	int timeSize = 0;
 	private Timer timer;
 	private deleteVRdataTask mRdataTask;
-	private int deletetime = 30*1000;
+	private int deletetime = 30 * 1000;
 
 	public String newFileName() {
 		try {
@@ -48,16 +50,15 @@ public class VideoRecorderUtil {
 		}
 	}
 
-	public void startRecording(SurfaceView paramSurfaceView,int cameraId) {
+	public void startRecording(SurfaceView paramSurfaceView, int cameraId) {
 		mediarecorder = new MediaRecorder();
-		
-		mCamera = Camera.open(cameraId);
+
+		mCamera = getCameraInstance(cameraId);
 		if (mCamera != null) {
-			//mCamera.setDisplayOrientation(90);
+			// mCamera.setDisplayOrientation(90);
 			mCamera.unlock();
 			mediarecorder.setCamera(mCamera);
 		}
-
 		mediarecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
 		mediarecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 		mediarecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
@@ -75,9 +76,9 @@ public class VideoRecorderUtil {
 			Log.i("AgingTest", TAG + "---startRecording---");
 			mediarecorder.start();
 			isRecording = true;
-			 //runtimetest();
+			// runtimetest();
 		} catch (Exception exception) {
-			//exception.printStackTrace();
+			// exception.printStackTrace();
 		}
 	}
 
@@ -88,13 +89,13 @@ public class VideoRecorderUtil {
 			this.mediarecorder.stop();
 			this.mediarecorder.release();
 			this.mediarecorder = null;
-			if (timer !=null) {
+			if (timer != null) {
 				this.timer.cancel();
 			}
 			if (mCamera != null) {
 				mCamera.release();
 				mCamera = null;
-            }
+			}
 			if ((this.lastFileName != null) && (!"".equals(this.lastFileName))) {
 				File localFile = new File(this.lastFileName);
 				localFile.delete();
@@ -122,7 +123,7 @@ public class VideoRecorderUtil {
 					mediarecorder.setOutputFile(lastFileName);
 				}
 			}
-			
+
 		}
 	}
 
@@ -136,7 +137,7 @@ public class VideoRecorderUtil {
 		int second = ca.get(Calendar.SECOND); // 秒
 
 		String date = "" + year + (month + 1) + day + hour + minute + second;
-		Log.d(TAG, "date:" + date);
+		Log.d("AgingTest", TAG + "date:" + date);
 
 		return date;
 	}
@@ -156,4 +157,26 @@ public class VideoRecorderUtil {
 
 		return null;
 	}
+
+	public static Camera getCameraInstance(int camerId) {
+		Camera mCamera = null;
+		try {
+			mCamera = Camera.open(camerId);
+		} catch (Exception e) {
+			Log.d("AgingTest", TAG + "--Error is " + e.getMessage());
+		}
+		return mCamera;
+	}
+
+	private boolean CheckCameraHardware(Context mContext) {
+		if (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)
+				&& mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
+			// 摄像头存在
+			return true;
+		} else {
+			// 摄像头不存在
+			return false;
+		}
+	}
+
 }
