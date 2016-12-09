@@ -30,6 +30,8 @@ public class MathCharmActivity extends Activity {
 	private MathCharmTask mCharmTask;
 	private int duration = 30 * 1000;
 	private static int flag;
+	
+	private AudioTask mAudioTask;
 
 	private ImageView lcdView;
 	private int[] lcdBgColor = { Color.BLUE, Color.GREEN, Color.RED, Color.WHITE, Color.BLACK, Color.YELLOW };
@@ -180,6 +182,16 @@ public class MathCharmActivity extends Activity {
 		Log.d("AgingTest", TAG + "---playMusic uri--->" + uri);
 		mPlayMediaUtil = new PlayMediaUtil(this, Uri.parse(uri));
 		mPlayMediaUtil.start();
+		
+		int musictime = mPlayMediaUtil.MusicTime();
+		if (timer != null) {
+			if (mAudioTask != null) {
+				mAudioTask.cancel();
+			}
+			mAudioTask = new AudioTask();
+			timer.schedule(mAudioTask, musictime);
+		}
+		
 	}
 
 	private void AudioTestStop() {
@@ -243,6 +255,16 @@ public class MathCharmActivity extends Activity {
 		}
 	}
 
+	class AudioTask extends TimerTask{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			AudioTestStart();
+		}
+		
+	}
+	
 	class LcdTask extends TimerTask {
 
 		@Override

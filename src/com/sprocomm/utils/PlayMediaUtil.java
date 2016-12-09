@@ -99,6 +99,7 @@ public class PlayMediaUtil implements IVoiceManager{
     	if (mPlayer!=null && mPlayer.isPlaying()) {
 			music_time = mPlayer.getDuration(); 
 		}
+    	Log.d("AgingTest", TAG + "---music_time---");
     	return music_time;
     }
     
