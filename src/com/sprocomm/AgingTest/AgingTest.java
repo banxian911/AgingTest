@@ -92,6 +92,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private Button button_clear_all;
 	private Button button_setting;
 	private Button button_report;
+	private Button button_stop;
 
 	View test_view;
 	PowerManager pm = null;
@@ -246,7 +247,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		button_clear_all = (Button) findViewById(R.id.clear_all);
 		button_setting = (Button) findViewById(R.id.setting);
 		button_report = (Button) findViewById(R.id.report);
-
+		button_stop = (Button) findViewById(R.id.stop);
+		
 		test_view = findViewById(R.id.test_view);
 
 		testCheckbox.clear();
@@ -286,6 +288,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		button_clear_all.setOnClickListener(this);
 		button_setting.setOnClickListener(this);
 		button_report.setOnClickListener(this);
+		button_stop.setOnClickListener(this);
 		initTimeSet();
 
 	}
@@ -294,7 +297,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	//	long testTime = 30 * MINUTE;
 
 		test_time = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time",
-				"30/30/30/30/30/30/30/30/30/30/30/1");
+				"30/30/30/30/30/30/30/30/30/30/30/60");
 		Log.i(TAGM, TAG + "------test_time-----" + test_time);
 		String[] test_time_eachS = test_time.split("/");
 		int[] test_time_eachI = new int[test_time_eachS.length];
@@ -391,7 +394,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		button_setting.setEnabled(false);
 
 		if (isInTest) {
-			// stop.setEnabled(true);
+			button_stop.setVisibility(View.VISIBLE);
+			 button_stop.setEnabled(true);
 		} else {
 
 			for (int i = 0; i < testCheckbox.size(); i++) {
@@ -402,7 +406,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			button_select_all.setEnabled(true);
 			button_clear_all.setEnabled(true);
 			button_setting.setEnabled(true);
-			// stop.setEnabled(false);
+			button_stop.setEnabled(false);
+			button_stop.setVisibility(View.GONE);
 		}
 	}
 
@@ -469,18 +474,15 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		case R.id.start:
 			isInTest = true;
 			mHandler.sendEmptyMessage(MSG_WAT_START);
-//			if (mTimeTask != null) {
-//				mTimeTask.cancel();
-//			}
 			CycleTask();
 			break;
-		// case R.id.stop:
+		case R.id.stop:
+			isInTest = false;
+			mHandler.sendEmptyMessage(MSG_WAT_STOP);
+			break;
 		case R.id.stop_testview:
 			isInTest = false;
 			mHandler.sendEmptyMessage(MSG_WAT_STOP);
-//			if (mTimeTask != null) {
-//				mTimeTask.cancel();
-//			}
 			break;
 		case R.id.select_all:
 			selectAll();
@@ -597,7 +599,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		
 		
 		getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
-				.edit().putLong("taskCycleTime", cycleInt * 60 * 1000).commit();
+				.edit().putLong("taskCycleTime", cycleInt * 60 * 60 * 1000).commit();
 				
 	}
 	
