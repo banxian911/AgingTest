@@ -55,7 +55,7 @@ public class VideoRecroder extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//设置窗体始终点亮
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//设置横屏
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		getWindow().setFormat(PixelFormat.TRANSLUCENT);
 
 		setContentView(R.layout.activity_video_recroder);
@@ -205,5 +205,4 @@ public class VideoRecroder extends Activity {
 			mSurfaceHolder = holder;
 		}
 	};
-
 }

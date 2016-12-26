@@ -76,7 +76,7 @@
         <activity
             android:name=".VideoRecroder"
             android:label="@string/title_activity_video_recorde"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Test3DActivity"

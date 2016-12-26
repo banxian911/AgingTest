@@ -55,7 +55,7 @@ public class VideoRecorderUtil {
 
 		mCamera = getCameraInstance(cameraId);
 		if (mCamera != null) {
-			// mCamera.setDisplayOrientation(90);
+			mCamera.setDisplayOrientation(90);
 			mCamera.unlock();
 			mediarecorder.setCamera(mCamera);
 		}
