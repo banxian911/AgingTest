@@ -44,7 +44,7 @@ public class VideoRecroder extends Activity {
 //	private int cameraID;
 	private changerBCIdTesk mBCTesk;
 	private changerFCIdTesk mFCTesk;
-	private int changerTime = 30 * 60 * 1000;
+	private int changerTime = 30 * 1000;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,12 @@ public class VideoRecroder extends Activity {
 	}
 
 	private void startBackCRecroder() {
-
+		Log.i("AgingTest", TAG + "---VideoRecorderUtil.CheckCameraHardware(getApplication())-->" + VideoRecorderUtil.CheckCameraHardware(getApplication()));
+		if ( !VideoRecorderUtil.CheckCameraHardware(getApplication())) {
+			Toast.makeText(getApplication(), "请检查camera设备", Toast.LENGTH_LONG).show();
+			stopTest();
+		}
+		
 		mRecorder = new VideoRecorderUtil();
 		Log.i("AgingTest", TAG + "---startBackCRecroder-->");
 		if (mRecorder != null) {
@@ -99,7 +104,12 @@ public class VideoRecroder extends Activity {
 	}
 
 	private void startFrontCRecroder() {
-
+		Log.i("AgingTest", TAG + "---CheckCameraFront-->"+ VideoRecorderUtil.CheckCameraFront(getApplication()));
+		if (!VideoRecorderUtil.CheckCameraFront(getApplication())) {
+			Toast.makeText(getApplication(), "请检查前置摄像头", Toast.LENGTH_LONG).show();
+			stopTest();
+		}
+		
 		mRecorder = new VideoRecorderUtil();
 		Log.i("AgingTest", TAG + "---startFrontCRecroder-->");
 		if (mRecorder != null) {
@@ -158,6 +168,11 @@ public class VideoRecroder extends Activity {
 
 	}
 
+	private void stopTest(){
+		Intent mIntent = new Intent(stopTestBR);
+		this.sendBroadcast(mIntent);
+	}
+	
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
@@ -172,8 +187,7 @@ public class VideoRecroder extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			Intent mIntent = new Intent(stopTestBR);
-			this.sendBroadcast(mIntent);
+			stopTest();
 		}
 		return super.onKeyDown(keyCode, event);
 	}

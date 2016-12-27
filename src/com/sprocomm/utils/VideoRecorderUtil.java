@@ -163,18 +163,27 @@ public class VideoRecorderUtil {
 		try {
 			mCamera = Camera.open(camerId);
 		} catch (Exception e) {
-			Log.d("AgingTest", TAG + "--Error is " + e.getMessage());
+			Log.e("AgingTest", TAG + "--Error is " + e.getMessage());
 		}
 		return mCamera;
 	}
 
-	private boolean CheckCameraHardware(Context mContext) {
-		if (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)
-				&& mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
+	public static boolean CheckCameraHardware(Context mContext) {
+		if (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
 			// 摄像头存在
 			return true;
 		} else {
 			// 摄像头不存在
+			return false;
+		}
+	}
+	
+	public static boolean CheckCameraFront(Context mContext){
+		if (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)) {
+			// 前摄像头存在
+			return true;
+		}else {
+			// 前摄像头不存在
 			return false;
 		}
 	}
