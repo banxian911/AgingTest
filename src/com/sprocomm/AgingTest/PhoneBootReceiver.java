@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.PowerManager;
+import android.os.SystemClock;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
 
 public class PhoneBootReceiver extends BroadcastReceiver{
@@ -31,9 +33,11 @@ public class PhoneBootReceiver extends BroadcastReceiver{
 		PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
 		Log.i(TAGM,TAG + "ian.qu Aging phonebootreceiver has been received; isRebootTest= " +isRebootTest );
 		if(isRebootTest){
-			//WakeLock wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
+			//PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
 			//wakeLock.acquire();
-			//pm.wakeUp(SystemClock.uptimeMillis());
+			
+		//	pm.wakeUp(SystemClock.uptimeMillis());唤醒系统，需要系统权限
+			
 			KeyguardManager kManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
 			KeyguardManager.KeyguardLock lock = kManager.newKeyguardLock("keyguardlock");
 			lock.disableKeyguard();	

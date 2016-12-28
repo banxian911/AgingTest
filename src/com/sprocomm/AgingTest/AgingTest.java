@@ -194,10 +194,10 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		super.onCreate(savedInstanceState);
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD,
 		// WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+		
 		kManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
 		lock = kManager.newKeyguardLock("keyguardlock");
 		lock.disableKeyguard();
-
 		setContentView(R.layout.main_activity);
 		/*
 		 * registerReceiver(mBatteryInfoReceiver, new
