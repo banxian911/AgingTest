@@ -45,8 +45,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private static final String TAG = "AgingTest";
 	private static final String TAGM = "AgingTest";
 
-	public static final String SAVE_DATA = "testState";
-	public static final String TEST_TIME = "testtime";
+	public static final String SAVE_DATA = "TestState";
+	public static final String TEST_TIME = "Testtime";
 
 	public static boolean DEBUG = true;
 
@@ -203,7 +203,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		 * registerReceiver(mBatteryInfoReceiver, new
 		 * IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 		 */
-		AccessPermissions();
+		//AccessPermissions();
 
 		registerReceiver(StopTestBR, new IntentFilter(stopTestBR));
 

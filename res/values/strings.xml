@@ -40,7 +40,7 @@
     <string name="dialog_again">重新获取</string>
     <string name="error_permissions">获取权限失败</string>
     <string name="dialog_dismiss">"关闭"</string>
-    <string name="main_view_text">"AgingTest:select what you want test,then press Start. V0.1"</string>
+    <string name="main_view_text">"AgingTest:select what you want test,then press Start."</string>
     <string name="cpu_test">CPU</string>
     <string name="audio_test">Audio</string>
     <string name="test_2d">2D</string>
@@ -62,7 +62,4 @@
     <string name="title_activity_video_recorde">VideoRecorde</string>
     <string name="title_activity_video_recroder">VideoRecroder</string>
     <string name="title_activity_test3_d">Test3DActivity</string>
-
-    
-
 </resources>
