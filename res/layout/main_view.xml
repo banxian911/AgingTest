@@ -32,12 +32,14 @@
                     android:id="@+id/reboot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/reboot_test" />
 
                 <CheckBox
                     android:id="@+id/cpu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/cpu_test"
                     android:visibility="invisible" />
 
@@ -45,12 +47,14 @@
                     android:id="@+id/audio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/audio_test" />
 
                 <CheckBox
                     android:id="@+id/test_2d"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/test_2d" />
             </LinearLayout>
 
@@ -63,6 +67,7 @@
                     android:id="@+id/s3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/s3_test"
                     android:visibility="invisible" />
 
@@ -70,6 +75,7 @@
                     android:id="@+id/emmc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/emmc_test"
                     android:visibility="invisible" />
 
@@ -77,12 +83,14 @@
                     android:id="@+id/video"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/play_video_test" />
 
                 <CheckBox
                     android:id="@+id/test_3d"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/test_3d" />
             </LinearLayout>
 
@@ -95,6 +103,7 @@
                     android:id="@+id/battery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/battery_test"
                     android:visibility="invisible" />
 
@@ -102,6 +111,7 @@
                     android:id="@+id/memory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/memory_test"
                     android:visibility="invisible" />
 
@@ -109,12 +119,14 @@
                     android:id="@+id/lcd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/lcd_test" />
 
                 <CheckBox
                     android:id="@+id/camera"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="15sp"
                     android:text="@string/camera" />
             </LinearLayout>
         </LinearLayout>
