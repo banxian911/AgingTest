@@ -1,303 +1,312 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="left"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:text="@string/settings_test"
-        android:textSize="12sp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/cpu_time"
-            android:layout_width="50dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cpu_test"
-            android:visibility="invisible"
-            android:textSize="13sp" />
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="@string/settings_test"
+            android:textSize="12sp" />
 
-        <EditText
-            android:id="@+id/cpu_time_Edit"
-            android:layout_width="50dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:inputType="number"
-            android:visibility="invisible"
-            android:textSize="13sp" />
+             android:layout_marginLeft="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/cpu_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cpu_test"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/cpu_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/memory_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/memory_test"
+                android:layout_marginLeft="10dp"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/memory_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/test_2d_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/test_2d"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/test_2d_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/test_3d_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                 
+                android:layout_marginLeft="10dp"
+                android:text="@string/test_3d"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/test_3d_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/audio_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/audio_test"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/audio_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/video_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/play_video_test"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/video_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/lcd_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/lcd_test"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/lcd_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/emmc_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/emmc_test"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/emmc_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/s3_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/s3_test"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/s3_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/battery_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/battery_test"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/battery_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_marginLeft="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/reboot_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/reboot_test"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/reboot_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_time"
+                android:inputType="number"
+                android:textSize="13sp" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/memory_time"
-            android:layout_width="50dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/memory_test"
-            android:visibility="invisible"
-            android:textSize="13sp" />
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="@string/settings_test_num"
+            android:textSize="12sp" />
 
-        <EditText
-            android:id="@+id/memory_time_Edit"
-            android:layout_width="50dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:visibility="invisible"
-            android:inputType="number"
-            android:textSize="13sp" />
-    </LinearLayout>
+           android:layout_marginLeft="10dp"
+            android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/camera_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/camera"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/camera_time_Edit"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="13sp" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/test_2d_time"
-            android:layout_width="50dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/test_2d"
-            android:textSize="13sp" />
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:text="@string/settings_cycle"
+            android:textSize="12sp" />
 
-        <EditText
-            android:id="@+id/test_2d_time_Edit"
-            android:layout_width="50dp"
+        <Spinner
+            android:id="@+id/cycle_spin"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:inputType="number"
-            android:textSize="13sp" />
+            android:layout_margin="10dp"
+            android:entries="@array/cycle_str"
+            android:gravity="center_horizontal" />
 
-        <TextView
-            android:id="@+id/test_3d_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/test_3d"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/test_3d_time_Edit"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:inputType="number"
-            android:textSize="13sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/audio_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/audio_test"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/audio_time_Edit"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:inputType="number"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/video_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/play_video_test"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/video_time_Edit"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:inputType="number"
-            android:textSize="13sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/lcd_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/lcd_test"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/lcd_time_Edit"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:inputType="number"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/emmc_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/emmc_test"
-            android:visibility="invisible"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/emmc_time_Edit"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:inputType="number"
-            android:visibility="invisible"
-            android:textSize="13sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/s3_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/s3_test"
-            android:visibility="invisible"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/s3_time_Edit"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:inputType="number"
-            android:visibility="invisible"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/battery_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/battery_test"
-            android:visibility="invisible"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/battery_time_Edit"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:visibility="invisible"
-            android:inputType="number"
-            android:textSize="13sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/reboot_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/reboot_test"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/reboot_time_Edit"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/default_time"
-            android:inputType="number"
-            android:textSize="13sp" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:text="@string/settings_test_num"
-        android:textSize="12sp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/camera_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/camera"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/camera_time_Edit"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:hint="1"
-            android:inputType="number"
-            android:textSize="13sp" />
-    </LinearLayout>
-    
-     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:text="@string/settings_cycle"
-        android:textSize="12sp" />
-     
-    <Spinner android:id="@+id/cycle_spin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center_horizontal"
-        android:entries="@array/cycle_str"
-        />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="20dp" >
-
-        <Button
-            android:id="@+id/ok"
-            style="?android:attr/buttonStyleSmall"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_ok" />
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="20dp" >
 
-        <Button
-            android:id="@+id/cancel"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_cancel" />
+            <Button
+                android:id="@+id/ok"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/button_ok" />
+
+            <Button
+                android:id="@+id/cancel"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/button_cancel" />
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
