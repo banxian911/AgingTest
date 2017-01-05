@@ -164,6 +164,7 @@ public class VideoRecorderUtil {
 			mCamera = Camera.open(camerId);
 		} catch (Exception e) {
 			Log.e("AgingTest", TAG + "--Error is " + e.getMessage());
+			mCamera = Camera.open(0);
 		}
 		return mCamera;
 	}
