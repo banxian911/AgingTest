@@ -36,7 +36,7 @@ public class PhoneBootReceiver extends BroadcastReceiver{
 			//PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
 			//wakeLock.acquire();
 			
-		//	pm.wakeUp(SystemClock.uptimeMillis());唤醒系统，需要系统权限
+			//pm.wakeUp(SystemClock.uptimeMillis());//唤醒系统，需要系统权限
 			
 			KeyguardManager kManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
 			KeyguardManager.KeyguardLock lock = kManager.newKeyguardLock("keyguardlock");

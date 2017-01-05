@@ -94,9 +94,9 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private Button button_report;
 	private Button button_stop;
 
-	View test_view;
-	PowerManager pm = null;
-	WakeLock wakeLock = null;
+	private View test_view;
+	private PowerManager pm = null;
+	private WakeLock wakeLock = null;
 
 	private KeyguardManager kManager;
 	private KeyguardManager.KeyguardLock lock;
@@ -199,6 +199,11 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		lock = kManager.newKeyguardLock("keyguardlock");
 		lock.disableKeyguard();
 		setContentView(R.layout.main_activity);
+		
+		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
+		wakeLock.acquire();//申请锁，这里会调用PowerManagerService里面acquireWakeLock()
+		
 		/*
 		 * registerReceiver(mBatteryInfoReceiver, new
 		 * IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -510,8 +515,9 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		super.onDestroy();
 		unregisterReceiver(StopTestBR);
 		lock.reenableKeyguard();
-		if (wakeLock.isHeld())
-			wakeLock.release();
+		if (wakeLock.isHeld()){
+			wakeLock.release();//释放锁，显示的释放锁，如果申请的锁不在此释放，系统就不会进入休眠
+		}
 		new Thread(new Runnable() {
 
 			@Override
