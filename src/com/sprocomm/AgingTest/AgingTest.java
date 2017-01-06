@@ -659,6 +659,17 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 						// TODO Auto-generated method stub
 						updateUI();
 					}
+				}).setNegativeButton("退出", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						isInTest = false;
+						if (!testlist.get(0).isInTest){
+							mHandler.sendEmptyMessage(MSG_WAT_STOP);
+						}
+						finish();
+					}
 				}).show();
 
 	}
