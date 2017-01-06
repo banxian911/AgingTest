@@ -20,12 +20,16 @@ import com.sprocomm.utils.PermissionUtil;
 import com.sprocomm.utils.TestItem;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -59,17 +63,19 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	public static final int MSG_WAT_STOP = 0x02;
 	public static final int MSG_REBOOT_STOP = 0x03;
 
-//	private static boolean isCirculation = false;
-//	private Timer timer;
-	//private cycleTimeTask mTimeTask;
+	// private static boolean isCirculation = false;
+	// private Timer timer;
+	// private cycleTimeTask mTimeTask;
 	private long startTestTime;
 	private long cycleTime;
-	
+
 	private static boolean isInTest;
+
+	private static boolean AllowTest;
 
 	private static String stopTestBR = "com.sprocomm.AgingTest.StopTestBR";
 
-//	CheckBox box_isCirculation;
+	// CheckBox box_isCirculation;
 
 	private CheckBox box_reboot;
 	private CheckBox box_cpu;
@@ -84,7 +90,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private CheckBox box_lcd;
 	private CheckBox box_camera;
 
-	Context mContext;
+	private Context mContext;
 
 	private Button button_start;
 	private Button stop_testview;
@@ -100,6 +106,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 	private KeyguardManager kManager;
 	private KeyguardManager.KeyguardLock lock;
+
+	private Dialog mDialog;
 
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -150,7 +158,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 				break;
 			case MSG_WAT_STOP:
-				//Log.i(TAGM, TAG + "-----MSG_WAT_STOP-1---");
+				// Log.i(TAGM, TAG + "-----MSG_WAT_STOP-1---");
 				boolean test_next = msg.getData().getBoolean("test_next");
 				Log.i(TAGM, TAG + "-----MSG_WAT_STOP-1---test_next--->" + test_next);
 				for (int i = 0; i < testlist.size(); i++) {
@@ -194,21 +202,15 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		super.onCreate(savedInstanceState);
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD,
 		// WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-		
+
 		kManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
 		lock = kManager.newKeyguardLock("keyguardlock");
 		lock.disableKeyguard();
 		setContentView(R.layout.main_activity);
-		
-		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-		wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
-		wakeLock.acquire();//申请锁，这里会调用PowerManagerService里面acquireWakeLock()
-		
-		/*
-		 * registerReceiver(mBatteryInfoReceiver, new
-		 * IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-		 */
-		//AccessPermissions();
+
+		registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+		// AccessPermissions();
 
 		registerReceiver(StopTestBR, new IntentFilter(stopTestBR));
 
@@ -217,12 +219,11 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "sprocomm");
 		wakeLock.acquire();
 
-	//	timer = new Timer();
-		
+		// timer = new Timer();
 		initUI();
 		init();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -244,7 +245,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		box_lcd = (CheckBox) findViewById(R.id.lcd);
 		box_camera = (CheckBox) findViewById(R.id.camera);
 
-	//	box_isCirculation = (CheckBox) findViewById(R.id.iscirculation);
+		// box_isCirculation = (CheckBox) findViewById(R.id.iscirculation);
 
 		button_start = (Button) findViewById(R.id.start);
 		stop_testview = (Button) findViewById(R.id.stop_testview);
@@ -253,7 +254,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		button_setting = (Button) findViewById(R.id.setting);
 		button_report = (Button) findViewById(R.id.report);
 		button_stop = (Button) findViewById(R.id.stop);
-		
+
 		test_view = findViewById(R.id.test_view);
 
 		testCheckbox.clear();
@@ -284,7 +285,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		box_memory.setOnCheckedChangeListener(this);
 		box_lcd.setOnCheckedChangeListener(this);
 		box_camera.setOnCheckedChangeListener(this);
-	//	box_isCirculation.setOnCheckedChangeListener(this);
+		// box_isCirculation.setOnCheckedChangeListener(this);
 
 		button_start.setOnClickListener(this);
 		stop_testview.setOnClickListener(this);
@@ -299,7 +300,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	}
 
 	private void initTimeSet() {
-	//	long testTime = 30 * MINUTE;
+		// long testTime = 30 * MINUTE;
 
 		test_time = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE).getString("test_time",
 				"30/30/30/30/30/30/30/30/30/30/30/60");
@@ -324,8 +325,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		testlist.add(new LcdTest(this, test_time_eachI[10] * MINUTE, mHandler));
 		testlist.add(new VRecroderTest(this, test_time_eachI[11] * MINUTE, mHandler));
 
-		boolean isRebootTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
-				.getBoolean("reboot", false);
+		boolean isRebootTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).getBoolean("reboot",
+				false);
 		isInTest = isRebootTest;
 		Log.i(TAGM, TAG + "------isInTest-----" + isInTest);
 		boolean isFromReceiver = getIntent().getBooleanExtra("fromReceiver", false);
@@ -338,7 +339,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			testCheckbox.get(0).setBackgroundColor(isFromReceiver ? Color.TRANSPARENT : Color.GRAY);
 			if (isFromReceiver) {
 				rebootTest.stopTest(true);
-				//mHandler.sendEmptyMessage(MSG_REBOOT_STOP);
+				// mHandler.sendEmptyMessage(MSG_REBOOT_STOP);
 				mHandler.sendEmptyMessage(MSG_WAT_START);
 			}
 
@@ -360,59 +361,68 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 						.putBoolean(item.getClass().getName(), false).commit();
 
 				String key = testlist.get(i).getClass().getName() + "isCheck";
-				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit()
-						.putBoolean(key, false).commit();
+				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit().putBoolean(key, false).commit();
 
-				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
-				.edit().putBoolean("isCleanReport", false).commit();
+				getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit()
+						.putBoolean("isCleanReport", false).commit();
 			}
 
 			item.isTestPass = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
 					.getBoolean(item.getClass().getName(), false);
 			String key = testlist.get(i).getClass().getName() + "isCheck";
-			item.isNeedTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).getBoolean(key,
-					false);
+			item.isNeedTest = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).getBoolean(key, false);
 			testCheckbox.get(i).setChecked(item.isNeedTest);
-		//	box_isCirculation.setChecked(getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
-			//		.getBoolean("isCirculation", false));
+			// box_isCirculation.setChecked(getSharedPreferences(AgingTest.SAVE_DATA,
+			// Context.MODE_PRIVATE)
+			// .getBoolean("isCirculation", false));
 
 		}
 
 		test_view.setVisibility(View.GONE);
 		button_start.setEnabled(true);
-		
+
 		updateUI();
 	}
 
 	public void updateUI() {
+
 		Log.i(TAGM, TAG + "--updateUI()--testCheckbox.size()---->" + testCheckbox.size());
 		for (int i = 0; i < testCheckbox.size(); i++) {
 			CheckBox checkbox = testCheckbox.get(i);
 			checkbox.setTextColor(testlist.get(i).isTestPass ? Color.GREEN : Color.RED);
 			checkbox.setEnabled(false);
 		}
-		//box_isCirculation.setEnabled(false);
-		button_start.setEnabled(false);
 
-		button_clear_all.setEnabled(false);
-		button_select_all.setEnabled(false);
-		button_setting.setEnabled(false);
+		Log.i(TAGM, TAG + "------AllowTest-----" + AllowTest);
 
-		if (isInTest) {
-			button_stop.setVisibility(View.VISIBLE);
-			 button_stop.setEnabled(true);
+		if (!AllowTest) {
+			// box_isCirculation.setEnabled(false);
+			AllowDialog();
+			button_start.setEnabled(false);
+			button_clear_all.setEnabled(false);
+			button_select_all.setEnabled(false);
+			button_setting.setEnabled(false);
 		} else {
-
-			for (int i = 0; i < testCheckbox.size(); i++) {
-				testCheckbox.get(i).setEnabled(true);
+			if (mDialog != null) {
+				Log.i(TAGM, TAG + "-----mDialog--a---" + mDialog);
+				mDialog.dismiss();
 			}
-			//box_isCirculation.setEnabled(true);
-			button_start.setEnabled(true);
-			button_select_all.setEnabled(true);
-			button_clear_all.setEnabled(true);
-			button_setting.setEnabled(true);
-			button_stop.setEnabled(false);
-			button_stop.setVisibility(View.GONE);
+			if (isInTest) {
+				button_stop.setVisibility(View.VISIBLE);
+				button_stop.setEnabled(true);
+			} else {
+
+				for (int i = 0; i < testCheckbox.size(); i++) {
+					testCheckbox.get(i).setEnabled(true);
+				}
+				// box_isCirculation.setEnabled(true);
+				button_start.setEnabled(true);
+				button_select_all.setEnabled(true);
+				button_clear_all.setEnabled(true);
+				button_setting.setEnabled(true);
+				button_stop.setEnabled(false);
+				button_stop.setVisibility(View.GONE);
+			}
 		}
 	}
 
@@ -457,18 +467,18 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			index = 11;
 			break;
 
-	/*	case R.id.iscirculation:
-			isCirculation = isChecked;
-			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit()
-					.putBoolean("isCirculation", isChecked).commit();
-			break;*/
+		/*
+		 * case R.id.iscirculation: isCirculation = isChecked;
+		 * getSharedPreferences(AgingTest.SAVE_DATA,
+		 * Context.MODE_PRIVATE).edit() .putBoolean("isCirculation",
+		 * isChecked).commit(); break;
+		 */
 		}
 		if (index != -1) {
 			testlist.get(index).isNeedTest = isChecked;
 			String key = testlist.get(index).getClass().getName() + "isCheck";
 			Log.i(TAGM, TAG + "----key---->" + key);
-			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit().putBoolean(key, isChecked)
-					.commit();
+			getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit().putBoolean(key, isChecked).commit();
 		}
 		updateUI();
 	}
@@ -515,8 +525,8 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		super.onDestroy();
 		unregisterReceiver(StopTestBR);
 		lock.reenableKeyguard();
-		if (wakeLock.isHeld()){
-			wakeLock.release();//释放锁，显示的释放锁，如果申请的锁不在此释放，系统就不会进入休眠
+		if (wakeLock.isHeld()) {
+			wakeLock.release();// 释放锁，显示的释放锁，如果申请的锁不在此释放，系统就不会进入休眠
 		}
 		new Thread(new Runnable() {
 
@@ -529,7 +539,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 				}
 			}
 		}).start();
-	//	timer.cancel();
+		// timer.cancel();
 	}
 
 	long lastTime = 0;
@@ -565,12 +575,12 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private void selectAll() {
 		Log.i(TAGM, TAG + "----selectAll()---->");
 		for (int i = 0; i < testCheckbox.size(); i++) {
-			if (i == 1 || i == 4 || i == 5 || i == 8 || i ==9) {
-				
-			}else {
+			if (i == 1 || i == 4 || i == 5 || i == 8 || i == 9) {
+
+			} else {
 				testCheckbox.get(i).setChecked(true);
 			}
-			
+
 		}
 	}
 
@@ -596,27 +606,61 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		}
 
 	};
-	
-	private void CycleTask(){
-		 getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
-				.edit().putLong("taskStartTime", System.currentTimeMillis()).commit();
-		 Log.i(TAGM, TAG + "----CycleTask()---->" + System.currentTimeMillis());
+
+	private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
+			Log.i(TAGM, TAG + "----status---->" + status);
+			if ((status == BatteryManager.BATTERY_STATUS_CHARGING) || (status == BatteryManager.BATTERY_STATUS_FULL)) {
+				AllowTest = true;
+				updateUI();
+			} else {
+				AllowTest = false;
+				updateUI();
+			}
+		}
+	};
+
+	private void CycleTask() {
+		getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit()
+				.putLong("taskStartTime", System.currentTimeMillis()).commit();
+		Log.i(TAGM, TAG + "----CycleTask()---->" + System.currentTimeMillis());
 		int cycleInt = getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).getInt("cycleNum", 0);
-		
-		
-		getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE)
-				.edit().putLong("taskCycleTime", cycleInt * 60 * 60 * 1000).commit();
-				
+
+		getSharedPreferences(AgingTest.SAVE_DATA, Context.MODE_PRIVATE).edit()
+				.putLong("taskCycleTime", cycleInt * 60 * 60 * 1000).commit();
+
 	}
-	
-	private Boolean isCycle(){
-		startTestTime = getSharedPreferences(AgingTest.SAVE_DATA, MODE_PRIVATE).getLong("taskStartTime",0);
+
+	private Boolean isCycle() {
+		startTestTime = getSharedPreferences(AgingTest.SAVE_DATA, MODE_PRIVATE).getLong("taskStartTime", 0);
 		cycleTime = getSharedPreferences(AgingTest.SAVE_DATA, MODE_PRIVATE).getLong("taskCycleTime", 0);
 		Log.i(TAGM, TAG + "----startTestTime---->" + startTestTime + "---cycleTime---" + cycleTime + "----->");
-		if ( (System.currentTimeMillis() - startTestTime) >= cycleTime) {
+		if ((System.currentTimeMillis() - startTestTime) >= cycleTime) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
+
+	private void AllowDialog() {
+		if (mDialog != null) {
+			Log.i(TAGM, TAG + "-----mDialog-----" + mDialog);
+			mDialog.dismiss();
+		}
+		mDialog = new AlertDialog.Builder(mContext).setTitle("提示").setMessage("请插入USB进行充电，才能测试")
+				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						updateUI();
+					}
+				}).show();
+
+	}
+
 }
