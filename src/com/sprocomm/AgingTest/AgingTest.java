@@ -646,6 +646,11 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		}
 	}
 
+	/**
+	 * dialog.setCancelable(false);dialog弹出后会点击屏幕或物理返回键，dialog不消失
+	 * 
+	 * dialog.setCanceledOnTouchOutside(false);dialog弹出后会点击屏幕，dialog不消失；点击物理返回键dialog消失
+	 */
 	private void AllowDialog() {
 		if (mDialog != null) {
 			Log.i(TAGM, TAG + "-----mDialog-----" + mDialog);
@@ -670,7 +675,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 						}
 						finish();
 					}
-				}).show();
+				}).setCancelable(false).show();
 
 	}
 
