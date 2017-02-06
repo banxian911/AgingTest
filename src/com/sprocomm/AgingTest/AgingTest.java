@@ -492,12 +492,10 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			CycleTask();
 			break;
 		case R.id.stop:
-			isInTest = false;
-			mHandler.sendEmptyMessage(MSG_WAT_STOP);
+			StopTest();
 			break;
 		case R.id.stop_testview:
-			isInTest = false;
-			mHandler.sendEmptyMessage(MSG_WAT_STOP);
+			StopTest();
 			break;
 		case R.id.select_all:
 			selectAll();
@@ -590,6 +588,12 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			testCheckbox.get(i).setChecked(false);
 		}
 	}
+	
+	private void StopTest(){
+		isInTest = false;
+		mHandler.sendEmptyMessage(MSG_WAT_STOP);
+		updateUI();
+	}
 
 	private BroadcastReceiver StopTestBR = new BroadcastReceiver() {
 
@@ -599,9 +603,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			Log.i(TAGM, TAG + "----StopTestBR---->");
 			String action = intent.getAction();
 			if (action.equals(stopTestBR)) {
-				isInTest = false;
-				mHandler.sendEmptyMessage(MSG_WAT_STOP);
-				updateUI();
+				StopTest();
 			}
 		}
 
@@ -619,7 +621,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 				updateUI();
 			} else {
 				AllowTest = false;
-				updateUI();
+				StopTest();
 			}
 		}
 	};
