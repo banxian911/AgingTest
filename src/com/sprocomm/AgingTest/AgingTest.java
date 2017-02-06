@@ -656,15 +656,15 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 			Log.i(TAGM, TAG + "-----mDialog-----" + mDialog);
 			mDialog.dismiss();
 		}
-		mDialog = new AlertDialog.Builder(mContext).setTitle("提示").setMessage("请插入USB进行充电，才能测试")
-				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+		mDialog = new AlertDialog.Builder(mContext).setTitle("warning").setMessage("Please insert the USB to charge to test")
+				.setPositiveButton("sure", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						updateUI();
 					}
-				}).setNegativeButton("退出", new DialogInterface.OnClickListener() {
+				}).setNegativeButton("quit", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
