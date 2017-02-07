@@ -42,8 +42,9 @@ public class Test3D extends TestItem {
 		isInTest = false;
 		isTestPass = isPass;
 		isTestEnd = isPass;
-		
-		Test3DActivity.instance.finish();
+		if (Test3DActivity.instance != null) {
+			Test3DActivity.instance.finish();
+		}
 	}
 
 }

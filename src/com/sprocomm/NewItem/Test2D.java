@@ -40,7 +40,9 @@ public class Test2D extends TestItem {
 		isInTest = false;
 		isTestPass = isPass;
 		isTestEnd = isPass;
+		if (MathCharmActivity.instance != null) {
+			MathCharmActivity.instance.finish();
+		}
 		
-		MathCharmActivity.instance.finish();
 	}
 }

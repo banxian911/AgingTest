@@ -41,8 +41,10 @@ public class VRecroderTest extends TestItem {
 		isInTest = false;
 		isTestPass = isPass;
 		isTestEnd = isPass;
-
-		VideoRecroder.instance.finish();
+		if (VideoRecroder.instance != null) {
+			VideoRecroder.instance.finish();
+		}
+		
 	}
 
 }

@@ -41,6 +41,8 @@ public class LcdTest extends TestItem {
 		isTestPass = isPass;
 		isTestEnd = isPass;
 		
-		MathCharmActivity.instance.finish();
+		if (MathCharmActivity.instance != null) {
+			MathCharmActivity.instance.finish();
+		}
 	}
 }
