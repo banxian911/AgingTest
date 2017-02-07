@@ -118,7 +118,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 					TestItem item = testlist.get(i);
 					Log.i(TAGM, TAG + "---i--->" + i + "---item.isNeedTest--->" + item.isNeedTest
 							+ "---item.isTestEnd--->" + item.isTestEnd);
-					if (item.isNeedTest && !item.isTestEnd) {
+					if (item.isNeedTest && !item.isTestEnd && AllowTest) {
 						item.startTest();
 						testCheckbox.get(i).setBackgroundColor(Color.GRAY);
 						isInTest = true;
