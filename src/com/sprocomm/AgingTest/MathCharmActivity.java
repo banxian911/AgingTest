@@ -7,13 +7,9 @@ import com.sprocomm.UIUtils.WJMagicCurveView;
 import com.sprocomm.utils.CpuInfo;
 import com.sprocomm.utils.PlayMediaUtil;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
