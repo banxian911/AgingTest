@@ -7,16 +7,26 @@ import com.sprocomm.UIUtils.WJMagicCurveView;
 import com.sprocomm.utils.CpuInfo;
 import com.sprocomm.utils.PlayMediaUtil;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -68,8 +78,8 @@ public class MathCharmActivity extends Activity {
 		Log.d("AgingTest", TAG + "---flag---" + flag);
 
 		startTest(flag);
-		startTransform(flag);
-
+		//startTransform(flag);
+		startAnminal(flag);
 		runTime.start();
 		runTime.setFormat("测试时间：%S");
 	}
@@ -144,6 +154,44 @@ public class MathCharmActivity extends Activity {
 		}
 	}
 
+	private void startAnminal(int flag){
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+		int height = displayMetrics.heightPixels;
+		int width = displayMetrics.widthPixels;
+		Log.d("AgingTest", TAG + "---height--->" + height + "---width-->" + width );
+		if (height <= 320 || width <= 240) {
+			Test2DAnminal();
+		} else {
+			startTransform(flag);
+		}
+	}
+	
+	private void Test2DAnminal(){
+		wjMagicCurveView.setVisibility(View.GONE);
+		lcdView.setVisibility(View.VISIBLE);
+		lcdView.setImageResource(R.drawable.ic_launcher);
+		/*ObjectAnimator mAnimator = ObjectAnimator.ofFloat(lcdView, "scaleY", 0,8,1);
+		mAnimator.setDuration(4000);
+		mAnimator.start();*/
+		RotateAnimation rotateAnim = new RotateAnimation(0, 720, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);  
+		rotateAnim.setRepeatCount(10);
+		AlphaAnimation alphaAnim = new AlphaAnimation(0.1f,1.0f);
+		alphaAnim.setRepeatCount(10);
+		ScaleAnimation scaleAnim = new ScaleAnimation(0.0f,1.0f,0.0f,1.0f,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+		scaleAnim.setRepeatCount(10);
+		AnimationSet setAnim=new AnimationSet(true);  
+		setAnim.addAnimation(alphaAnim);  
+		setAnim.addAnimation(scaleAnim);  
+		setAnim.addAnimation(rotateAnim);  
+		  
+		setAnim.setDuration(3000);  
+		setAnim.setFillAfter(true);
+		//setAnim.setRepeatCount(10);
+		setAnim.setRepeatMode(Animation.REVERSE);
+		lcdView.startAnimation(setAnim);
+	}
+	
 	private void LcdTest() {
 
 		if (lcdBg >= lcdBgColor.length) {
