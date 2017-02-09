@@ -73,7 +73,7 @@ public class MathCharmActivity extends Activity {
 		flag = mIntent.getIntExtra("mathcharm", 0);
 		Log.d("AgingTest", TAG + "---flag---" + flag);
 
-		startTest(flag);
+		//startTest(flag);
 		//startTransform(flag);
 		startAnminal(flag);
 		runTime.start();
@@ -103,8 +103,7 @@ public class MathCharmActivity extends Activity {
 			testType.setText("MemoryTest is Running");
 			break;
 		case 6:
-			testType.setText("LCDTest is Running");
-			lcdView.setVisibility(View.VISIBLE);
+			testType.setText("LCDTest is Running");	
 			LcdTest();
 			break;
 		default:
@@ -129,18 +128,15 @@ public class MathCharmActivity extends Activity {
 			line3();
 			break;
 		case 4:
-
 			break;
 		case 5:
-
 			break;
 		case 6:
-
 			break;
 		default:
 			break;
 		}
-		Log.d("AgingTest", TAG + "---timer--->" + timer);
+		Log.d("AgingTest", TAG + "---timer--a->" + timer);
 		if (timer != null) {
 			if (mCharmTask != null) {
 				mCharmTask.cancel();
@@ -156,11 +152,12 @@ public class MathCharmActivity extends Activity {
 		int height = displayMetrics.heightPixels;
 		int width = displayMetrics.widthPixels;
 		Log.d("AgingTest", TAG + "---height--->" + height + "---width-->" + width );
-		if (height <= 320 || width <= 240) {
+		if ( (height <= 320 || width <= 240) && flag != 6) {
 			Test2DAnminal();
 		} else {
 			startTransform(flag);
 		}
+		startTest(flag);
 	}
 	
 	private void Test2DAnminal(){
@@ -186,16 +183,30 @@ public class MathCharmActivity extends Activity {
 		//setAnim.setRepeatCount(10);
 		setAnim.setRepeatMode(Animation.REVERSE);
 		lcdView.startAnimation(setAnim);
+		
+		Log.d("AgingTest", TAG + "---timer--->" + timer);
+		if (timer != null) {
+			if (mCharmTask != null) {
+				mCharmTask.cancel();
+			}
+			mCharmTask = new MathCharmTask();
+			timer.schedule(mCharmTask, duration);
+		}
 	}
 	
 	private void LcdTest() {
-
+		
+		wjMagicCurveView.setVisibility(View.GONE);
+		lcdView.setVisibility(View.VISIBLE);
 		if (lcdBg >= lcdBgColor.length) {
 			lcdBg = 0;
 		}
 		lcdView.setBackgroundColor(lcdBgColor[lcdBg]);
 		lcdBg++;
 		if (timer != null) {
+			if (mCharmTask != null) {
+				mCharmTask.cancel();
+			}
 			if (mLcdTask != null) {
 				mLcdTask.cancel();
 			}
@@ -291,8 +302,8 @@ public class MathCharmActivity extends Activity {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					startTransform(flag);
-					//mCharmTask.cancel();
+					//startTransform(flag);
+					startAnminal(flag);
 				}
 			});
 
