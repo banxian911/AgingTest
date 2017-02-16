@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.sprocomm.AgingTest.R;
+import com.sprocomm.R;
 import com.sprocomm.utils.TestItem;
 
 import android.app.Activity;

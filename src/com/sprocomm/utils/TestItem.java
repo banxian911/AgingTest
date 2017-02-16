@@ -1,6 +1,8 @@
 package com.sprocomm.utils;
 
-import com.sprocomm.AgingTest.AgingTest;
+
+
+import com.sprocomm.AgingTest;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.sprocomm.AgingTest;
+package com.sprocomm;
 
 import java.io.File;
 import java.util.ArrayList;

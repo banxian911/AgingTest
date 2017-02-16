@@ -1,4 +1,4 @@
-package com.sprocomm.AgingTest;
+package com.sprocomm;
 
 
 import com.sprocomm.Earth3D.OpenglSurfaceView;

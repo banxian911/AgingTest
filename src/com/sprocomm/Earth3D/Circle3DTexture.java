@@ -5,8 +5,8 @@ import java.io.InputStream;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-import com.sprocomm.AgingTest.Test3DActivity;
-import com.sprocomm.AgingTest.R;
+import com.sprocomm.R;
+import com.sprocomm.Test3DActivity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;

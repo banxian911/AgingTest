@@ -1,6 +1,6 @@
 package com.sprocomm.NewItem;
 
-import com.sprocomm.AgingTest.VideoRecroder;
+import com.sprocomm.VideoRecroder;
 import com.sprocomm.utils.TestItem;
 import com.sprocomm.utils.VideoRecorderUtil;
 

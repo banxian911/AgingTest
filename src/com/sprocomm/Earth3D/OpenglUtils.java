@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import com.sprocomm.AgingTest.Test3DActivity;
+import com.sprocomm.Test3DActivity;
 
 import android.opengl.GLES20;
 import android.util.Log;

@@ -1,6 +1,7 @@
 package com.sprocomm.itemtest;
 
-import com.sprocomm.AgingTest.AgingTest;
+
+import com.sprocomm.AgingTest;
 import com.sprocomm.utils.TestItem;
 
 import android.app.Activity;

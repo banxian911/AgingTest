@@ -1,4 +1,4 @@
-package com.sprocomm.AgingTest;
+package com.sprocomm;
 
 import java.util.Timer;
 import java.util.TimerTask;

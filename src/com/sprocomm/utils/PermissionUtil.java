@@ -1,6 +1,8 @@
  package com.sprocomm.utils;
 
-import com.sprocomm.AgingTest.R;
+
+
+import com.sprocomm.R;
 
 import android.Manifest;
 import android.annotation.TargetApi;

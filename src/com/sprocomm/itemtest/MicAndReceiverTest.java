@@ -3,7 +3,7 @@ package com.sprocomm.itemtest;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.sprocomm.AgingTest.R;
+import com.sprocomm.R;
 import com.sprocomm.utils.PlayMediaUtil;
 import com.sprocomm.utils.ReceiverUtil;
 import com.sprocomm.utils.TestItem;

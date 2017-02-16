@@ -1,4 +1,4 @@
-package com.sprocomm.AgingTest;
+package com.sprocomm;
 
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
