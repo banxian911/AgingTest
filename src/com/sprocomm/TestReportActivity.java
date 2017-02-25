@@ -21,7 +21,7 @@ public class TestReportActivity extends Activity implements OnClickListener {
 	private Button setCancel;
 
 	private TextView reboot;
-	private TextView cpu;
+	private TextView vibrate;
 	private TextView audio;
 	private TextView text2d;
 	private TextView s3;
@@ -74,7 +74,7 @@ public class TestReportActivity extends Activity implements OnClickListener {
 	
 	private void initUI(){
 		reboot = (TextView) findViewById(R.id.reboot_report_text);
-		cpu = (TextView) findViewById(R.id.cpu_report_text);
+		vibrate = (TextView) findViewById(R.id.vibrate_report_text);
 		audio = (TextView) findViewById(R.id.audio_report_text);
 		text2d = (TextView) findViewById(R.id.test_2d_report_text);
 		s3 = (TextView) findViewById(R.id.s3_report_text);
@@ -87,7 +87,7 @@ public class TestReportActivity extends Activity implements OnClickListener {
 		camera = (TextView) findViewById(R.id.camera_report_text);
 
 		edit.add(reboot);
-		edit.add(cpu);
+		edit.add(vibrate);
 		edit.add(audio);
 		edit.add(text2d);
 		edit.add(s3);

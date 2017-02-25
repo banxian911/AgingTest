@@ -43,21 +43,19 @@
                 android:paddingTop="20dp" >
 
                 <TextView
-                    android:id="@+id/cpu_report"
+                    android:id="@+id/vibrate_report"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:text="@string/cpu_test"
-                    android:textSize="12sp"
-                    android:visibility="invisible" />
+                    android:text="@string/vibrate_test"
+                    android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/cpu_report_text"
+                    android:id="@+id/vibrate_report_text"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="@string/noTest"
-                    android:textSize="12sp"
-                    android:visibility="invisible" />
+                    android:textSize="12sp"/>
             </LinearLayout>
 
             <LinearLayout

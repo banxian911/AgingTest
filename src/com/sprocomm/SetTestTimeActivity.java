@@ -25,7 +25,7 @@ public class SetTestTimeActivity extends Activity implements OnClickListener,OnI
 	private Button setOK;
 	private Button setCancel;
 	
-	private EditText cpuEdit;
+	private EditText virbrationEdit;
 	private EditText memoryEdit;
 	private EditText test2DEdit;
 	private EditText play3DEdit;
@@ -61,7 +61,7 @@ public class SetTestTimeActivity extends Activity implements OnClickListener,OnI
 		  mSharepreferences = getSharedPreferences(AgingTest.TEST_TIME, Context.MODE_PRIVATE);
 	        String test_time = mSharepreferences.getString("test_time", "30/30/30/30/30/30/30/30/30/30/30/60");
 	        edit.add(rebootEdit);
-	        edit.add(cpuEdit);
+	        edit.add(virbrationEdit);
 	        edit.add(audioEdit);
 	        edit.add(test2DEdit);
 	        edit.add(s3Edit);
@@ -87,7 +87,7 @@ public class SetTestTimeActivity extends Activity implements OnClickListener,OnI
 	}
 
 	private void initUI(){
-		 cpuEdit = (EditText) findViewById(R.id.cpu_time_Edit);
+		 virbrationEdit = (EditText) findViewById(R.id.vibrate_time_Edit);
 		 memoryEdit = (EditText) findViewById(R.id.memory_time_Edit);
 		 test2DEdit = (EditText) findViewById(R.id.test_2d_time_Edit);
 		 play3DEdit = (EditText) findViewById(R.id.test_3d_time_Edit);
