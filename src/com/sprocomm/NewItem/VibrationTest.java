@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-public class CpuTest extends TestItem {
+public class VibrationTest extends TestItem {
 	
 	private static final String TAG = "CpuTest";
 	private SurfaceView mSurfaceView;
@@ -24,7 +24,7 @@ public class CpuTest extends TestItem {
 	private View mainView;
 	private Activity mActivity;
 	
-	public CpuTest(Context context,long time,Handler handler){
+	public VibrationTest(Context context,long time,Handler handler){
 		mContext = context;
 		testTime = time;
 		mHandler = handler;
@@ -57,20 +57,5 @@ public class CpuTest extends TestItem {
 		isTestEnd = isPass;
 		
 		MathCharmActivity.instance.finish();
-	}
-	
-	private void initUI(){
-		mActivity = (Activity) mContext;
-		mainView = mActivity.findViewById(R.id.main_view);
-		test_view = mActivity.findViewById(R.id.test_view);
-		mSurfaceView = (SurfaceView) mActivity.findViewById(R.id.camera_surface);
-		videoView = (VideoView) mActivity.findViewById(R.id.videoView);
-		mTextView = (TextView) mActivity.findViewById(R.id.textView);
-
-		mainView.setVisibility(View.GONE);
-		test_view.setVisibility(View.VISIBLE);
-		mSurfaceView.setVisibility(View.GONE);
-		videoView.setVisibility(View.GONE);
-		mTextView.setVisibility(View.VISIBLE);
 	}
 }

@@ -8,11 +8,13 @@ import com.sprocomm.utils.CpuInfo;
 import com.sprocomm.utils.PlayMediaUtil;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -54,6 +56,7 @@ public class MathCharmActivity extends Activity {
 
 	private static String stopTestBR = "com.sprocomm.AgingTest.StopTestBR";
 
+	private Vibrator vibrator = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,7 +87,8 @@ public class MathCharmActivity extends Activity {
 		Log.d("AgingTest", TAG + "---startTest---flag--->" + flag);
 		switch (flag) {
 		case 0:
-			testType.setText(cpuinfo() + "\n\n" + "Test the CPU......");
+			testType.setText("Test the Vibtrate......");
+			startVibrator();
 			break;
 		case 1:
 			testType.setText("AudioTest is Running");
@@ -215,6 +219,21 @@ public class MathCharmActivity extends Activity {
 		}
 
 	}
+	
+	private void startVibrator() {
+		if (vibrator != null){
+			stopVibrator();
+		}
+		vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+		vibrator.vibrate(new long[] { 100, 10, 100, 1000 }, 0);
+	}
+
+	private void stopVibrator() {
+		if (vibrator != null){
+			vibrator.cancel();
+			vibrator = null;
+		}
+	}
 
 	private String cpuinfo() {
 
@@ -263,6 +282,7 @@ public class MathCharmActivity extends Activity {
 		super.onDestroy();
 		timer.cancel();
 		wjMagicCurveView.destory();
+		stopVibrator();
 		AudioTestStop();
 		runTime.stop();
 		runTime.setBase(SystemClock.elapsedRealtime());// 复位

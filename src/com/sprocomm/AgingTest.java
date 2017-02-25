@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import com.sprocomm.NewItem.AudioTest;
-import com.sprocomm.NewItem.CpuTest;
+import com.sprocomm.NewItem.VibrationTest;
 import com.sprocomm.NewItem.EmmcTest;
 import com.sprocomm.NewItem.LcdTest;
 import com.sprocomm.NewItem.MemoryTest;
@@ -78,7 +78,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	// CheckBox box_isCirculation;
 
 	private CheckBox box_reboot;
-	private CheckBox box_cpu;
+	private CheckBox box_vidrate;
 	private CheckBox box_audio;
 	private CheckBox box_2d;
 	private CheckBox box_s3;
@@ -233,7 +233,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 
 	private void initUI() {
 		box_reboot = (CheckBox) findViewById(R.id.reboot);
-		box_cpu = (CheckBox) findViewById(R.id.cpu);
+		box_vidrate = (CheckBox) findViewById(R.id.vibrate);
 		box_audio = (CheckBox) findViewById(R.id.audio);
 		box_2d = (CheckBox) findViewById(R.id.test_2d);
 		box_s3 = (CheckBox) findViewById(R.id.s3);
@@ -261,7 +261,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		testlist.clear();
 
 		testCheckbox.add(box_reboot);
-		testCheckbox.add(box_cpu);
+		testCheckbox.add(box_vidrate);
 		testCheckbox.add(box_audio);
 		testCheckbox.add(box_2d);
 		testCheckbox.add(box_s3);
@@ -274,7 +274,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		testCheckbox.add(box_camera);
 
 		box_reboot.setOnCheckedChangeListener(this);
-		box_cpu.setOnCheckedChangeListener(this);
+		box_vidrate.setOnCheckedChangeListener(this);
 		box_audio.setOnCheckedChangeListener(this);
 		box_2d.setOnCheckedChangeListener(this);
 		box_s3.setOnCheckedChangeListener(this);
@@ -313,7 +313,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		}
 
 		testlist.add(new RebootTest(this, test_time_eachI[0] * MINUTE, mHandler));
-		testlist.add(new CpuTest(this, test_time_eachI[1] * MINUTE, mHandler));
+		testlist.add(new VibrationTest(this, test_time_eachI[1] * MINUTE, mHandler));
 		testlist.add(new AudioTest(this, test_time_eachI[2] * MINUTE, mHandler));
 		testlist.add(new Test2D(this, test_time_eachI[3] * MINUTE, mHandler));
 		testlist.add(new S3Test(this, test_time_eachI[4] * MINUTE, mHandler));
@@ -433,7 +433,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 		case R.id.reboot:
 			index = 0;
 			break;
-		case R.id.cpu:
+		case R.id.vibrate:
 			index = 1;
 			break;
 		case R.id.audio:

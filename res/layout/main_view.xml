@@ -36,12 +36,11 @@
                     android:text="@string/reboot_test" />
 
                 <CheckBox
-                    android:id="@+id/cpu"
+                    android:id="@+id/vibrate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="@string/cpu_test"
-                    android:visibility="invisible" />
+                    android:text="@string/vibrate_test"/>
 
                 <CheckBox
                     android:id="@+id/audio"
