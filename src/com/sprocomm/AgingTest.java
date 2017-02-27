@@ -573,7 +573,7 @@ public class AgingTest extends Activity implements OnCheckedChangeListener, OnCl
 	private void selectAll() {
 		Log.i(TAGM, TAG + "----selectAll()---->");
 		for (int i = 0; i < testCheckbox.size(); i++) {
-			if (i == 1 || i == 4 || i == 5 || i == 8 || i == 9) {
+			if (i == 4 || i == 5 || i == 8 || i == 9) {
 
 			} else {
 				testCheckbox.get(i).setChecked(true);
